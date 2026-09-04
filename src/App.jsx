@@ -205,7 +205,7 @@ export default function App() {
 
       <section className={styles.contactSection} id="contact">
         <div className={styles.contactCopy}><span>LET'S BECOME CREATOR FRIENDS</span><h2>先认识，先交流。<br />不急着让你测试。</h2><p>我们不会让你替未成熟的产品排基础问题。先用 15 分钟了解一次真实创作流程；如果当前能力不适合，我们也会直接说明。</p><div className={styles.contactSteps}><span><b>01</b> 企业微信认识</span><ChevronRight/><span><b>02</b> 分享真实难题</span><ChevronRight/><span><b>03</b> 再决定是否共创</span></div></div>
-        <div className={styles.qrCard}><img src={asset('admin-wechat.png')} alt="石根洁的企业微信二维码"/><strong>添加我的企业微信</strong><span>石根洁 · 硅基词元</span></div>
+        <div className={styles.qrCard}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><strong>添加我的企业微信</strong><span>石根洁 · 硅基词元</span></div>
       </section>
 
       <footer className={styles.footer}><a href="#top" className={styles.logoLink}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>AI STATION</span></a><p>价格和参数仅作参考，非最终版，硅基词元拥有一切解释权</p><a href="#top">回到顶部 ↑</a></footer>
