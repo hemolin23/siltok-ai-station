@@ -1,0 +1,6 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: #070b12; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
