@@ -37,20 +37,20 @@ export default function App() {
           <a href="#compare">本地与云端</a>
           <a href="#limits">能力边界</a>
         </nav>
-        <a href="#contact" className={styles.navCta}>申请创作者访谈 <ArrowRight size={15} /></a>
+        <a href="#contact" className={styles.navCta}>认识一下 <ArrowRight size={15} /></a>
       </header>
 
       <section className={styles.hero} id="top">
         <div className={styles.heroGrid} aria-hidden="true" />
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}><span>LOCAL VIDEO AI / 研发验证版本</span></p>
-          <h1>完整视频大模型，<br /><em>放进你的工作室。</em></h1>
-          <p className={styles.lead}>在本地运行 MiniMax H3、LTX 等视频模型。素材留在本地，工作流可以固定，持续生成不再逐次付费。</p>
+          <p className={styles.eyebrow}><span>CREATOR CO-CREATION / 10.30 阶段目标</span></p>
+          <h1>想和认真创作的人，<br /><em>一起做点真的。</em></h1>
+          <p className={styles.lead}>我们正在把完整视频模型、ComfyUI 节点和真实工作流带到本地设备。产品还没有完全准备好，所以现在不是一次销售，而是一份诚实的共创邀请。</p>
           <div className={styles.actions}>
-            <a href="#contact" className={styles.primary}>提交一个真实任务 <ArrowRight /></a>
-            <a href="#evidence" className={styles.secondary}>查看真实性能 <ArrowDown /></a>
+            <a href="#contact" className={styles.primary}>先聊聊你的创作 <ArrowRight /></a>
+            <a href="#limits" className={styles.secondary}>看我们说清边界 <ArrowDown /></a>
           </div>
-          <p className={styles.disclaimer}>当前为研发验证版本。生成速度、模型、硬件参数和价格以最终产品为准。</p>
+          <p className={styles.disclaimer}>当前为研发共创阶段；页面能力为内部进展与 10 月 30 日阶段目标，不代表正式交付承诺。</p>
         </div>
 
         <div className={styles.stationStage} aria-label="Siltok 本地创作工作站能力示意">
@@ -61,24 +61,24 @@ export default function App() {
             <div className={styles.machineLight} />
           </div>
           <div className={styles.flowRail}>
-            <span className={styles.flowLabel}>完整模型权重</span>
+            <span className={styles.flowLabel}>BF16 非量化模型</span>
             <i /><i /><i /><i /><i />
-            <strong>消费级 GPU</strong>
+            <strong>研发验证中</strong>
           </div>
           <div className={styles.stageStats}>
-            <div><Film /><span>最高直出</span><strong>15s / 1080P</strong></div>
-            <div><ShieldCheck /><span>素材处理</span><strong>本地完成</strong></div>
-            <div><HardDrive /><span>模型形态</span><strong>完整 H3 · BF16</strong></div>
+            <div><Film /><span>产品阶段</span><strong>研发共创中</strong></div>
+            <div><ShieldCheck /><span>阶段目标</span><strong>10 / 30</strong></div>
+            <div><HardDrive /><span>合作起点</span><strong>先聊真实任务</strong></div>
           </div>
         </div>
       </section>
 
       <section className={styles.proofBar} id="evidence">
-        <span>当前实测能力</span>
-        <div><strong>MiniMax H3</strong><small>BF16 · 非量化</small></div>
-        <div><strong>15 秒</strong><small>单次最长直出</small></div>
-        <div><strong>1920×1080</strong><small>LTX 最高输出</small></div>
-        <div><strong>本地处理</strong><small>素材不必上传云端</small></div>
+        <span>研发进展与共创原则</span>
+        <div><strong>核心技术已跑通</strong><small>H3 BF16 · 非量化</small></div>
+        <div><strong>产品仍在打磨</strong><small>不把用户当免费测试员</small></div>
+        <div><strong>10 月 30 日</strong><small>阶段能力目标</small></div>
+        <div><strong>结论不预设</strong><small>欢迎真实甚至负面反馈</small></div>
       </section>
 
       <section className={styles.workflowSection} id="workflow">
@@ -116,9 +116,9 @@ export default function App() {
         <div className={styles.scenarioCopy}>
           <span className={styles.sectionNo}>03</span>
           <p className={styles.monoKicker}>ONE WORKFLOW, BUILT FOR YOUR TASK</p>
-          <h2>不卖一堆参数。<br />先帮你固定一个真实任务。</h2>
-          <p>把长期头疼的环节交给我们：人物一致性、批量素材、口播视频或镜头预演。我们负责配置、调试和记录，你只判断结果能不能用。</p>
-          <a href="#contact">提交你的任务 <ArrowRight /></a>
+          <h2>不急着让你测试。<br />先做彼此信任的朋友。</h2>
+          <p>先用 15 分钟理解你长期头疼的环节。只有产品当前能力真的可能帮到你，我们才邀请你继续共创；不合适，也会坦诚说明。</p>
+          <a href="#contact">先认识一下 <ArrowRight /></a>
         </div>
         <div className={styles.timelineBoard} aria-label="专属工作流示意">
           <div className={styles.boardHeader}><span>WORKFLOW / SHORT DRAMA 01</span><span>00:00:15:00</span></div>
@@ -160,9 +160,9 @@ export default function App() {
         <div className={styles.partnerRoles}>
           <article><Boxes/><span>01</span><h3>工作流贡献者</h3><p>提交原创或获授权的工作流，参与版本登记、适配和测试。</p><small>回报方向：署名、展示、共创权益</small></article>
           <article><Wrench/><span>02</span><h3>认证方案伙伴</h3><p>为垂直行业用户完成部署、培训、工作流配置和问题支持。</p><small>回报方向：项目合作、服务收益</small></article>
-          <article><Store/><span>03</span><h3>渠道合作伙伴</h3><p>基于真实案例介绍产品，连接有明确需求的工作室与团队。</p><small>具体资格与政策另行确认</small></article>
+          <article><Store/><span>03</span><h3>未来生态伙伴</h3><p>产品与案例真正成立后，再共同探索方案交付与渠道合作。</p><small>当前不承诺经销资格或收益</small></article>
         </div>
-        <div className={styles.partnerRule}><Users/><p><strong>先共创、再认证、后渠道。</strong>合作资格不只看粉丝量，还要看工作流原创性、真实案例、服务能力和对产品边界的诚实表达。</p><a href="#contact">申请成为生态伙伴 <ArrowRight/></a></div>
+        <div className={styles.partnerRule}><Users/><p><strong>先认识、再共创、后合作。</strong>我们重视工作流原创性、真实案例、服务能力，也重视对产品边界的诚实表达。</p><a href="#contact">先聊聊彼此 <ArrowRight/></a></div>
       </section>
 
       <section className={styles.compareSection} id="compare">
@@ -189,7 +189,7 @@ export default function App() {
           <div className={styles.conveyor}>{[1,2,3,4,5,6].map(n=><i key={n}/>)}</div>
           <div className={styles.gpuBlock}><span>CONSUMER GPU</span><strong>16GB</strong><small>分层调度 · 提前搬运</small></div>
         </div>
-        <div className={styles.techCopy}><p className={styles.monoKicker}>SILTOK INFERENCE SYSTEM</p><h2>装不下，<br />就让它流过去。</h2><p>完整权重不再一次性塞进显存。系统根据计算顺序提前调度下一层需要的数据，让模型权重分层流经消费级 GPU。</p><ul><li><Check /> MiniMax H3 BF16 完整权重</li><li><Check /> 自研推理调度与 CUDA 算子</li><li><Check /> 统一的视频生成接口</li></ul></div>
+        <div className={styles.techCopy}><p className={styles.monoKicker}>SILTOK INFERENCE SYSTEM</p><h2>技术跑通，<br />只是共创的起点。</h2><p>这里的“完整”指使用 BF16 非量化权重，不代表高于模型官方分辨率。H3 当前按官方规格最高 1344×768；LTX 当前最高 1920×1080。</p><ul><li><Check /> MiniMax H3 BF16 非量化权重</li><li><Check /> 自研推理调度与 CUDA 算子</li><li><Check /> 产品体验仍在联合验证</li></ul></div>
       </section>
 
       <section className={styles.limitsSection} id="limits">
@@ -198,14 +198,14 @@ export default function App() {
           <div><p>WHAT IT IS — AND ISN'T</p><h2>真实边界，比一句“更快”更重要。</h2></div>
         </div>
         <div className={styles.limitGrid}>
-          <div className={styles.does}><h3><Check /> 当前已经做到</h3><ul><li>本地运行完整 MiniMax H3 BF16</li><li>文生、图生、首尾帧与多参考生成</li><li>LTX 最高支持15秒、1080P直出</li><li>图片、视频与声音素材本地处理</li><li>将固定任务沉淀为可复用工作流</li></ul></div>
-          <div className={styles.notYet}><h3><X /> 当前不做的承诺</h3><ul><li>不承诺所有任务都比云端生成更快</li><li>不承诺一次生成即可直接商用</li><li>不同加速档位会影响速度与质量</li><li>插帧、口型和角色替换仍有适用边界</li><li>价格、配置和模型清单仍可能调整</li></ul></div>
+          <div className={styles.does}><h3><Check /> 已确认的研发进展</h3><ul><li>核心技术已跑通 MiniMax H3 BF16 非量化模型</li><li>H3 官方规格最高 1344×768</li><li>LTX 内部测试支持 720P / 1080P</li><li>ComfyUI 工作流已建立版本与证据规范</li><li>更多产品入口与工作流仍在验证</li></ul></div>
+          <div className={styles.notYet}><h3><X /> 当前不做的承诺</h3><ul><li>不承诺所有任务都比云端更快或质量更高</li><li>不承诺一次生成即可直接商用</li><li>不把内部测试数据包装成正式交付能力</li><li>不承诺未经验证的工作流已经可用</li><li>价格、配置和模型清单以最终产品为准</li></ul></div>
         </div>
       </section>
 
       <section className={styles.contactSection} id="contact">
-        <div className={styles.contactCopy}><span>CREATOR RESEARCH PROGRAM</span><h2>先聊一个真实任务。<br />再决定要不要测试。</h2><p>我们不会让你为未成熟的产品排基础问题。15分钟还原一次真实创作流程，我们会给你一份本地与云端的工作流判断。</p><div className={styles.contactSteps}><span><b>01</b> 扫码联系</span><ChevronRight/><span><b>02</b> 15分钟访谈</span><ChevronRight/><span><b>03</b> 获得诊断建议</span></div></div>
-        <div className={styles.qrCard}><img src={asset('admin-wechat.png')} alt="Siltok 用户运营经理微信二维码"/><strong>微信扫码联系</strong><span>备注：创作者访谈</span></div>
+        <div className={styles.contactCopy}><span>LET'S BECOME CREATOR FRIENDS</span><h2>先认识，先交流。<br />不急着让你测试。</h2><p>我们不会让你替未成熟的产品排基础问题。先用 15 分钟了解一次真实创作流程；如果当前能力不适合，我们也会直接说明。</p><div className={styles.contactSteps}><span><b>01</b> 企业微信认识</span><ChevronRight/><span><b>02</b> 分享真实难题</span><ChevronRight/><span><b>03</b> 再决定是否共创</span></div></div>
+        <div className={styles.qrCard}><img src={asset('admin-wechat.png')} alt="石根洁的企业微信二维码"/><strong>添加我的企业微信</strong><span>石根洁 · 硅基词元</span></div>
       </section>
 
       <footer className={styles.footer}><a href="#top" className={styles.logoLink}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>AI STATION</span></a><p>价格和参数仅作参考，非最终版，硅基词元拥有一切解释权</p><a href="#top">回到顶部 ↑</a></footer>
