@@ -8,7 +8,7 @@ import styles from './station.module.css';
 
 const engineData = [
   { index: '01', name: 'LTX 2.3 / 2.5', role: '快速创作', icon: Gauge, copy: '适合预览、图生视频、首尾帧与音图生视频。需要更快看到方向时，从这里开始。', metrics: ['720P · 15秒 ≈ 1.5分钟', '1080P · 15秒 ≈ 5.5分钟'], tags: ['文生视频', '图生视频', '首尾帧', '声音与口型'] },
-  { index: '02', name: 'MiniMax H3 · BF16', role: '高控制生成', icon: Layers3, copy: '完整模型本地运行。用人物、场景、动作、视频和声音作为参考，完成更复杂的镜头描述。', metrics: ['生成模式 · 15秒 ≈ 6分钟', '多参考模式 · 15秒 ≈ 8分钟'], tags: ['完整权重', '多参考', '原生音频', '结构化分镜'] },
+  { index: '02', name: 'MiniMax H3 · BF16', role: '高控制生成', icon: Layers3, copy: '满血模型本地运行。用人物、场景、动作、视频和声音作为参考，完成更复杂的镜头描述。', metrics: ['生成模式 · 15秒 ≈ 6分钟', '多参考模式 · 15秒 ≈ 8分钟'], tags: ['BF16 非量化', '多参考', '原生音频', '结构化分镜'] },
   { index: '03', name: 'SCAIL-2', role: '角色与动作', icon: RefreshCw, copy: '让角色跟随参考动作，或把参考视频中的人物替换为设定角色，适合动作预演与快速实验。', metrics: ['896×520 · 5秒 ≈ 2分钟', '当前定位：实验型能力'], tags: ['角色动画', '动作迁移', '角色替换'] },
 ];
 
@@ -45,7 +45,7 @@ export default function App() {
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}><span>CREATOR CO-CREATION / 10.30 阶段目标</span></p>
           <h1>想和认真创作的人，<br /><em>一起做点真的。</em></h1>
-          <p className={styles.lead}>我们正在把完整视频模型、ComfyUI 节点和真实工作流带到本地设备。产品还没有完全准备好，所以现在不是一次销售，而是一份诚实的共创邀请。</p>
+          <p className={styles.lead}>我们正在把满血模型、ComfyUI 节点和真实工作流带到本地设备。产品还没有完全准备好，所以现在不是一次销售，而是一份诚实的共创邀请。</p>
           <div className={styles.actions}>
             <a href="#contact" className={styles.primary}>先聊聊你的创作 <ArrowRight /></a>
             <a href="#limits" className={styles.secondary}>看我们说清边界 <ArrowDown /></a>
