@@ -1,5 +1,6 @@
 import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow } from 'lucide-react';
 import styles from './station.module.css';
+import visual from './product-visual.module.css';
 
 const APPLY_URL = 'https://my.feishu.cn/share/base/shrcnVgo3Gj2zxuRtMYljrAmozd';
 const COLLAB_URL = 'https://my.feishu.cn/share/base/shrcn63I30xlVeGwwS1aRNVMm7b';
@@ -50,12 +51,14 @@ export default function App() {
         <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请</a><a className={styles.secondary} href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作</a></div>
         <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
-      <div className={styles.heroPanel} id="wechat">
-        <div className={styles.panelTop}><span>STEP 01 / CONNECT</span><span>专人对接</span></div>
-        <div className={styles.wechatHero}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><b>先添加企业微信</b><span>石根洁 · 硅基词元</span><p>添加后发送“内测 + 你的创作方向”，由技术、运营、产品团队共同为你服务。</p></div></div>
-        <div className={styles.panelStats}><div><b>01</b><span>添加企微</span></div><div><b>02</b><span>填写申请</span></div><div><b>03</b><span>确认排期</span></div></div>
+      <div className={styles.heroPanel}>
+        <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>BASE · PRO</span></div>
+        <div className={visual.orbit}><div className={visual.device}><img src={asset('brand/siltok-blue.png')} alt="Siltok AI Station 产品形态"/><span>LOCAL AI STATION</span></div><i/><i/><i/></div>
+        <div className={styles.panelStats}><div><b>本地</b><span>创作资产处理</span></div><div><b>开放</b><span>模型与节点扩展</span></div><div><b>共创</b><span>工作流沉淀</span></div></div>
       </div>
     </section>
+
+    <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>STEP 01 · CONNECT</p><h2>先添加企业微信，再选择合作入口。</h2><span>添加后发送“内测”或“商单合作”以及你的创作方向，技术、运营、产品团队将共同为你服务。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请 <ArrowRight/></a><a href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作 <ArrowRight/></a></div></section>
 
     <section className={styles.valueStrip}><p>这不是一次“随便体验”</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
 
