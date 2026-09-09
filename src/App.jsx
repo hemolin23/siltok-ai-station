@@ -38,7 +38,7 @@ export default function App() {
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
       <nav><a href="#program">内测说明</a><a href="#tasks">测试任务</a><a href="#ecosystem">创作者生态</a><a href="#products">产品</a><a href="#team">团队</a></nav>
-      <a className={styles.navCta} href={APPLY_URL} target="_blank" rel="noreferrer">申请内测 <ArrowRight /></a>
+      <a className={styles.navCta} href="#wechat">添加企业微信 <ArrowRight /></a>
     </header>
 
     <section className={styles.hero} id="top">
@@ -46,13 +46,13 @@ export default function App() {
         <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
         <h1>把真实创作难题，<br/><em>变成可复用的工作流。</em></h1>
         <p className={styles.lead}>Siltok Labs 面向 AI 短剧、视觉创作、电商广告和 ComfyUI 创作者开放小规模内测。你带来真实任务与判断标准，我们提供现场或远程测试环境、使用支持和工作流共创。</p>
-        <div className={styles.actions}><a className={styles.primary} href={APPLY_URL} target="_blank" rel="noreferrer">填写飞书申请表 <ArrowRight /></a><a className={styles.secondary} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网</a></div>
-        <div className={styles.heroNote}><ShieldCheck /><span>申请约 3-5 分钟。提交后按真实场景与当前产品能力匹配；申请不等于自动入选。</span></div>
+        <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">第二步 · 填写申请表</a></div>
+        <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
-      <div className={styles.heroPanel}>
-        <div className={styles.panelTop}><span>CREATOR TEST / 01</span><span>现场 · 远程</span></div>
-        <div className={styles.orbit}><div className={styles.device}><img src={asset('brand/siltok-blue.png')} alt=""/><span>AI STATION</span></div><i/><i/><i/></div>
-        <div className={styles.panelStats}><div><b>1 周</b><span>建议测试周期</span></div><div><b>70%</b><span>真实项目</span></div><div><b>30%</b><span>定向案例</span></div></div>
+      <div className={styles.heroPanel} id="wechat">
+        <div className={styles.panelTop}><span>STEP 01 / CONNECT</span><span>专人对接</span></div>
+        <div className={styles.wechatHero}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><b>先添加企业微信</b><span>石根洁 · 硅基词元</span><p>添加后发送“内测 + 你的创作方向”，由技术、运营、产品团队共同为你服务。</p></div></div>
+        <div className={styles.panelStats}><div><b>01</b><span>添加企微</span></div><div><b>02</b><span>填写申请</span></div><div><b>03</b><span>确认排期</span></div></div>
       </div>
     </section>
 
@@ -90,7 +90,7 @@ export default function App() {
       </div>
     </section>
 
-    <section className={styles.apply}><div><p>READY TO TEST A REAL TASK?</p><h2>用一个真实项目，<br/>告诉我们什么才算“可用”。</h2><span>填写创作方向、当前工具、真实场景和可参与时间。我们会先判断产品是否适合你的任务，再安排现场或远程测试。</span></div><div className={styles.applyCard}><FileCheck2/><h3>创作者内测申请</h3><p>约 3-5 分钟 · 飞书表单</p><a href={APPLY_URL} target="_blank" rel="noreferrer">立即填写 <ArrowRight/></a><small>联系方式仅用于内测沟通；公开案例与作品展示将另行征得授权。</small></div></section>
+    <section className={styles.apply}><div><p>READY TO TEST A REAL TASK?</p><h2>先加企微，<br/>再确认是否适合测试。</h2><span>第一步添加企业微信，由技术、运营、产品团队了解你的创作任务；第二步填写申请表，补充当前工具、真实场景和可参与时间。</span></div><div className={styles.applyCards}><div className={styles.qrMini}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>01 · 添加企业微信</b></div><div className={styles.applyCard}><FileCheck2/><h3>02 · 填写内测申请</h3><p>约 3-5 分钟 · 飞书表单</p><a href={APPLY_URL} target="_blank" rel="noreferrer">立即填写 <ArrowRight/></a><small>联系方式仅用于内测沟通；公开案例与作品展示将另行征得授权。</small></div></div></section>
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · Siltok Labs AI 创作共创社区</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测</a></div></footer>
   </main>;
