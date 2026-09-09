@@ -2,6 +2,7 @@ import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIco
 import styles from './station.module.css';
 
 const APPLY_URL = 'https://my.feishu.cn/share/base/shrcnVgo3Gj2zxuRtMYljrAmozd';
+const COLLAB_URL = 'https://my.feishu.cn/share/base/shrcn63I30xlVeGwwS1aRNVMm7b';
 const OFFICIAL_URL = 'https://siltok-ai.com/products/ai-station';
 
 const directedCases = [
@@ -46,7 +47,7 @@ export default function App() {
         <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
         <h1>把真实创作难题，<br/><em>变成可复用的工作流。</em></h1>
         <p className={styles.lead}>Siltok Labs 面向 AI 短剧、视觉创作、电商广告和 ComfyUI 创作者开放小规模内测。你带来真实任务与判断标准，我们提供现场或远程测试环境、使用支持和工作流共创。</p>
-        <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">第二步 · 填写申请表</a></div>
+        <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请</a><a className={styles.secondary} href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作</a></div>
         <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
       <div className={styles.heroPanel} id="wechat">
@@ -90,9 +91,9 @@ export default function App() {
       </div>
     </section>
 
-    <section className={styles.apply}><div><p>READY TO TEST A REAL TASK?</p><h2>先加企微，<br/>再确认是否适合测试。</h2><span>第一步添加企业微信，由技术、运营、产品团队了解你的创作任务；第二步填写申请表，补充当前工具、真实场景和可参与时间。</span></div><div className={styles.applyCards}><div className={styles.qrMini}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>01 · 添加企业微信</b></div><div className={styles.applyCard}><FileCheck2/><h3>02 · 填写内测申请</h3><p>约 3-5 分钟 · 飞书表单</p><a href={APPLY_URL} target="_blank" rel="noreferrer">立即填写 <ArrowRight/></a><small>联系方式仅用于内测沟通；公开案例与作品展示将另行征得授权。</small></div></div></section>
+    <section className={styles.apply}><div><p>LET'S BUILD TOGETHER</p><h2>先加企微，<br/>再选择合作入口。</h2><span>产品体验请选择“内测申请”；拥有内容账号、商单报价、工作流或渠道资源的创作者与机构，请选择“商单 / 生态合作”。</span></div><div className={styles.applyCards}><div className={styles.qrMini}><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>01 · 添加企业微信</b></div><div className={styles.formCards}><div className={styles.applyCard}><FileCheck2/><h3>产品内测申请</h3><p>真实任务、工具现状与可参与时间</p><a href={APPLY_URL} target="_blank" rel="noreferrer">填写内测表 <ArrowRight/></a></div><div className={styles.applyCard}><MessageSquareText/><h3>商单 / 生态合作</h3><p>账号、报价、内容能力与合作意向</p><a href={COLLAB_URL} target="_blank" rel="noreferrer">填写合作表 <ArrowRight/></a></div></div></div></section>
 
-    <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · Siltok Labs AI 创作共创社区</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测</a></div></footer>
+    <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · Siltok Labs AI 创作共创社区</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测</a><a href={COLLAB_URL} target="_blank" rel="noreferrer">商单合作</a></div></footer>
   </main>;
 }
 
