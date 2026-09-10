@@ -29,8 +29,8 @@ const ecosystem = [
 ];
 
 const products = [
-  { name: 'Siltok Base', label: '个人创作', copy: '面向独立创作者和轻量生产任务，提供开箱可用的本地模型与创作环境。', points: ['日常素材试作与版本迭代', '本地保存创作资产', '预置创作工具与基础工作流'] },
-  { name: 'Siltok Pro', label: '专业工作流', copy: '面向工作室和持续生产场景，承载更复杂的模型、ComfyUI 节点与团队工作流。', points: ['复杂工作流与多轮调试', '更高频的生产任务', '按业务场景进行部署支持'] },
+  { name: 'Siltok Base', label: '个人创作', copy: '面向独立创作者和轻量生产任务，用于验证本地模型、基础节点与日常素材工作流。', points: ['日常素材试作与版本迭代', '本地保存项目与创作资产', '预置工具与基础工作流'] },
+  { name: 'Siltok Pro', label: '专业工作流', copy: '面向工作室和持续生产场景，重点验证更复杂的模型、ComfyUI 节点与团队工作流。', points: ['复杂工作流与多轮调试', '更高频的批量生产任务', '按业务场景提供部署支持'] },
 ];
 
 const creatorScenes = [
@@ -41,7 +41,19 @@ const creatorScenes = [
 ];
 
 const localValues = [
-  ['本地运行', '素材与项目更可控'], ['持续生产', '适合高频重复任务'], ['开放工作流', '支持 ComfyUI 节点扩展'],
+  ['本地优先', '未发布素材、提示词和项目文件留在自己的环境'], ['云端协同', '按任务选择本地或云端，不被单一模型和平台绑定'], ['工作流资产', '沉淀 ComfyUI 节点、参数配置、模板与失败经验'],
+];
+
+const productLogic = [
+  ['模型底座持续变化', '开源模型会不断更新。设备的长期价值，不应只绑定某一个模型，而在于可升级、可维护的运行环境。'],
+  ['推理工程决定可用性', '能运行只是起点；模型加载、显存与内存调度、任务队列、异常恢复和依赖管理，决定能否进入生产。'],
+  ['业务资产形成壁垒', '真正可复用的是素材、角色设定、提示词、节点组合、参数配置和质量判断标准，而不只是一次生成结果。'],
+];
+
+const capabilityStages = [
+  ['当前重点', '本地运行环境、ComfyUI 节点部署、模型与依赖管理、工作流测试和创作资产留存。'],
+  ['正在验证', '不同模型的加载与精度表现、复杂工作流稳定性、批量任务、长时运行和失败恢复。'],
+  ['不做预先承诺', '不承诺所有任务快于云端、不承诺所有开源模型可用，也不承诺一次生成即可达到精品成片标准。'],
 ];
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -57,8 +69,8 @@ export default function App() {
     <section className={styles.hero} id="top">
       <div className={styles.heroCopy}>
         <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
-        <h1>把真实创作难题，<br/><em>变成可复用的工作流。</em></h1>
-        <p className={styles.lead}>Siltok Labs 面向 AI 短剧、视觉创作、电商广告和 ComfyUI 创作者开放小规模内测。你带来真实任务与判断标准，我们提供现场或远程测试环境、使用支持和工作流共创。</p>
+        <h1>把开源模型与工作流，<br/><em>带回创作者桌面。</em></h1>
+        <p className={styles.lead}>Siltok AI Station 面向需要本地处理素材、持续生成和复用工作流的创作者与团队。我们把模型环境、ComfyUI 节点和任务执行整合为一套可维护的本地创作底座——它不是所有云端工具的替代品，而是隐私、稳定生产和深度定制之外的另一种选择。</p>
         <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请</a><a className={styles.secondary} href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作</a></div>
         <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
@@ -92,12 +104,15 @@ export default function App() {
     </section>
 
     <section className={styles.products} id="products">
-      <SectionHead n="04" label="SILTOK AI STATION" title="两款产品，服务不同创作负载。" copy="页面仅说明产品定位，不展开具体硬件参数。最终配置、价格和可用模型以正式发布信息为准。" />
+      <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在从一次生成结果，走向可持续运行的生产系统。Siltok 的重点不是把某个模型装进机器，而是让本地模型、节点、素材和任务更容易管理与复用。" />
+      <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低了模型门槛，<br/>工程和业务资产决定长期价值。</h3><p>参考实时视频、长视频推理和本地工作站的发展方向，我们把与 Siltok 直接相关的判断拆成三层。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
       <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，重点验证真实项目中的稳定性、可控性与工作流复用价值。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
       <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点与可复用工作流。产品仍处于内测共创阶段，实际能力以测试环境为准。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
       <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
       <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
-      <div className={visual.techStrip}><div><span>异构协同 · 算力池化</span><b>同一套硬件调度多种计算资源</b></div><div><span>流式模型 · 算载并行</span><b>消费级显卡也能运行更完整模型</b></div><div><span>多模同构 · 全局调度</span><b>从脚本到成片集中完成</b></div></div>
+      <div className={visual.techStrip}><div><span>研发方向 · 资源协同</span><b>探索 CPU、GPU、内存与存储之间更有效的模型加载和任务调度</b></div><div><span>研发方向 · 推理优化</span><b>在实际硬件边界内验证精度、速度、稳定性与资源占用的平衡</b></div><div><span>产品方向 · 流程管理</span><b>把模型、节点、素材、任务记录与反馈组织成可复用的生产流程</b></div></div>
+      <div className={visual.stageBlock}><div className={visual.stageTitle}><span>CAPABILITY BOUNDARY</span><h3>先把能力边界说清楚。</h3><p>产品仍处于内测共创阶段。以下内容区分当前重点、正在验证与不做预先承诺的事项。</p></div><div className={visual.stageGrid}>{capabilityStages.map(([title,copy],i)=><article key={title} data-stage={i}><b>{title}</b><p>{copy}</p></article>)}</div></div>
+      <div className={visual.fitMatrix}><article><span>更适合</span><ul><li>未发布素材、客户项目或内网环境需要本地处理</li><li>有高频重复任务，希望沉淀 ComfyUI 工作流</li><li>希望自主选择模型、节点和部署方式</li><li>愿意参与测试并共同定义质量标准</li></ul></article><article><span>现阶段可能不适合</span><ul><li>只追求最新云端模型和最快单次生成</li><li>完全不希望安装、配置或维护任何环境</li><li>期待所有任务都超过云端效果与速度</li><li>要求一键产出电影级长片或原生音画成片</li></ul></article></div>
       <div className={visual.disclaimer}><ShieldCheck/><span><b>参数仅作参考，非最终版</b>产品配置、模型能力和功能范围以最终发布与实际测试结果为准；硅基词元拥有一切解释权。</span></div>
       <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a></div>
     </section>
