@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow } from 'lucide-react';
 import styles from './station.module.css';
 import visual from './product-visual.module.css';
@@ -56,13 +57,33 @@ const capabilityStages = [
   ['不做预先承诺', '不承诺所有任务快于云端、不承诺所有开源模型可用，也不承诺一次生成即可达到精品成片标准。'],
 ];
 
+const techAdvantages = [
+  ['01', '桌面级本地 AI 工作站', '它不是在线生成网站，而是一台承载模型、节点、素材与工作流的独立设备。'],
+  ['02', '模型运行与资源协同', '围绕 GPU、内存、存储和模型加载进行系统级适配，降低创作者自行配环境的门槛。'],
+  ['03', '不靠牺牲精度换速度', '技术路径不以简单压缩模型作为加速前提；不同模型的精度、速度与稳定性仍在逐项实测。'],
+  ['04', '开放 ComfyUI 生态', '支持部署 ComfyUI 节点和自有工作流，不把用户锁在单一模型或固定模板里。'],
+];
+
+const userQuestions = [
+  ['这到底是什么产品？', 'Siltok AI Station 是一台面向本地 AI 部署与创作工作流的桌面主机。它把模型环境、ComfyUI 节点、素材和任务运行放在同一台设备上管理，不是单独的视频模型，也不只是一个网页平台。'],
+  ['内测免费吗？在哪里使用？', '入选当前内测后，约定范围内不收取设备测试使用费。测试以公司现场或远程连接 Siltok 测试设备为主，不要求你把模型安装到自己的电脑；如涉及第三方付费 API，会在测试前单独说明。'],
+  ['我的电脑或 Mac 能带动吗？', '参加远程内测时，主要算力由 Siltok 测试设备承担，你的 Mac 或普通电脑用于远程连接和操作即可。未来如需部署到自有设备，则要根据模型、显存和工作流单独评估。'],
+  ['这是做 AI 视频的模型吗？', '不是单一的视频模型。Siltok 提供本地模型运行与工作流环境，可按场景配置图像、视频、超分和 ComfyUI 工作流。具体可用模型与效果，以当期测试环境为准。'],
+  ['优势只是算力价格更低吗？', '成本是一个验证维度，但不是唯一价值。更核心的是素材本地留存、减少云端排队和平台绑定、工作流可复现，以及模型与节点可按业务调整。是否比云端更省，需要用你的真实任务测算。'],
+  ['H3 不如其他云端模型怎么办？', '我们不要求所有任务只用一个模型。本地与云端可以协同：不同模型负责更擅长的环节。内测正是要确认真人、动画、电商等场景分别适合什么模型，以及哪些任务现阶段仍应使用云端。'],
+  ['支持超分和 ComfyUI 节点吗？', '支持围绕 ComfyUI 节点和工作流进行部署。超分可作为具体项目的测试环节，但模型、节点版本和资源占用需要在排期前确认，不默认承诺所有插件一次兼容。'],
+  ['我现在项目忙，能晚点参加吗？', '可以。你可以先登记方向，等测试环境和时间匹配后再加入；也可以先做一次 20–30 分钟远程体验，不需要立刻迁移完整项目。'],
+  ['电商团队可以怎么测试？', '可以从商品图批量变体、场景替换、短视频镜头、超分或一条现有 ComfyUI 流程开始。我们会先确认产量、可用率和返工标准，再安排最小测试任务。'],
+  ['测试期间还有其他费用吗？', '约定的内测设备使用本身免费，不会自动转为付费服务。测试时长、支持范围以及可能产生的第三方模型或 API 费用，会在开始前书面确认。'],
+];
+
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#program">内测说明</a><a href="#tasks">测试任务</a><a href="#ecosystem">创作者生态</a><a href="#products">产品</a><a href="#team">团队</a></nav>
+      <nav><a href="#product-overview">产品与技术</a><a href="#questions">常见问题</a><a href="#program">内测说明</a><a href="#ecosystem">创作者生态</a><a href="#team">团队</a></nav>
       <a className={styles.navCta} href="#wechat">添加企业微信 <ArrowRight /></a>
     </header>
 
@@ -81,6 +102,8 @@ export default function App() {
         <div className={styles.panelStats}><div><b>本地</b><span>创作资产处理</span></div><div><b>开放</b><span>模型与节点扩展</span></div><div><b>共创</b><span>工作流沉淀</span></div></div>
       </div>
     </section>
+
+    <ProductOverview />
 
     <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>STEP 01 · CONNECT</p><h2>第一步，添加企业微信。</h2><span>添加后发送你的创作方向，技术、运营、产品团队将共同为你服务。第二步与第三步按需选择，也可以同时填写。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>02</b> 内测申请</span><small>请创作者填写内测申请</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>03</b> 商单生态合作</span><small>请创作者填写合作报价</small><ArrowRight/></a></div></section>
 
@@ -104,7 +127,7 @@ export default function App() {
       <div className={styles.ecoBody}><div className={styles.donut}><div><b>100%</b><span>创作者共创</span></div></div><div className={styles.legend}>{ecosystem.map(([name,pct,color])=><div key={name}><i style={{background:color}}/><span>{name}</span><b>{pct}</b></div>)}</div></div>
     </section>
 
-    <section className={styles.products} id="products">
+    <section className={styles.products} id="product-details">
       <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在从一次生成结果，走向可持续运行的生产系统。Siltok 的重点不是把某个模型装进机器，而是让本地模型、节点、素材和任务更容易管理与复用。" />
       <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低了模型门槛，<br/>工程和业务资产决定长期价值。</h3><p>参考实时视频、长视频推理和本地工作站的发展方向，我们把与 Siltok 直接相关的判断拆成三层。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
       <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，重点验证真实项目中的稳定性、可控性与工作流复用价值。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
@@ -134,4 +157,13 @@ export default function App() {
 
 function SectionHead({n,label,title,copy}) {
   return <div className={styles.sectionHead}><span>{n}</span><div><p>{label}</p><h2>{title}</h2></div><p>{copy}</p></div>;
+}
+
+function ProductOverview() {
+  const [active, setActive] = useState(0);
+  return <section className={styles.productOverview} id="product-overview">
+    <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>不是一个 AI 视频网站。<br/>是一台为本地 AI 部署设计的桌面工作站。</h2><div><p>Siltok AI Station 面向不想从零配置本地环境、又需要保留模型与工作流自主权的创作者和团队。</p><a href="#product-details">查看完整产品说明 <ArrowRight/></a></div></div>
+    <div className={styles.techAdvantages}>{techAdvantages.map(([n,title,copy])=><article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
+    <div className={styles.questionRouter} id="questions"><div className={styles.questionList}><p>CHOOSE YOUR QUESTION</p><h3>你可能正在问——</h3>{userQuestions.map(([question],i)=><button className={i===active?styles.activeQuestion:''} key={question} onClick={()=>setActive(i)}><span>{String(i+1).padStart(2,'0')}</span>{question}<ArrowRight/></button>)}</div><article className={styles.answerPanel}><span>ANSWER / {String(active+1).padStart(2,'0')}</span><h3>{userQuestions[active][0]}</h3><p>{userQuestions[active][1]}</p><div><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测 <ArrowRight/></a><a href="#wechat">先添加企微沟通</a></div><small>产品仍处于内测阶段；配置、模型能力和测试范围以实际确认结果为准。</small></article></div>
+  </section>;
 }
