@@ -48,7 +48,7 @@ const localValues = [
 const productLogic = [
   ['模型底座持续变化', '开源模型会不断更新。设备的长期价值，不应只绑定某一个模型，而在于可升级、可维护的运行环境。'],
   ['推理工程决定可用性', '能运行只是起点；模型加载、显存与内存调度、任务队列、异常恢复和依赖管理，决定能否进入生产。'],
-  ['业务资产形成壁垒', '真正可复用的是素材、角色设定、提示词、节点组合、参数配置和质量判断标准，而不只是一次生成结果。'],
+  ['业务资产形成壁垒', '素材、角色设定、提示词、节点组合、参数配置和质量判断标准，可以持续沉淀和复用。'],
 ];
 
 const capabilityStages = [
@@ -58,18 +58,18 @@ const capabilityStages = [
 ];
 
 const techAdvantages = [
-  ['01', '桌面级本地 AI 工作站', '它不是在线生成网站，而是一台承载模型、节点、素材与工作流的独立设备。'],
+  ['01', '桌面级本地 AI 工作站', '一台设备统一承载模型、节点、素材与工作流。'],
   ['02', '模型运行与资源协同', '围绕 GPU、内存、存储和模型加载进行系统级适配，降低创作者自行配环境的门槛。'],
-  ['03', '不靠牺牲精度换速度', '技术路径不以简单压缩模型作为加速前提；不同模型的精度、速度与稳定性仍在逐项实测。'],
+  ['03', '保留精度的加速路径', '通过系统级优化提升运行效率；不同模型的精度、速度与稳定性正在逐项实测。'],
   ['04', '开放 ComfyUI 生态', '支持部署 ComfyUI 节点和自有工作流，不把用户锁在单一模型或固定模板里。'],
 ];
 
 const userQuestions = [
-  ['这到底是什么产品？', 'Siltok AI Station 是一台面向本地 AI 部署与创作工作流的桌面主机。它把模型环境、ComfyUI 节点、素材和任务运行放在同一台设备上管理，不是单独的视频模型，也不只是一个网页平台。'],
+  ['这到底是什么产品？', 'Siltok AI Station 是一台面向本地 AI 部署与创作工作流的桌面主机，统一管理模型环境、ComfyUI 节点、素材和任务运行。'],
   ['内测免费吗？在哪里使用？', '入选当前内测后，约定范围内不收取设备测试使用费。测试以公司现场或远程连接 Siltok 测试设备为主，不要求你把模型安装到自己的电脑；如涉及第三方付费 API，会在测试前单独说明。'],
   ['我的电脑或 Mac 能带动吗？', '参加远程内测时，主要算力由 Siltok 测试设备承担，你的 Mac 或普通电脑用于远程连接和操作即可。未来如需部署到自有设备，则要根据模型、显存和工作流单独评估。'],
-  ['这是做 AI 视频的模型吗？', '不是单一的视频模型。Siltok 提供本地模型运行与工作流环境，可按场景配置图像、视频、超分和 ComfyUI 工作流。具体可用模型与效果，以当期测试环境为准。'],
-  ['优势只是算力价格更低吗？', '成本是一个验证维度，但不是唯一价值。更核心的是素材本地留存、减少云端排队和平台绑定、工作流可复现，以及模型与节点可按业务调整。是否比云端更省，需要用你的真实任务测算。'],
+  ['这是做 AI 视频的模型吗？', 'Siltok 提供本地模型运行与工作流环境，可按场景配置图像、视频、超分和 ComfyUI 工作流。具体可用模型与效果，以当期测试环境为准。'],
+  ['主要优势是算力价格更低吗？', '核心价值包括素材本地留存、减少云端排队和平台绑定、工作流复现，以及模型与节点按业务调整。成本优势需要通过真实任务测算。'],
   ['H3 不如其他云端模型怎么办？', '我们不要求所有任务只用一个模型。本地与云端可以协同：不同模型负责更擅长的环节。内测正是要确认真人、动画、电商等场景分别适合什么模型，以及哪些任务现阶段仍应使用云端。'],
   ['支持超分和 ComfyUI 节点吗？', '支持围绕 ComfyUI 节点和工作流进行部署。超分可作为具体项目的测试环节，但模型、节点版本和资源占用需要在排期前确认，不默认承诺所有插件一次兼容。'],
   ['我现在项目忙，能晚点参加吗？', '可以。你可以先登记方向，等测试环境和时间匹配后再加入；也可以先做一次 20–30 分钟远程体验，不需要立刻迁移完整项目。'],
@@ -92,7 +92,7 @@ export default function App() {
       <div className={styles.heroCopy}>
         <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
         <h1>把开源模型与工作流，<br/><em>带回创作者桌面。</em></h1>
-        <p className={styles.lead}>Siltok AI Station 面向需要本地处理素材、持续生成和复用工作流的创作者与团队。我们把模型环境、ComfyUI 节点和任务执行整合为一套可维护的本地创作底座——它不是所有云端工具的替代品，而是隐私、稳定生产和深度定制之外的另一种选择。</p>
+        <p className={styles.lead}>Siltok AI Station 面向需要本地处理素材、持续生成和复用工作流的创作者与团队。模型环境、ComfyUI 节点和任务执行统一整合，支持本地数据管理、稳定生产和深度定制。</p>
         <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请</a><a className={styles.secondary} href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作</a></div>
         <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
@@ -107,10 +107,10 @@ export default function App() {
 
     <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>STEP 01 · CONNECT</p><h2>第一步，添加企业微信。</h2><span>添加后发送你的创作方向，技术、运营、产品团队将共同为你服务。第二步与第三步按需选择，也可以同时填写。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>02</b> 内测申请</span><small>请创作者填写内测申请</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>03</b> 商单生态合作</span><small>请创作者填写合作报价</small><ArrowRight/></a></div></section>
 
-    <section className={styles.valueStrip}><p>这不是一次“随便体验”</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
+    <section className={styles.valueStrip}><p>围绕真实任务完成测试</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
 
     <section className={styles.program} id="program">
-      <SectionHead n="01" label="BETA PROGRAM" title="一周完成一个最小测试闭环。" copy="测试不是追求功能全部跑一遍，而是围绕一个明确痛点和一个真实项目，留下可复现的结论。" />
+      <SectionHead n="01" label="BETA PROGRAM" title="一周完成一个最小测试闭环。" copy="围绕一个明确痛点和一个真实项目测试，留下可复现的结论。" />
       <div className={styles.weekGrid}>{week.map(([day,title,copy])=><article key={day}><b>{day}</b><h3>{title}</h3><p>{copy}</p></article>)}</div>
       <div className={styles.exchange}><div><span>我们提供</span><ul><li><Check/>现场或远程测试环境</li><li><Check/>安装与操作引导</li><li><Check/>定向案例与问题响应</li><li><Check/>适合时共同沉淀模板</li></ul></div><div><span>参与者提供</span><ul><li><Check/>一个真实业务任务</li><li><Check/>每周至少 1-2 小时</li><li><Check/>问题、失败样本与判断标准</li><li><Check/>结束后的结构化访谈</li></ul></div></div>
     </section>
@@ -128,7 +128,7 @@ export default function App() {
     </section>
 
     <section className={styles.products} id="product-details">
-      <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在从一次生成结果，走向可持续运行的生产系统。Siltok 的重点不是把某个模型装进机器，而是让本地模型、节点、素材和任务更容易管理与复用。" />
+      <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在走向可持续运行的生产系统。Siltok 统一管理本地模型、节点、素材和任务，帮助团队复用创作流程。" />
       <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低了模型门槛，<br/>工程和业务资产决定长期价值。</h3><p>参考实时视频、长视频推理和本地工作站的发展方向，我们把与 Siltok 直接相关的判断拆成三层。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
       <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，重点验证真实项目中的稳定性、可控性与工作流复用价值。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
       <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点与可复用工作流。产品仍处于内测共创阶段，实际能力以测试环境为准。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
@@ -162,7 +162,7 @@ function SectionHead({n,label,title,copy}) {
 function ProductOverview() {
   const [active, setActive] = useState(0);
   return <section className={styles.productOverview} id="product-overview">
-    <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>不是一个 AI 视频网站。<br/>是一台为本地 AI 部署设计的桌面工作站。</h2><div><p>Siltok AI Station 面向不想从零配置本地环境、又需要保留模型与工作流自主权的创作者和团队。</p><a href="#product-details">查看完整产品说明 <ArrowRight/></a></div></div>
+    <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>为本地 AI 部署设计的<br/>桌面工作站。</h2><div><p>Siltok AI Station 帮助创作者和团队快速建立本地模型环境，并保留模型与工作流自主权。</p><a href="#product-details">查看完整产品说明 <ArrowRight/></a></div></div>
     <div className={styles.techAdvantages}>{techAdvantages.map(([n,title,copy])=><article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
     <div className={styles.questionRouter} id="questions"><div className={styles.questionList}><p>CHOOSE YOUR QUESTION</p><h3>你可能正在问——</h3>{userQuestions.map(([question],i)=><button className={i===active?styles.activeQuestion:''} key={question} onClick={()=>setActive(i)}><span>{String(i+1).padStart(2,'0')}</span>{question}<ArrowRight/></button>)}</div><article className={styles.answerPanel}><span>ANSWER / {String(active+1).padStart(2,'0')}</span><h3>{userQuestions[active][0]}</h3><p>{userQuestions[active][1]}</p><div><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测 <ArrowRight/></a><a href="#wechat">先添加企微沟通</a></div><small>产品仍处于内测阶段；配置、模型能力和测试范围以实际确认结果为准。</small></article></div>
   </section>;
