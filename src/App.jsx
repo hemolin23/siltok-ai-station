@@ -67,6 +67,7 @@ export default function App() {
     </header>
 
     <section className={styles.hero} id="top">
+      <div className={visual.heroRail} aria-hidden="true"><span>MODEL</span><i/><span>NODE</span><i/><span>WORKFLOW</span><i/><span>OUTPUT</span></div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
         <h1>把开源模型与工作流，<br/><em>带回创作者桌面。</em></h1>
@@ -75,8 +76,8 @@ export default function App() {
         <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
       </div>
       <div className={styles.heroPanel}>
-        <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>BASE · PRO</span></div>
-        <div className={visual.posterFrame}><img src={asset('siltok-ai-station-hero-poster.png')} alt="Siltok AI Station 蓝白产品海报"/><div><span>LOCAL AI STATION</span><b>把模型与工作流，<br/>带回创作者桌面。</b></div></div>
+        <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>LOCAL CREATIVE INFRASTRUCTURE</span></div>
+        <div className={visual.deviceStage}><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 桌面级本地 AI 工作站"/><div className={visual.stageCaption}><b>一台设备，承载你的本地创作环境。</b><span>模型 · ComfyUI 节点 · 素材 · 工作流</span></div><span className={visual.stageNode}>01 / LOCAL</span><span className={visual.stageNode}>02 / OPEN</span></div>
         <div className={styles.panelStats}><div><b>本地</b><span>创作资产处理</span></div><div><b>开放</b><span>模型与节点扩展</span></div><div><b>共创</b><span>工作流沉淀</span></div></div>
       </div>
     </section>
