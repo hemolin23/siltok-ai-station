@@ -33,6 +33,17 @@ const products = [
   { name: 'Siltok Pro', label: '专业工作流', copy: '面向工作室和持续生产场景，承载更复杂的模型、ComfyUI 节点与团队工作流。', points: ['复杂工作流与多轮调试', '更高频的生产任务', '按业务场景进行部署支持'] },
 ];
 
+const creatorScenes = [
+  ['AI 真人短剧', '批量生成高频剧情内容'], ['AI 漫剧 / 动画短片', '快速迭代角色与分镜'],
+  ['电商素材批量生产', '服务品牌、商家与代运营团队'], ['影视后期与特效', '辅助项目后期制作'],
+  ['4A 广告与品牌 TVC', '打造高质量品牌视觉素材'], ['自媒体内容', '支持稳定的内容更新'],
+  ['互联网广告服务商', '服务 SMB 广告投放'], ['游戏 CG', '批量制作角色与场景素材'],
+];
+
+const localValues = [
+  ['本地运行', '素材与项目更可控'], ['持续生产', '适合高频重复任务'], ['开放工作流', '支持 ComfyUI 节点扩展'],
+];
+
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 export default function App() {
@@ -82,9 +93,12 @@ export default function App() {
 
     <section className={styles.products} id="products">
       <SectionHead n="04" label="SILTOK AI STATION" title="两款产品，服务不同创作负载。" copy="页面仅说明产品定位，不展开具体硬件参数。最终配置、价格和可用模型以正式发布信息为准。" />
+      <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，重点验证真实项目中的稳定性、可控性与工作流复用价值。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
       <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点与可复用工作流。产品仍处于内测共创阶段，实际能力以测试环境为准。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
       <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
-      <a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a>
+      <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
+      <div className={visual.techStrip}><div><span>异构协同 · 算力池化</span><b>同一套硬件调度多种计算资源</b></div><div><span>流式模型 · 算载并行</span><b>消费级显卡也能运行更完整模型</b></div><div><span>多模同构 · 全局调度</span><b>从脚本到成片集中完成</b></div></div>
+      <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a><a className={styles.officialLink} href={asset('siltok-ai-station-overview-no-price.png')} target="_blank" rel="noreferrer">查看无价格版一页纸 <ArrowRight/></a></div>
     </section>
 
     <section className={styles.team} id="team">
