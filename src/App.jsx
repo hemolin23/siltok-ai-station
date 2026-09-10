@@ -53,7 +53,7 @@ export default function App() {
       </div>
       <div className={styles.heroPanel}>
         <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>BASE · PRO</span></div>
-        <div className={visual.orbit}><div className={visual.device}><img src={asset('brand/siltok-blue.png')} alt="Siltok AI Station 产品形态"/><span>LOCAL AI STATION</span></div><i/><i/><i/></div>
+        <div className={visual.posterFrame}><img src={asset('siltok-ai-station-hero-poster.png')} alt="Siltok AI Station 蓝白产品海报"/><div><span>LOCAL AI STATION</span><b>把模型与工作流，<br/>带回创作者桌面。</b></div></div>
         <div className={styles.panelStats}><div><b>本地</b><span>创作资产处理</span></div><div><b>开放</b><span>模型与节点扩展</span></div><div><b>共创</b><span>工作流沉淀</span></div></div>
       </div>
     </section>
@@ -82,6 +82,7 @@ export default function App() {
 
     <section className={styles.products} id="products">
       <SectionHead n="04" label="SILTOK AI STATION" title="两款产品，服务不同创作负载。" copy="页面仅说明产品定位，不展开具体硬件参数。最终配置、价格和可用模型以正式发布信息为准。" />
+      <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点与可复用工作流。产品仍处于内测共创阶段，实际能力以测试环境为准。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
       <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
       <a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a>
     </section>
