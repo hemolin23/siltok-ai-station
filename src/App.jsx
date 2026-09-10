@@ -98,7 +98,8 @@ export default function App() {
       <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
       <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
       <div className={visual.techStrip}><div><span>异构协同 · 算力池化</span><b>同一套硬件调度多种计算资源</b></div><div><span>流式模型 · 算载并行</span><b>消费级显卡也能运行更完整模型</b></div><div><span>多模同构 · 全局调度</span><b>从脚本到成片集中完成</b></div></div>
-      <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a><a className={styles.officialLink} href={asset('siltok-ai-station-overview-no-price.png')} target="_blank" rel="noreferrer">查看无价格版一页纸 <ArrowRight/></a></div>
+      <div className={visual.disclaimer}><ShieldCheck/><span><b>参数仅作参考，非最终版</b>产品配置、模型能力和功能范围以最终发布与实际测试结果为准；硅基词元拥有一切解释权。</span></div>
+      <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a></div>
     </section>
 
     <section className={styles.team} id="team">
