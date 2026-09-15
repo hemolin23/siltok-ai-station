@@ -15,12 +15,10 @@ const directedCases = [
   { n: '05', icon: MonitorUp, title: '批量与异常恢复', copy: '连续执行一组任务，记录中断、报错、恢复方式和对日常生产的影响。' },
 ];
 
-const week = [
-  ['DAY 0', '确认与准备', '完成报名、能力匹配、保密协议与测试排期'],
-  ['DAY 1-2', '上手与定向测试', '完成安装引导和 1-2 个统一测试案例'],
-  ['DAY 3-5', '真实任务迁移', '用自己的项目跑通一个最小可复现工作流'],
-  ['DAY 6', '问题复盘', '整理失败样本、操作卡点与能力边界'],
-  ['DAY 7', '30 分钟访谈', '确认质量标准、继续测试意愿与后续共创方向'],
+const testDays = [
+  ['DAY 1', '熟悉与试跑', '完成操作引导，选择一个最小测试任务并首次运行'],
+  ['DAY 2', '自由测试', '根据自己的时间继续测试，保留结果、报错与失败样本'],
+  ['DAY 3', '反馈与复盘', '提交使用感受，并通过简短沟通确认问题与能力边界'],
 ];
 
 const ecosystem = [
@@ -72,7 +70,7 @@ const userQuestions = [
   ['主要优势是算力价格更低吗？', '核心价值包括素材本地留存、减少云端排队和平台绑定、工作流复现，以及模型与节点按业务调整。成本优势需要通过真实任务测算。'],
   ['H3 不如其他云端模型怎么办？', '我们不要求所有任务只用一个模型。本地与云端可以协同：不同模型负责更擅长的环节。内测正是要确认真人、动画、电商等场景分别适合什么模型，以及哪些任务现阶段仍应使用云端。'],
   ['支持超分和 ComfyUI 节点吗？', '支持围绕 ComfyUI 节点和工作流进行部署。超分可作为具体项目的测试环节，但模型、节点版本和资源占用需要在排期前确认，不默认承诺所有插件一次兼容。'],
-  ['我现在项目忙，能晚点参加吗？', '可以。你可以先登记方向，等测试环境和时间匹配后再加入；也可以先做一次 20–30 分钟远程体验，不需要立刻迁移完整项目。'],
+  ['我现在项目忙，能晚点参加吗？', '可以。你可以先登记方向，等测试环境和时间匹配后再加入。正式测试周期为 3 天，可在约定时间窗口内自由安排，不要求连续在线，也不需要迁移完整项目。'],
   ['电商团队可以怎么测试？', '可以从商品图批量变体、场景替换、短视频镜头、超分或一条现有 ComfyUI 流程开始。我们会先确认产量、可用率和返工标准，再安排最小测试任务。'],
   ['测试期间还有其他费用吗？', '约定的内测设备使用本身免费，不会自动转为付费服务。测试时长、支持范围以及可能产生的第三方模型或 API 费用，会在开始前书面确认。'],
 ];
@@ -110,9 +108,9 @@ export default function App() {
     <section className={styles.valueStrip}><p>围绕真实任务完成测试</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
 
     <section className={styles.program} id="program">
-      <SectionHead n="01" label="BETA PROGRAM" title="一周完成一个最小测试闭环。" copy="围绕一个明确痛点和一个真实项目测试，留下可复现的结论。" />
-      <div className={styles.weekGrid}>{week.map(([day,title,copy])=><article key={day}><b>{day}</b><h3>{title}</h3><p>{copy}</p></article>)}</div>
-      <div className={styles.exchange}><div><span>我们提供</span><ul><li><Check/>现场或远程测试环境</li><li><Check/>安装与操作引导</li><li><Check/>定向案例与问题响应</li><li><Check/>适合时共同沉淀模板</li></ul></div><div><span>参与者提供</span><ul><li><Check/>一个真实业务任务</li><li><Check/>每周至少 1-2 小时</li><li><Check/>问题、失败样本与判断标准</li><li><Check/>结束后的结构化访谈</li></ul></div></div>
+      <SectionHead n="01" label="BETA PROGRAM" title="3 天完成一个最小测试闭环。" copy="在约定的 3 天窗口内根据自己的时间自由测试，不要求连续在线；围绕一个明确问题留下可复现的结论。" />
+      <div className={styles.weekGrid}>{testDays.map(([day,title,copy])=><article key={day}><b>{day}</b><h3>{title}</h3><p>{copy}</p></article>)}</div>
+      <div className={styles.exchange}><div><span>我们提供</span><ul><li><Check/>现场或远程测试环境</li><li><Check/>安装与操作引导</li><li><Check/>定向案例与问题响应</li><li><Check/>适合时共同沉淀模板</li></ul></div><div><span>参与者提供</span><ul><li><Check/>一个最小测试任务</li><li><Check/>3 天内按自己的时间自由测试</li><li><Check/>问题、失败样本与判断标准</li><li><Check/>结束后的简短反馈</li></ul></div></div>
     </section>
 
     <section className={styles.tasks} id="tasks">
