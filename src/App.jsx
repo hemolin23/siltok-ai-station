@@ -130,18 +130,10 @@ export default function App() {
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
       <HeroFluidField />
       <div className={styles.heroSpatialRig} aria-hidden="true">
-        <div className={styles.heroCameraPath}><i/><i/><i/><span>CAMERA PATH / 03</span></div>
-        <div className={styles.heroReferenceDeck}>
-          <figure><img src={asset('forbidden-bride/r18-space.jpg')} alt=""/><figcaption>SPACE REF</figcaption></figure>
-          <figure><img src={asset('forbidden-bride/elvira-identity.jpg')} alt=""/><figcaption>IDENTITY REF</figcaption></figure>
-          <figure><img src={asset('forbidden-bride/r18-viewpoint.jpg')} alt=""/><figcaption>CAMERA REF</figcaption></figure>
+        <div className={styles.heroAppIconStage}>
+          <i/><i/><i/>
+          <div className={styles.heroAppIconCrop}><img src={asset('brand/siltok-dash-icon.png')} alt="Siltok 软件图标"/></div>
         </div>
-        <div className={styles.heroRemoteApp}>
-          <header><img src={asset('brand/siltok-dash-icon.png')} alt=""/><div><b>Siltok Dash</b><span>REMOTE CREATIVE DESKTOP</span></div><i><em/>ONLINE</i></header>
-          <main><div className={styles.remotePreview}><video src={asset('forbidden-bride/ep01-sh03.mp4')} muted autoPlay loop playsInline/><span>EP01 / SH03 · LIVE</span></div><aside><span>创作节点</span><b>Forbidden Bride</b><small>30 SHOTS · 9:16</small><div><i/><em>H3 多参考</em><strong>READY</strong></div><div><i/><em>FLUX 文生图</em><strong>READY</strong></div><div><i/><em>图生图编辑</em><strong>READY</strong></div></aside></main>
-          <footer><span><i/>远程连接本地工作区</span><b>创作节点 01</b></footer>
-        </div>
-        <div className={styles.heroSceneBadge}><span>SILTOK DASH</span><b>远程连接 · 模型路由 · 本地队列</b><i><em/>创作节点已在线</i></div>
       </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
