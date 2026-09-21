@@ -125,16 +125,6 @@ export default function App() {
         <p className={styles.lead}>一张画布，把文字、图片、视频、模型、素材与作品连成完整创作流。</p>
         <div className={styles.actions}><a className={styles.primary} href="#creator-canvas">进入创作画布 <ArrowRight /></a><a className={styles.secondary} href="#showreel">观看样片</a></div>
       </div>
-      <div className={`${styles.heroMedia} ${styles.heroProductStage}`}>
-        <div className={styles.glassEyebrow}><span>LOCAL CREATIVE CORE</span><b>STATION / 01</b></div>
-        <div className={styles.deviceHalo}/>
-        <img className={styles.heroDevice} src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品"/>
-        <div className={`${styles.heroUiWindow} ${styles.heroUiCanvas}`}><div><i/><i/><i/><b>镜头画布</b></div><img src={asset(showreel[2].poster)} alt=""/><span><em/><em/><em/><em/></span></div>
-        <div className={`${styles.heroUiWindow} ${styles.heroUiAssets}`}><div><i/><i/><i/><b>参考素材</b></div><section>{showreel.slice(0,3).map(x=><img key={x.poster} src={asset(x.poster)} alt=""/>)}</section><small>人物 · 场景 · 动作</small></div>
-        <div className={`${styles.heroUiWindow} ${styles.heroUiQueue}`}><div><i/><i/><i/><b>本地渲染</b></div><strong><i/>生成中 68%</strong><span/><small>GPU 84% · LOCAL</small></div>
-        <div className={`${styles.glassChip} ${styles.glassChipOne}`}><i/>模型环境 <b>READY</b></div>
-        <p><i/>正在运行 · 本地创作系统</p>
-      </div>
       <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
     </section>
 
@@ -322,9 +312,8 @@ function Showreel() {
     if (event.currentTarget.requestFullscreen) event.currentTarget.requestFullscreen().catch(()=>{});
   };
   return <section className={styles.showreel} id="showreel">
-    <SectionHead n="04" label="SELECTED OUTPUTS" title="四条样片，一次看完。" copy="电影节目录式排布；悬停静音预览，点击进入全屏。" />
-    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={expand}/><i>{String(index+1).padStart(2,'0')}</i><button onClick={e=>{e.stopPropagation();expand({currentTarget:e.currentTarget.previousSibling.previousSibling})}}><Play/> 全屏播放</button></div><div className={styles.reelStreamCaption}><span>{item.meta.join(' · ')}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
-    <p className={styles.reelNote}>产品测试样片 · 效果会随模型、输入素材与工作流配置变化</p>
+    <div className={styles.compactReelHead}><span>04 / SELECTED OUTPUTS</span><h2>四条样片</h2></div>
+    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={expand}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button onClick={e=>{e.stopPropagation();expand({currentTarget:e.currentTarget.parentElement.querySelector('video')})}}><Play/> 全屏</button></div></article>)}</div>
   </section>;
 }
 
@@ -338,8 +327,15 @@ function ParticipationIntro() {
 
 function TeamSection() {
   return <section className={styles.team} id="team">
-    <div className={styles.companyIntro}><span>04 / SILTOK LABS</span><h2>我们把硬件、模型工程与创作体验，聚合成一件产品。</h2><p>北京硅基词元科技有限公司专注端侧 AI 创作系统。团队同时理解智能硬件、高性能计算、企业软件和内容生产，让模型真正进入稳定工作流。</p></div>
-    <div className={styles.talentMap}><div className={styles.talentCore}><b>SILTOK</b><span>人才与能力聚合</span></div><article><span>创始人 & CEO</span><b>白鹏</b><small>智能硬件 · 产品商业化 · 互联网生态</small></article><article><span>联合创始人 & CTO</span><b>沈游人</b><small>高性能计算 · 企业软件 · 端侧 AI</small></article><i>AI 模型工程</i><i>创作工作流</i><i>硬件产品</i><i>创作者生态</i></div>
+    <div className={styles.companyIntro}><span>06 / SILTOK LABS</span><h2>把满血视频模型，<br/>带进消费级硬件。</h2><p>专注端侧 AI 基础设施，正在推进首款桌面级 AI Station 端侧硬件产品。</p><div className={styles.founderLine}><span><b>白鹏</b> CEO · 智能硬件与产品商业化</span><span><b>沈游人</b> CTO · 高性能计算与端侧 AI</span></div></div>
+    <div className={styles.moatGraphic} aria-label="Siltok 三层技术护城河">
+      <div className={styles.moatOrbit}><i/><i/><i/></div>
+      <div className={styles.moatCore}><small>LOCAL VIDEO INFERENCE</small><strong><b>16</b>GB</strong><i>→</i><strong><b>120</b>GB</strong><span>让“装不下”的满血视频模型跑起来</span></div>
+      <article className={styles.moatOne}><span>01 / 推理系统</span><b>从“装不下”这一侧求解</b><small>不是用更多的卡，而是让消费级硬件承载完整视频模型。</small></article>
+      <article className={styles.moatTwo}><span>02 / 交叉能力</span><b>扩散算法 × 高性能系统</b><small>稠密视频模型无法照搬语言模型经验，必须从零重做。</small></article>
+      <article className={styles.moatThree}><span>03 / 时间积累</span><b>系统工程不能速成</b><small>内存生命周期、跨设备调度与每一处崩溃路径，都来自亲手踩过的坑。</small></article>
+      <div className={styles.moatTags}><span>MEMORY LIFECYCLE</span><span>CROSS-DEVICE SCHEDULING</span><span>DENSE VIDEO MODEL</span></div>
+    </div>
   </section>;
 }
 
