@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow } from 'lucide-react';
+import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow, Play, Plus, SlidersHorizontal, Sparkles, Box, RotateCcw, Volume2, WandSparkles } from 'lucide-react';
 import styles from './station.module.css';
 import visual from './product-visual.module.css';
 
@@ -111,7 +111,7 @@ export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#creator-canvas">创作画布</a><a href="#visual-story">创作系统</a><a href="#showreel">生成样片</a><a href="#team">公司与团队</a></nav>
+      <nav><a href="#creator-canvas">创作画布</a><a href="#product-ui">产品界面</a><a href="#showreel">生成样片</a><a href="#asset-universe">素材宇宙</a></nav>
       <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
@@ -125,13 +125,14 @@ export default function App() {
         <p className={styles.lead}>一张画布，把文字、图片、视频、模型、素材与作品连成完整创作流。</p>
         <div className={styles.actions}><a className={styles.primary} href="#creator-canvas">进入创作画布 <ArrowRight /></a><a className={styles.secondary} href="#showreel">观看样片</a></div>
       </div>
-      <div className={styles.heroMedia}>
+      <div className={`${styles.heroMedia} ${styles.heroProductStage}`}>
         <div className={styles.glassEyebrow}><span>LOCAL CREATIVE CORE</span><b>STATION / 01</b></div>
         <div className={styles.deviceHalo}/>
         <img className={styles.heroDevice} src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品"/>
+        <div className={`${styles.heroUiWindow} ${styles.heroUiCanvas}`}><div><i/><i/><i/><b>镜头画布</b></div><img src={asset(showreel[2].poster)} alt=""/><span><em/><em/><em/><em/></span></div>
+        <div className={`${styles.heroUiWindow} ${styles.heroUiAssets}`}><div><i/><i/><i/><b>参考素材</b></div><section>{showreel.slice(0,3).map(x=><img key={x.poster} src={asset(x.poster)} alt=""/>)}</section><small>人物 · 场景 · 动作</small></div>
+        <div className={`${styles.heroUiWindow} ${styles.heroUiQueue}`}><div><i/><i/><i/><b>本地渲染</b></div><strong><i/>生成中 68%</strong><span/><small>GPU 84% · LOCAL</small></div>
         <div className={`${styles.glassChip} ${styles.glassChipOne}`}><i/>模型环境 <b>READY</b></div>
-        <div className={`${styles.glassChip} ${styles.glassChipTwo}`}>素材处理 <b>LOCAL</b></div>
-        <div className={`${styles.glassChip} ${styles.glassChipThree}`}>工作流 <b>REUSABLE</b></div>
         <p><i/>正在运行 · 本地创作系统</p>
       </div>
       <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
@@ -140,8 +141,10 @@ export default function App() {
     <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
     <CanvasExperience />
-    <VisualStories />
+    <ProductUISuite />
+    <CreationJourney />
     <Showreel />
+    <AssetUniverse />
     <TeamSection />
     <section className={styles.coCreateGateway}><img src={asset('siltok-liquid-workflow.png')} alt="液态玻璃创作工作流"/><div><span>CO-CREATE / SEPARATE PAGE</span><h2>带一个真实任务，<br/>来和我们一起验证。</h2><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
 
@@ -219,6 +222,87 @@ function CanvasExperience() {
   </section>;
 }
 
+const uiScenes = [
+  ['01','创作工作台总览','项目、素材、任务、模型与作品同时在场','overview'],
+  ['02','视频创作画布','预览、时间线与生成参数保持同一上下文','canvas'],
+  ['03','模型选择器','看见模型擅长什么，再决定让谁工作','models'],
+  ['04','多参考素材板','人物、场景、动作、首尾帧与声音自由组合','references'],
+  ['05','镜头编排与时间线','镜头、关键帧、提示词和声音轨道横向展开','timeline'],
+  ['06','本地渲染队列','等待、生成、完成与失败恢复都清晰可见','queue'],
+  ['07','工作流保存','把模型、参数、节点与素材封装成创作配方','recipe'],
+  ['08','作品与素材库','角色、场景、片段和版本沉淀为视觉资产','library'],
+];
+
+function ProductUISuite() {
+  const [active, setActive] = useState(0);
+  const [focus, setFocus] = useState('多模型');
+  return <section className={styles.uiSuite} id="product-ui">
+    <div className={styles.uiSuiteHead}><span>02 / PRODUCT INTERFACE</span><h2>不是功能清单。<br/>直接进入工作站。</h2><p>八个真实创作场景，组成一套从素材到作品的本地生产系统。</p></div>
+    <div className={styles.uiSuiteNav}>{uiScenes.map(([n,title],i)=><button key={n} className={i===active?styles.uiSuiteNavOn:''} onClick={()=>setActive(i)}><span>{n}</span>{title}</button>)}</div>
+    <div className={styles.uiSuiteFrame}>
+      <div className={styles.uiSuiteMeta}><span>{uiScenes[active][0]} / 08</span><div><h3>{uiScenes[active][1]}</h3><p>{uiScenes[active][2]}</p></div></div>
+      <ProductScreen type={uiScenes[active][3]} focus={focus}/>
+      <div className={styles.uiHotspots}>{['多模型','多参考','本地生成','镜头编排','任务队列','工作流复用'].map(x=><button key={x} onMouseEnter={()=>setFocus(x)} onFocus={()=>setFocus(x)} className={focus===x?styles.uiHotspotOn:''}><i/>{x}</button>)}</div>
+    </div>
+  </section>;
+}
+
+function AppChrome({title='《失落文明》概念短片',children}) {
+  return <div className={styles.productScreen}>
+    <aside className={styles.productSidebar}><b>S</b><button className={styles.sideOn}>⌁</button><button>▧</button><button>◫</button><button>◇</button><button>◉</button><i/><button>⚙</button></aside>
+    <div className={styles.productDesk}>
+      <header><div><i/><i/><i/></div><b>{title}</b><span>本地工作区 · 已保存</span><button>导出</button></header>
+      {children}
+    </div>
+  </div>;
+}
+
+function ProductScreen({type, focus}) {
+  if(type==='overview') return <AppChrome><div className={styles.overviewScreen}>
+    <section className={styles.overviewProject}><span>当前项目 / 03</span><h4>机械法老 · 概念片</h4><img src={asset(showreel[2].poster)} alt="机械法老项目"/><div><b>12 个镜头</b><b>8 个参考</b><b>4 个版本</b></div></section>
+    <section className={styles.overviewRecent}><span>最近素材</span><div>{showreel.map(x=><figure key={x.poster}><img src={asset(x.poster)} alt=""/><small>{x.title}</small></figure>)}</div></section>
+    <section className={`${styles.overviewQueue} ${focus==='任务队列'?styles.uiFocus:''}`}><span>生成任务</span><article><i/>H3 · 镜头 08 <b>68%</b></article><article><i/>LTX · 镜头 06 <b>排队</b></article><article><i/>FLUX · 角色设定 <b>完成</b></article></section>
+    <section className={`${styles.overviewModels} ${focus==='多模型'?styles.uiFocus:''}`}><span>模型状态</span><b><i/>H3 已加载</b><b><i/>LTX 在线</b><b><i/>图像模型待命</b></section>
+  </div></AppChrome>;
+
+  if(type==='canvas') return <AppChrome><div className={styles.fullCanvas}>
+    <nav><button>T</button><button>▧</button><button>▷</button><button>♬</button><button>◇</button></nav>
+    <main><div className={styles.canvasPreview}><img src={asset(showreel[2].poster)} alt="机械法老镜头预览"/><button><Play/>预览镜头</button></div><MiniTimeline/></main>
+    <aside className={focus==='多参考'?styles.uiFocus:''}><span>生成参数</span><label>创作模型</label><button>MiniMax H3 <small>已加载</small></button><label>参考素材</label><div className={styles.refThumbs}>{showreel.slice(0,3).map(x=><img key={x.poster} src={asset(x.poster)} alt=""/>)}<b><Plus/></b></div><label>画面描述</label><p>机械法老从暗处醒来，镜头沿金属纹理缓慢环绕。</p><button className={styles.runButton}><Sparkles/>加入本地队列</button></aside>
+  </div></AppChrome>;
+
+  if(type==='models') return <AppChrome title="选择创作模型"><div className={`${styles.modelScreen} ${focus==='多模型'?styles.uiFocus:''}`}>
+    <div className={styles.modelFilter}><span>模型中心</span><button className={styles.filterOn}>全部</button><button>视频</button><button>图像</button><button>语言</button><i/><small>4 个本地模型已就绪</small></div>
+    <div className={styles.modelGrid}>{[
+      ['H3','视频生成','电影镜头与复杂运动',showreel[2].poster,'已加载'],['LTX','视频生成','快速预览与迭代',showreel[0].poster,'在线'],['FLUX','图像生成','角色与场景设定',showreel[3].poster,'在线'],['Qwen','语言模型','分镜与提示词助手',showreel[1].poster,'在线']
+    ].map(([name,kind,desc,img,state],i)=><article className={i===0?styles.modelSelected:''} key={name}><img src={asset(img)} alt=""/><div><span>{kind}</span><b>{name}</b><p>{desc}</p><small><i/>{state}</small></div></article>)}</div>
+  </div></AppChrome>;
+
+  if(type==='references') return <AppChrome title="多参考素材板"><div className={`${styles.referenceScreen} ${focus==='多参考'?styles.uiFocus:''}`}>
+    <div className={styles.refLines}/>{[['人物参考',showreel[1].poster,'CHARACTER'],['场景参考',showreel[3].poster,'SCENE'],['动作参考',showreel[0].poster,'MOTION'],['首帧',showreel[2].poster,'START'],['尾帧',showreel[3].poster,'END']].map(([title,img,tag],i)=><article style={{'--x':`${8+i*17}%`,'--y':`${i%2?42:15}%`}} key={title}><img src={asset(img)} alt=""/><span>{tag}</span><b>{title}</b><small>拖动连接到镜头 08</small></article>)}<div className={styles.audioCard}><Volume2/><span>氛围声音</span><i/></div><div className={styles.refCore}><WandSparkles/><b>镜头 08</b><small>5 个参考已连接</small></div>
+  </div></AppChrome>;
+
+  if(type==='timeline') return <AppChrome title="镜头编排"><div className={`${styles.timelineScreen} ${focus==='镜头编排'?styles.uiFocus:''}`}><div className={styles.timelinePlayer}><img src={asset(showreel[3].poster)} alt=""/><span>00:18:12 / 00:42:00</span></div><div className={styles.timelineTools}><button><Play/></button><b>12 个镜头</b><span>自动吸附</span><span>关键帧</span><i/></div><div className={styles.cinemaTimeline}>{['画面','提示词','声音'].map((track,row)=><section key={track}><b>{track}</b><div>{showreel.concat(showreel.slice(0,2)).map((x,i)=><article style={{'--w':`${110+(i%3)*36}px`}} key={`${track}-${i}`}>{row===0?<img src={asset(x.poster)} alt=""/>:<><small>{row===1?'镜头沿主体缓慢环绕':'氛围 · 机械低鸣'}</small></>}</article>)}</div></section>)}<i className={styles.playhead}/></div></div></AppChrome>;
+
+  if(type==='queue') return <AppChrome title="本地渲染队列"><div className={`${styles.queueScreen} ${focus==='本地生成'||focus==='任务队列'?styles.uiFocus:''}`}><section className={styles.resourcePanel}><span>设备资源</span><div><b>GPU</b><i><em style={{width:'84%'}}/></i><small>84%</small></div><div><b>显存</b><i><em style={{width:'71%'}}/></i><small>17.2 GB</small></div><div><b>温度</b><i><em style={{width:'58%'}}/></i><small>62°C</small></div><p><i/>Siltok Station · 本地运行</p></section><section className={styles.queueList}><span>任务 / 06</span>{[['生成中','镜头 08 · H3','68%'],['等待','镜头 09 · H3','下一个'],['完成','角色定帧 · FLUX','查看'],['失败','镜头 04 · LTX','重试']].map(([state,title,meta],i)=><article data-state={state} key={title}><b>{String(i+1).padStart(2,'0')}</b><img src={asset(showreel[i].poster)} alt=""/><div><span>{state}</span><strong>{title}</strong>{i===0&&<i><em/></i>}</div><button>{state==='失败'?<RotateCcw/>:meta}</button></article>)}</section></div></AppChrome>;
+
+  if(type==='recipe') return <AppChrome title="工作流配方"><div className={`${styles.recipeScreen} ${focus==='工作流复用'?styles.uiFocus:''}`}><section><span>配方 / CINEMA CHARACTER V04</span><h4>电影角色一致性工作流</h4><div className={styles.nodeGraph}>{['参考素材','提示词助手','图像模型','视频模型','清晰化','作品'].map((x,i)=><article key={x} style={{'--delay':i}}><small>0{i+1}</small><b>{x}</b><i/></article>)}</div></section><aside><Box/><b>保存为创作配方</b><p>模型、节点、参数、素材与版本将被一起保存。</p><div><span>6 个节点</span><span>8 个素材</span><span>12 项参数</span></div><button>保存工作流</button></aside></div></AppChrome>;
+
+  return <AppChrome title="作品与素材库"><div className={styles.libraryScreen}><div className={styles.libraryBar}><b>视觉资产</b><button>全部</button><button>角色</button><button>场景</button><button>片段</button><span>48 项 · 本地</span></div><div className={styles.libraryWall}>{showreel.concat(showreel,showreel.slice(0,2)).map((x,i)=><figure key={`${x.poster}-${i}`} className={i%5===0?styles.libraryTall:''}><img src={asset(x.poster)} alt=""/><figcaption><b>{i%3===0?'角色资产':i%3===1?'场景版本':'镜头片段'} {String(i+1).padStart(2,'0')}</b><span>V{(i%4)+1} · 关联 {i+2} 个工作流</span></figcaption></figure>)}</div></div></AppChrome>;
+}
+
+function MiniTimeline(){return <div className={styles.miniTimeline}><div><button><Play/></button><span>00:08:14</span><i/></div><section>{showreel.concat(showreel.slice(0,2)).map((x,i)=><img key={`${x.poster}-${i}`} src={asset(x.poster)} alt=""/>)}</section><em/></div>}
+
+function CreationJourney() {
+  const steps=[['参考素材','人物、场景与动作进入同一个项目','references'],['画布编排','把镜头放进故事结构','canvas'],['选择模型','根据画面目标分配模型','models'],['本地渲染','队列持续工作，状态始终可见','queue'],['保存工作流','这次成功，成为下一次的起点','recipe']];
+  return <section className={styles.journey} id="visual-story"><div className={styles.journeyHead}><span>03 / ONE CREATION</span><h2>一次创作，<br/>如何真正发生。</h2><p>向下滚动，蓝色能量沿本地创作管线依次点亮五个环节。</p></div><div className={styles.journeyPipe}>{steps.map(([title,copy,type],i)=><article key={title}><div className={styles.journeyIndex}><span>0{i+1}</span><i/></div><div className={styles.journeyCopy}><small>STEP {String(i+1).padStart(2,'0')}</small><h3>{title}</h3><p>{copy}</p></div><div className={styles.journeyUi}><ProductScreen type={type} focus={type==='models'?'多模型':type==='references'?'多参考':type==='queue'?'本地生成':type==='recipe'?'工作流复用':'镜头编排'}/></div></article>)}</div></section>;
+}
+
+function AssetUniverse(){
+  const assets=[['角色 / PHARAOH',showreel[2].poster,'03 个作品 · 02 条工作流'],['场景 / VALLEY',showreel[3].poster,'02 个作品 · 04 条工作流'],['动作 / RUN',showreel[0].poster,'01 个作品 · 03 条工作流'],['人物 / MARKET',showreel[1].poster,'04 个作品 · 02 条工作流'],['色板 / COBALT',null,'06 个作品 · 05 条工作流'],['声音 / INDUSTRIAL',null,'03 个作品 · 04 条工作流']];
+  return <section className={styles.assetUniverse} id="asset-universe"><div className={styles.assetUniverseHead}><span>05 / ASSET UNIVERSE</span><h2>每一次创作，<br/>都让素材宇宙继续生长。</h2><p>横向浏览角色、场景、动作、声音与色板；悬停查看它们参与过的作品和工作流。</p></div><div className={styles.assetOrbit}>{assets.map(([title,img,meta],i)=><article key={title} className={!img?styles.assetAbstract:''}>{img?<img src={asset(img)} alt=""/>:<div>{i===4?<><i/><i/><i/><i/></>:<><Volume2/><span/><span/><span/></>}</div>}<small>{String(i+1).padStart(2,'0')}</small><b>{title}</b><p>{meta}</p></article>)}</div></section>
+}
+
 function VisualStories() {
   const cards = [
     ['siltok-liquid-workflow.png','素材、参考与模型汇成同一条创作流','工作流不是配置文件，而是可以复用的创作资产。'],
@@ -231,9 +315,15 @@ function VisualStories() {
 }
 
 function Showreel() {
+  const preview = (event, play) => {
+    if (window.matchMedia('(hover:hover)').matches) play ? event.currentTarget.play().catch(()=>{}) : event.currentTarget.pause();
+  };
+  const expand = (event) => {
+    if (event.currentTarget.requestFullscreen) event.currentTarget.requestFullscreen().catch(()=>{});
+  };
   return <section className={styles.showreel} id="showreel">
-    <SectionHead n="03" label="SELECTED OUTPUTS" title="四条样片，一次看完。" copy="不分页、不拆组，横向浏览四种不同的影像能力。" />
-    <div className={styles.reelStream}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} controls muted loop playsInline preload="metadata"/><i>{String(index+1).padStart(2,'0')} / 04</i></div><div className={styles.reelStreamCaption}><span>{item.meta.join(' · ')}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
+    <SectionHead n="04" label="SELECTED OUTPUTS" title="四条样片，一次看完。" copy="电影节目录式排布；悬停静音预览，点击进入全屏。" />
+    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={expand}/><i>{String(index+1).padStart(2,'0')}</i><button onClick={e=>{e.stopPropagation();expand({currentTarget:e.currentTarget.previousSibling.previousSibling})}}><Play/> 全屏播放</button></div><div className={styles.reelStreamCaption}><span>{item.meta.join(' · ')}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
     <p className={styles.reelNote}>产品测试样片 · 效果会随模型、输入素材与工作流配置变化</p>
   </section>;
 }
