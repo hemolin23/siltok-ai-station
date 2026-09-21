@@ -349,6 +349,7 @@ function CanvasExperience() {
       </div>
     </div>
     <div className={styles.canvasFeatureRail}><span>多模型选择</span><span>提示词助手</span><span>图／视频／音频参考</span><span>首尾帧控制</span><span>多比例与时长</span><span>批量生成</span><span>本地队列</span><span>作品与素材库</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开完整原型 <ArrowRight/></a></div>
+    <p className={styles.demoNotice}>当前演示效果非产品最终形态，仅为用户理解而做。</p>
   </section>;
 }
 
@@ -382,6 +383,7 @@ function ProductUISuite() {
       <ProductScreen type={uiScenes[active][3]} focus={focus} selectedModel={selectedModel} onSelectModel={setSelectedModel}/>
       <div className={styles.uiHotspots}>{['多模型','多参考','本地生成','镜头编排','任务队列','工作流复用'].map(x=><button key={x} onMouseEnter={()=>setFocus(x)} onFocus={()=>setFocus(x)} className={focus===x?styles.uiHotspotOn:''}><i/>{x}</button>)}</div>
     </div>
+    <p className={styles.demoNotice}>当前演示效果非产品最终形态，仅为用户理解而做。</p>
   </section>;
 }
 
