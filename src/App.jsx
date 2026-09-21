@@ -121,7 +121,7 @@ export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#product-ui">创作工作站</a><a href="#visual-story">创作流程</a><a href="#showreel">生成样片</a><a href="#advantages">独特优势</a></nav>
+      <nav><a href="#creator-canvas">动态画布</a><a href="#product-ui">创作工作站</a><a href="#showreel">生成样片</a><a href="#advantages">独特优势</a></nav>
       <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
@@ -130,10 +130,7 @@ export default function App() {
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
       <HeroFluidField />
       <div className={styles.heroSpatialRig} aria-hidden="true">
-        <div className={styles.heroAppIconStage}>
-          <i/><i/><i/>
-          <div className={styles.heroAppIconCrop}><img src={asset('brand/siltok-dash-icon.png')} alt="Siltok 软件图标"/></div>
-        </div>
+        <div className={styles.heroRemoteFlow}><img src={asset('brand/siltok-remote-test-flow.png')} alt="创作者通过 Siltok 远程软件连接硬件、技术与加速支持"/></div>
       </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
@@ -147,8 +144,8 @@ export default function App() {
 
     <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
+    <CanvasExperience />
     <ProductUISuite />
-    <CreationJourney />
     <Showreel />
     <AdvantagesSection />
     <section className={styles.coCreateGateway}><div className={styles.gatewayFluid} aria-hidden="true"><i/><i/><i/></div><div className={styles.gatewayOffer}><span>CO-CREATE / CREATOR NETWORK</span><h2>把真实任务，<br/>接进 Siltok。</h2><div className={styles.gatewayCards}><article><b>01</b><strong>AI 内容与商业项目</strong><small>BRIEF · PRODUCTION · DELIVERY</small></article><article><b>02</b><strong>平台、技术与发行资源</strong><small>PLATFORM · SERVICE · DISTRIBUTION</small></article><article><b>03</b><strong>本地 AI 与工作流共创</strong><small>DEVICE · COMFYUI · TEST</small></article></div><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
@@ -335,17 +332,17 @@ function CanvasExperience() {
   const [mode, setMode] = useState('视频');
   const tools = [['文字','T'],['图片','▧'],['视频','▷'],['作品','□']];
   return <section className={styles.canvasSection} id="creator-canvas">
-    <SectionHead n="01" label="SILTOK CREATOR" title="从想法到成片，都在这一张画布里。" copy="文字、图片、视频和作品资产共用同一套项目上下文。" />
+    <SectionHead n="01" label="SILTOK CREATOR" title="画布先动起来。" copy="文字、参考图、视频和作品始终处在同一个创作上下文。" />
     <div className={styles.canvasWindow}>
       <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL · 项目自动保存</i></div>
       <div className={styles.canvasBody}>
         <aside>{tools.map(([name,icon])=><button key={name} onClick={()=>setMode(name)} className={mode===name?styles.canvasToolOn:''}>{icon}<small>{name}</small></button>)}</aside>
         <div className={styles.canvasStage}>
           <div className={styles.canvasStageHead}><b>{mode}预览</b><span>画布 80% · 版本 12</span></div>
-          {mode==='视频'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} autoPlay muted loop playsInline preload="metadata"/>}
-          {mode==='图片'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><img key={item.poster} src={asset(item.poster)} alt=""/>)}</div>}
-          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>镜头 01</span><h4>机械法老从黑暗中醒来，镜头沿金属结构缓慢环绕。</h4><span>镜头 02</span><h4>峡谷云雾被巨龙的翼尖切开，远处城市逐渐显现。</h4></div>}
-          {mode==='作品'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><figure key={item.poster}><img src={asset(item.poster)} alt=""/><b>{item.title}</b></figure>)}</div>}
+          {mode==='视频'&&<MotionClip clip={workbenchClips[0]}/>}
+          {mode==='图片'&&<div className={styles.canvasImageBoard}>{workbenchClips.slice(1,5).map(item=><img key={item.src} src={asset(item.src)} alt={item.title}/>)}</div>}
+          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>R18 · 镜头任务</span><h4>Elvira 在走廊尽头回身，空间结构、人物身份与机位关系保持一致。</h4><span>参考分工</span><h4>身份参考锁定人物；空间图锁定环境；首尾帧定义镜头起点与终点。</h4></div>}
+          {mode==='作品'&&<div className={styles.canvasImageBoard}>{workbenchClips.slice(3,7).map(item=><figure key={item.src}><img src={asset(item.src)} alt={item.title}/><b>{item.title}</b></figure>)}</div>}
           <div className={styles.canvasTimeline}><i/><i/><i/><i/><i/><i/></div>
         </div>
         <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>{mode}生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>首尾帧</span><span>全能参考</span></div><label>画面描述 <em>✦ 提示词助手</em></label><p>描述人物、场景、动作、镜头和声音，也可以拖入图片、视频或音频参考。</p><label>输出规格</label><div className={styles.canvasSpec}><span><small>清晰度</small><b>768p</b></span><span><small>比例</small><b>16:9</b></span><span><small>时长</small><b>5–15 秒</b></span><span><small>声音</small><b>可选</b></span><span><small>数量</small><b>1 / 2 / 4</b></span><span><small>服务</small><b>标准 / 高速</b></span></div><div className={styles.canvasQueue}><i/><span>本地渲染队列可见 · 完成一条展示一条</span></div><button className={styles.generateButton}>立即生成 <ArrowRight/></button></div>
