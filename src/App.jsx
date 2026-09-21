@@ -329,26 +329,25 @@ function ProductDetails() {
 }
 
 function CanvasExperience() {
-  const [mode, setMode] = useState('视频');
-  const tools = [['文字','T'],['图片','▧'],['视频','▷'],['作品','□']];
+  const [mode, setMode] = useState('视频生成');
   return <section className={styles.canvasSection} id="creator-canvas">
     <SectionHead n="01" label="SILTOK CREATOR" title="画布先动起来。" copy="文字、参考图、视频和作品始终处在同一个创作上下文。" />
-    <div className={styles.canvasWindow}>
-      <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL · 项目自动保存</i></div>
-      <div className={styles.canvasBody}>
-        <aside>{tools.map(([name,icon])=><button key={name} onClick={()=>setMode(name)} className={mode===name?styles.canvasToolOn:''}>{icon}<small>{name}</small></button>)}</aside>
-        <div className={styles.canvasStage}>
-          <div className={styles.canvasStageHead}><b>{mode}预览</b><span>画布 80% · 版本 12</span></div>
-          {mode==='视频'&&<MotionClip clip={showreel[2]}/>}
-          {mode==='图片'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><img key={item.poster} src={asset(item.poster)} alt={`${item.title}样片海报`}/>)}</div>}
-          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>SELECTED OUTPUT · 镜头任务</span><h4>让角色、环境与镜头运动在同一段影像中自然发生。</h4><span>创作方向</span><h4>动画叙事、写实人物、机械材质与奇幻大场景，分别调用更合适的模型与参考方式。</h4></div>}
-          {mode==='作品'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><figure key={item.poster}><img src={asset(item.poster)} alt={`${item.title}样片海报`}/><b>{item.title}</b></figure>)}</div>}
-          <div className={styles.canvasTimeline}><i/><i/><i/><i/><i/><i/></div>
+    <StudioShell conversations resource="内存 90%" queue="队列 1">
+      <div className={styles.realChatStage}>
+        <div className={styles.realResultMeta}>minimax-h3-fl2va · 16:9 · 768P · 5 秒</div>
+        <div className={styles.realResult}>
+          {mode==='视频生成'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} muted autoPlay loop playsInline/>}
+          {mode==='图片生成'&&<img src={asset(showreel[3].poster)} alt="龙临峡谷生成结果"/>}
+          {mode==='文字对话'&&<div className={styles.realTextReply}><span>GEMMA-4</span><h3>把镜头拆成可执行的生成描述</h3><p>主体：机械法老在暗色空间中缓慢苏醒。动作：胸腔机械结构逐级点亮。镜头：由半身近景向右侧环绕，保持面部与金属纹理稳定。</p></div>}
         </div>
-        <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>{mode}生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>首尾帧</span><span>全能参考</span></div><label>画面描述 <em>✦ 提示词助手</em></label><p>描述人物、场景、动作、镜头和声音，也可以拖入图片、视频或音频参考。</p><label>输出规格</label><div className={styles.canvasSpec}><span><small>清晰度</small><b>768p</b></span><span><small>比例</small><b>16:9</b></span><span><small>时长</small><b>5–15 秒</b></span><span><small>声音</small><b>可选</b></span><span><small>数量</small><b>1 / 2 / 4</b></span><span><small>服务</small><b>标准 / 高速</b></span></div><div className={styles.canvasQueue}><i/><span>本地渲染队列可见 · 完成一条展示一条</span></div><button className={styles.generateButton}>立即生成 <ArrowRight/></button></div>
+        <div className={styles.realActions}><button>重新编辑</button><button>再次生成</button><button>复制</button><button>删除</button></div>
+        <div className={styles.realComposer}>
+          <p>{mode==='文字对话'?'输入消息，与模型对话…':'描述主体、动作、场景和镜头效果。'}</p>
+          <div><button onClick={()=>setMode('文字对话')} className={mode==='文字对话'?styles.realActive:''}>文字对话</button><button onClick={()=>setMode('图片生成')} className={mode==='图片生成'?styles.realActive:''}>图片生成</button><button onClick={()=>setMode('视频生成')} className={mode==='视频生成'?styles.realActive:''}>视频生成</button><span>{mode==='视频生成'?'minimax h3':mode==='图片生成'?'SenseNova 图像模型':'Gemma-4 语言模型'}⌄</span>{mode==='视频生成'&&<><span>文字生成视频⌄</span><span>16:9 · 768P · 5秒 · 1条⌄</span></>}<i>↑</i></div>
+        </div>
       </div>
-    </div>
-    <div className={styles.canvasFeatureRail}><span>多模型选择</span><span>提示词助手</span><span>图／视频／音频参考</span><span>首尾帧控制</span><span>多比例与时长</span><span>批量生成</span><span>本地队列</span><span>作品与素材库</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开完整原型 <ArrowRight/></a></div>
+    </StudioShell>
+    <div className={styles.canvasFeatureRail}><span>文字对话</span><span>图片生成</span><span>视频生成</span><span>多种参考方式</span><span>参数与队列可见</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">查看功能设计 <ArrowRight/></a></div>
     <p className={styles.demoNotice}>当前演示效果非产品最终形态，仅为用户理解而做。</p>
   </section>;
 }
@@ -361,30 +360,44 @@ function CreationNotebook() {
 }
 
 const uiScenes = [
-  ['01','创作工作台总览','项目、素材、任务、模型与作品同时在场','overview'],
-  ['02','视频创作画布','预览、时间线与生成参数保持同一上下文','canvas'],
-  ['03','模型选择器','看见模型擅长什么，再决定让谁工作','models'],
-  ['04','多参考素材板','人物、场景、动作、首尾帧与声音自由组合','references'],
-  ['05','镜头编排与时间线','镜头、关键帧、提示词和声音轨道横向展开','timeline'],
-  ['06','本地渲染队列','等待、生成、完成与失败恢复都清晰可见','queue'],
-  ['07','工作流保存','把模型、参数、节点与素材封装成创作配方','recipe'],
-  ['08','作品与素材库','角色、场景、片段和版本沉淀为视觉资产','library'],
+  ['01','主机管理','远程查看设备资源、成员与运行状态','host'],
+  ['02','模型商店','文字、图片与视频模型统一安装和启用','store'],
+  ['03','灵感广场','从真实工作流模板开始创作','inspiration'],
+  ['04','AI 对话','在同一会话里完成文字、图片与视频生成','chat'],
+  ['05','任务队列','生成进度、完成结果与设备占用随时可见','queue'],
 ];
 
 function ProductUISuite() {
   const [active, setActive] = useState(0);
-  const [focus, setFocus] = useState('多模型');
-  const [selectedModel, setSelectedModel] = useState('H3');
   return <section className={styles.uiSuite} id="product-ui">
-    <div className={styles.stationBar}><span>SILTOK CREATOR</span><b>远程创作工作区</b><i><em/>本地创作节点已连接</i></div>
+    <div className={styles.stationBar}><span>SILTOK STUDIO V1.0</span><b>远程创作工作区</b><i><em/>Siltok 设备已连接</i></div>
     <div className={styles.uiSuiteNav}>{uiScenes.map(([n,title],i)=><button key={n} className={i===active?styles.uiSuiteNavOn:''} onClick={()=>setActive(i)}><span>{n}</span>{title}</button>)}</div>
     <div className={styles.uiSuiteFrame}>
-      <div className={styles.uiSuiteMeta}><span>{uiScenes[active][0]} / 08</span><div><h3>{uiScenes[active][1]}</h3><p>{uiScenes[active][2]}</p></div></div>
-      <ProductScreen type={uiScenes[active][3]} focus={focus} selectedModel={selectedModel} onSelectModel={setSelectedModel}/>
-      <div className={styles.uiHotspots}>{['多模型','多参考','本地生成','镜头编排','任务队列','工作流复用'].map(x=><button key={x} onMouseEnter={()=>setFocus(x)} onFocus={()=>setFocus(x)} className={focus===x?styles.uiHotspotOn:''}><i/>{x}</button>)}</div>
+      <div className={styles.uiSuiteMeta}><span>{uiScenes[active][0]} / 05</span><div><h3>{uiScenes[active][1]}</h3><p>{uiScenes[active][2]}</p></div></div>
+      <StudioProductScreen type={uiScenes[active][3]}/>
     </div>
     <p className={styles.demoNotice}>当前演示效果非产品最终形态，仅为用户理解而做。</p>
   </section>;
+}
+
+function StudioShell({children, conversations=false, resource='显存 8%', queue='队列'}) {
+  return <div className={styles.studioShell}>
+    <aside className={styles.studioRail}><b>S</b><button className={styles.studioOn}>⌁</button><button>⌘</button><button>◇</button><i/><button>▣</button><button>⚙</button></aside>
+    {conversations&&<aside className={styles.studioConversations}><button>⊕ 新建会话</button><span>机械法老</span><span>图像灵感</span><span>新会话</span><span>新会话</span></aside>}
+    <main className={styles.studioMain}><header><span>{resource}</span><span>{queue}⌄</span><i>—</i><i>□</i><i>×</i></header>{children}</main>
+  </div>;
+}
+
+function StudioProductScreen({type}) {
+  if(type==='host') return <StudioShell resource="显存 8%"><div className={styles.studioPage}><div className={styles.studioProfile}><i/>清风铃兰 <button>退出登录</button></div><div className={styles.studioTitle}><h3>主机</h3><button>＋ 添加主机</button></div><section className={styles.hostCard}><div><h4>▣ Siltok 设备 <small>● 在线 · 正在使用</small></h4><dl><dt>机型</dt><dd>桌面创作站</dd><dt>系统</dt><dd>Windows 11</dd><dt>成员</dt><dd>3 位创作者</dd></dl></div><div className={styles.hostMetrics}><article><span>存储</span><b>366 GB</b><i style={{'--meter':'34%'}}/></article><article><span>网络</span><b>1.72 MB/s</b><i style={{'--meter':'18%'}}/></article><article><span>CPU</span><b>17%</b><i style={{'--meter':'17%'}}/></article><article><span>内存</span><b>78%</b><i style={{'--meter':'78%'}}/></article><article><span>GPU</span><b>15%</b><i style={{'--meter':'15%'}}/></article><article><span>显存</span><b>8%</b><i style={{'--meter':'8%'}}/></article></div></section><div className={styles.hostMini}><article><b>Siltok 设备</b><span>● 在线</span><button>使用</button></article><article><b>Siltok-1</b><span>● 在线</span><button>使用</button></article><article><b>＋</b><span>添加主机</span></article></div></div></StudioShell>;
+
+  if(type==='store') return <StudioShell><div className={styles.studioPage}><div className={styles.studioTitle}><h3>模型商店</h3></div><div className={styles.storeToolbar}><input value="" readOnly placeholder="搜索本地模型或 LoRA"/><button>全部</button><button>文字</button><button>图片</button><button>视频</button><select aria-label="安装状态"><option>全部状态</option></select></div><div className={styles.modelTable}><div><b>模型</b><b>模型信息</b><b>安装大小</b><b>安装状态</b><b>操作</b></div>{[['gemma-4-26B-A4B-it.bf16','文字','48 GB'],['ideogram-4.fp8','图片','34 GB'],['krea-2-turbo.fp8','图片','21 GB'],['minimax-h3-fl2va','视频','91 GB'],['minimax-h3-ref2va','视频','91 GB'],['qwen3-30b-a3b.fp8','文字','30 GB']].map(([name,kind,size])=><div key={name}><span>◇ {name}</span><span>{kind}</span><span>{size}</span><span>已安装</span><span><button>使用</button><button>卸载</button></span></div>)}</div></div></StudioShell>;
+
+  if(type==='inspiration') return <StudioShell><div className={styles.studioPage}><div className={styles.studioTitle}><div><h3>灵感广场</h3><p>发现可直接运行的开源工作流与创作模板</p></div></div><div className={styles.inspirationTabs}><b>灵感广场</b><span>管理我的 ComfyUI</span><button>全部</button><button>产品</button><button>人像</button><input value="" readOnly placeholder="搜索模板和能力"/></div><div className={styles.workflowCards}>{[['Ideogram 4','图片文字与排版',showreel[2].poster],['Krea 2 Turbo','文生图',showreel[0].poster],['Z-Image Base','轻量文生图',showreel[1].poster],['LTX 2.3','图像生成视频',showreel[3].poster],['LTX 2.3 Motion','运动控制',showreel[0].poster],['LTX 2.3 Union','多控制联合',showreel[2].poster]].map(([name,copy,poster])=><article key={name}><img src={asset(poster)} alt=""/><span>WORKFLOW</span><b>{name}</b><small>{copy}</small></article>)}</div></div></StudioShell>;
+
+  if(type==='chat') return <StudioShell conversations resource="内存 90%" queue="队列 1"><div className={styles.realChatStage}><div className={styles.realResultMeta}>minimax-h3-fl2va · 16:9 · 768P · 5 秒</div><div className={styles.realResult}><video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} muted autoPlay loop playsInline/></div><div className={styles.realActions}><button>重新编辑</button><button>再次生成</button><button>复制</button><button>删除</button></div><div className={styles.realComposer}><p>描述主体、动作、场景和镜头效果。</p><div><button className={styles.realActive}>视频生成</button><span>minimax h3⌄</span><span>文字生成视频⌄</span><span>16:9 · 768P · 5秒 · 1条⌄</span><i>↑</i></div></div></div></StudioShell>;
+
+  return <StudioShell conversations resource="内存 88%" queue="队列 1"><div className={styles.queueDemo}><div className={styles.queueBackdrop}><img src={asset(showreel[3].poster)} alt="生成结果"/><img src={asset(showreel[1].poster)} alt="生成结果"/></div><aside><div><h3>任务队列</h3><button>×</button></div><nav><b>进行中 0</b><b>已完成 1</b></nav><article><img src={asset(showreel[3].poster)} alt=""/><div><b>龙临峡谷，镜头从山谷向上推进…</b><span>local/minimax-h3-fl2va · 1280×768</span></div><small>已完成 · 13:18</small><button>查看结果</button></article></aside><div className={styles.realComposer}><p>输入消息，与模型对话…</p><div><button>文字对话</button><span>Gemma-4 语言模型⌄</span><i>↑</i></div></div></div></StudioShell>;
 }
 
 function AppChrome({title='《Forbidden Bride》短剧项目',children}) {
