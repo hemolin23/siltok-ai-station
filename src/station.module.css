@@ -301,3 +301,24 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 .coCreateGateway>img{filter:brightness(.66) saturate(.9)}
 @media(max-width:1000px){.notebookSection{grid-template-columns:1fr}.notebookIntro p{max-width:620px}.notebookPreview>main{grid-template-columns:1fr 1fr}.team{grid-template-columns:1fr 1fr}.marketPanel{grid-column:1/-1}}
 @media(max-width:640px){.notebookSection{grid-template-columns:1fr;width:calc(100% - 36px);padding:76px 0}.notebookIntro h2{font-size:43px}.notebookPreview{border-radius:24px}.notebookPreview>header span{display:none}.notebookPreview>main{grid-template-columns:1fr}.notebookShot{min-height:260px}.notebookNotes h3{margin-top:28px}.team{width:calc(100% - 36px);padding:20px!important;border-radius:28px}.team{grid-template-columns:1fr}.marketPanel{grid-column:auto}}
+
+/* Quarter-screen cover: a compact editorial banner instead of a full-screen hero. */
+@media(min-width:761px){
+  .nav{width:min(900px,calc(100% - 48px))}
+  .hero{width:calc(100% - 48px);max-width:900px;min-height:0;margin:22px auto 58px;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;gap:0;padding:38px 44px 36px;border-radius:30px}
+  .heroCopy{width:min(590px,100%);padding:0}
+  .hero .kicker{margin:0 0 12px;font-size:7px}
+  .hero h1{max-width:590px;margin:0;font-size:clamp(46px,5vw,66px);line-height:.8}
+  .heroCopy h2{max-width:560px;margin:17px 0 0;font-size:clamp(17px,2vw,24px);line-height:1.08}
+  .hero .lead{display:none}
+  .hero .actions{margin-top:16px}
+  .hero .primary,.hero .secondary{padding:9px 13px;font-size:9px}
+  .heroFacts{display:none}
+  .heroBackdrop img{object-position:62% center}
+}
+@media(max-width:760px){
+  .hero{padding:82px 22px 24px}
+  .hero h1{font-size:54px}
+  .hero .lead,.heroFacts{display:none}
+  .hero .actions{margin-top:18px}
+}
