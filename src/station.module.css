@@ -322,3 +322,20 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
   .hero .lead,.heroFacts{display:none}
   .hero .actions{margin-top:18px}
 }
+
+/* One visual chapter: samples and creator canvas share the same blue-white studio. */
+.showreel,.canvasSection{background:linear-gradient(180deg,#eef6ff 0%,#f8fbff 52%,#e8f2ff 100%);color:#132846}
+.compactReelHead>span,.canvasSection .sectionHead>span,.canvasSection .sectionHead>div>p{color:#176be5}
+.compactReelHead h2,.canvasSection .sectionHead h2{color:#10233e}
+.canvasSection .sectionHead>p{color:#6d819b}
+.festivalReel article,.festivalReel article:first-child,.festivalReel article:last-child{border-color:#bfd5ef;background:#fff;box-shadow:0 16px 40px rgba(38,91,158,.1)}
+.festivalReel .reelMedia{background:#dceaff}
+.festivalReel .reelMedia>i{border-color:rgba(255,255,255,.75);background:rgba(25,91,181,.48);color:#fff}
+.festivalReel .reelMedia>button{border-color:rgba(255,255,255,.7);background:rgba(21,80,160,.68)}
+.canvasWindow{border-color:#b9d1ee;background:#f8fbff;box-shadow:0 26px 70px rgba(35,88,156,.13),inset 0 1px #fff}
+.canvasTop{border-bottom-color:#ccdef1;background:#fff;color:#71859e}.canvasTop b{color:#122a49}.canvasTop i{border-color:#9fd9bf;background:#effbf5;color:#34825f}
+.canvasBody>aside{border-right-color:#cbdcf0;background:#edf5ff}.canvasBody>aside button{color:#6b83a1}.canvasBody>aside button:hover{background:#e0edff;color:#1768df}.canvasBody>aside .canvasToolOn{border-color:#74a7ea;background:#dcecff;color:#1768df;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
+.canvasStage{background:radial-gradient(circle at 50% 0,rgba(69,137,235,.18),transparent 42%),#f5f9ff}.canvasStageHead{color:#7287a1}.canvasStageHead b{color:#17304f}.canvasTimeline i{border-color:#b7cfea;background:linear-gradient(135deg,#dceaff,#f8fbff)}.canvasTimeline i:first-child{border-color:#4384e6;background:linear-gradient(135deg,#8cbcff,#dbeaff)}
+.canvasControls{border-left-color:#c8daef;background:#fff}.canvasControls>span{color:#1768df}.canvasControls h3{color:#132946}.canvasControls label{color:#637b98}.canvasSelect,.canvasControls>p,.canvasModes>* ,.canvasChips>*{border-color:#c6d9ee;background:#f3f8ff;color:#385575}.canvasModes b,.canvasChips b{border-color:#4b88e3;background:#1768df;color:#fff}.canvasControls>p{color:#6d8199}.canvasSpec>span{border-color:#c6d9ee;background:#f3f8ff}.canvasSpec small{color:#71859d}.canvasSpec b{color:#1c385a}.canvasQueue{color:#6f849d}
+.canvasFeatureRail>span,.canvasFeatureRail>a{border-color:#c0d5ee;background:rgba(255,255,255,.72);color:#587494}.canvasFeatureRail>a{border-color:#6e9fe4;color:#1768df}
+.canvasImageBoard figure b{background:rgba(20,86,177,.72);color:#fff}.canvasTextBoard{background:radial-gradient(circle at 80% 20%,rgba(65,126,243,.17),transparent 35%),#f7fbff}.canvasTextBoard span{color:#1768df}.canvasTextBoard h4{color:#1a3557}
