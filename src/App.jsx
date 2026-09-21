@@ -336,10 +336,10 @@ function CanvasExperience() {
         <aside>{tools.map(([name,icon])=><button key={name} onClick={()=>setMode(name)} className={mode===name?styles.canvasToolOn:''}>{icon}<small>{name}</small></button>)}</aside>
         <div className={styles.canvasStage}>
           <div className={styles.canvasStageHead}><b>{mode}预览</b><span>画布 80% · 版本 12</span></div>
-          {mode==='视频'&&<MotionClip clip={workbenchClips[0]}/>}
-          {mode==='图片'&&<div className={styles.canvasImageBoard}>{workbenchClips.slice(1,5).map(item=><img key={item.src} src={asset(item.src)} alt={item.title}/>)}</div>}
-          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>R18 · 镜头任务</span><h4>Elvira 在走廊尽头回身，空间结构、人物身份与机位关系保持一致。</h4><span>参考分工</span><h4>身份参考锁定人物；空间图锁定环境；首尾帧定义镜头起点与终点。</h4></div>}
-          {mode==='作品'&&<div className={styles.canvasImageBoard}>{workbenchClips.slice(3,7).map(item=><figure key={item.src}><img src={asset(item.src)} alt={item.title}/><b>{item.title}</b></figure>)}</div>}
+          {mode==='视频'&&<MotionClip clip={showreel[0]}/>}
+          {mode==='图片'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><img key={item.poster} src={asset(item.poster)} alt={`${item.title}样片海报`}/>)}</div>}
+          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>SELECTED OUTPUT · 镜头任务</span><h4>让角色、环境与镜头运动在同一段影像中自然发生。</h4><span>创作方向</span><h4>动画叙事、写实人物、机械材质与奇幻大场景，分别调用更合适的模型与参考方式。</h4></div>}
+          {mode==='作品'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><figure key={item.poster}><img src={asset(item.poster)} alt={`${item.title}样片海报`}/><b>{item.title}</b></figure>)}</div>}
           <div className={styles.canvasTimeline}><i/><i/><i/><i/><i/><i/></div>
         </div>
         <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>{mode}生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>首尾帧</span><span>全能参考</span></div><label>画面描述 <em>✦ 提示词助手</em></label><p>描述人物、场景、动作、镜头和声音，也可以拖入图片、视频或音频参考。</p><label>输出规格</label><div className={styles.canvasSpec}><span><small>清晰度</small><b>768p</b></span><span><small>比例</small><b>16:9</b></span><span><small>时长</small><b>5–15 秒</b></span><span><small>声音</small><b>可选</b></span><span><small>数量</small><b>1 / 2 / 4</b></span><span><small>服务</small><b>标准 / 高速</b></span></div><div className={styles.canvasQueue}><i/><span>本地渲染队列可见 · 完成一条展示一条</span></div><button className={styles.generateButton}>立即生成 <ArrowRight/></button></div>
