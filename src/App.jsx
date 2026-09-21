@@ -84,10 +84,13 @@ const showreel = [
 ];
 
 const workbenchClips = [
-  { src: 'workbench/cathedral.mp4', title: '蓝色教堂', tag: 'SCENE' },
-  { src: 'workbench/piano-run.mp4', title: '键盘奔跑', tag: 'MOTION' },
-  { src: 'workbench/pharaoh.mp4', title: '机械法老', tag: 'CHARACTER' },
-  { src: 'workbench/market.mp4', title: '古集市', tag: 'LOCATION' },
+  { src: 'forbidden-bride/ep01-sh03.mp4', title: 'EP01 · 契约场景', tag: 'GENERATED' },
+  { src: 'forbidden-bride/r18-space.jpg', title: '走廊空间锚点', tag: 'SPACE' },
+  { src: 'forbidden-bride/r18-viewpoint.jpg', title: '机位与景别参考', tag: 'VIEWPOINT' },
+  { src: 'forbidden-bride/r18-start.jpg', title: 'R18 首帧', tag: 'START FRAME' },
+  { src: 'forbidden-bride/r18-end.jpg', title: 'R18 尾帧', tag: 'END FRAME' },
+  { src: 'forbidden-bride/elvira-identity.jpg', title: 'Elvira 身份参考', tag: 'IDENTITY' },
+  { src: 'forbidden-bride/lucas-identity.jpg', title: 'Lucas 身份参考', tag: 'IDENTITY' },
 ];
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -129,12 +132,16 @@ export default function App() {
       <div className={styles.heroSpatialRig} aria-hidden="true">
         <div className={styles.heroCameraPath}><i/><i/><i/><span>CAMERA PATH / 03</span></div>
         <div className={styles.heroReferenceDeck}>
-          <figure><img src={asset(showreel[3].poster)} alt=""/><figcaption>SCENE REF</figcaption></figure>
-          <figure><img src={asset(showreel[1].poster)} alt=""/><figcaption>CHARACTER REF</figcaption></figure>
-          <figure><img src={asset(showreel[0].poster)} alt=""/><figcaption>MOTION REF</figcaption></figure>
+          <figure><img src={asset('forbidden-bride/r18-space.jpg')} alt=""/><figcaption>SPACE REF</figcaption></figure>
+          <figure><img src={asset('forbidden-bride/elvira-identity.jpg')} alt=""/><figcaption>IDENTITY REF</figcaption></figure>
+          <figure><img src={asset('forbidden-bride/r18-viewpoint.jpg')} alt=""/><figcaption>CAMERA REF</figcaption></figure>
         </div>
-        <img className={styles.heroStationModel} src={asset('siltok-ai-station-cutout.png')} alt=""/>
-        <div className={styles.heroSceneBadge}><span>SCENE MODEL</span><b>场景建模 · 摄像机 · 参考图生成</b><i><em/>本地创作核心</i></div>
+        <div className={styles.heroRemoteApp}>
+          <header><img src={asset('brand/siltok-dash-icon.png')} alt=""/><div><b>Siltok Dash</b><span>REMOTE CREATIVE DESKTOP</span></div><i><em/>ONLINE</i></header>
+          <main><div className={styles.remotePreview}><video src={asset('forbidden-bride/ep01-sh03.mp4')} muted autoPlay loop playsInline/><span>EP01 / SH03 · LIVE</span></div><aside><span>创作节点</span><b>Forbidden Bride</b><small>30 SHOTS · 9:16</small><div><i/><em>H3 多参考</em><strong>READY</strong></div><div><i/><em>FLUX 文生图</em><strong>READY</strong></div><div><i/><em>图生图编辑</em><strong>READY</strong></div></aside></main>
+          <footer><span><i/>远程连接本地工作区</span><b>创作节点 01</b></footer>
+        </div>
+        <div className={styles.heroSceneBadge}><span>SILTOK DASH</span><b>远程连接 · 模型路由 · 本地队列</b><i><em/>创作节点已在线</i></div>
       </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
@@ -152,8 +159,7 @@ export default function App() {
     <CreationJourney />
     <Showreel />
     <AdvantagesSection />
-    <TeamSection />
-    <section className={styles.coCreateGateway}><img src={asset('siltok-liquid-workflow.png')} alt="液态玻璃创作工作流"/><div><span>CO-CREATE / SEPARATE PAGE</span><h2>带一个真实任务，<br/>来和我们一起验证。</h2><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
+    <section className={styles.coCreateGateway}><div className={styles.gatewayFluid} aria-hidden="true"><i/><i/><i/></div><div className={styles.gatewayOffer}><span>CO-CREATE / CREATOR NETWORK</span><h2>把真实任务，<br/>接进 Siltok。</h2><div className={styles.gatewayCards}><article><b>01</b><strong>AI 内容与商业项目</strong><small>BRIEF · PRODUCTION · DELIVERY</small></article><article><b>02</b><strong>平台、技术与发行资源</strong><small>PLATFORM · SERVICE · DISTRIBUTION</small></article><article><b>03</b><strong>本地 AI 与工作流共创</strong><small>DEVICE · COMFYUI · TEST</small></article></div><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
@@ -373,7 +379,7 @@ function ProductUISuite() {
   const [focus, setFocus] = useState('多模型');
   const [selectedModel, setSelectedModel] = useState('H3');
   return <section className={styles.uiSuite} id="product-ui">
-    <div className={styles.stationBar}><span>SILTOK CREATOR</span><b>本地创作工作站</b><i><em/>设备已连接</i></div>
+    <div className={styles.stationBar}><span>SILTOK CREATOR</span><b>远程创作工作区</b><i><em/>本地创作节点已连接</i></div>
     <div className={styles.uiSuiteNav}>{uiScenes.map(([n,title],i)=><button key={n} className={i===active?styles.uiSuiteNavOn:''} onClick={()=>setActive(i)}><span>{n}</span>{title}</button>)}</div>
     <div className={styles.uiSuiteFrame}>
       <div className={styles.uiSuiteMeta}><span>{uiScenes[active][0]} / 08</span><div><h3>{uiScenes[active][1]}</h3><p>{uiScenes[active][2]}</p></div></div>
@@ -383,7 +389,7 @@ function ProductUISuite() {
   </section>;
 }
 
-function AppChrome({title='《失落文明》概念短片',children}) {
+function AppChrome({title='《Forbidden Bride》短剧项目',children}) {
   return <div className={styles.productScreen}>
     <aside className={styles.productSidebar}><b>S</b><button className={styles.sideOn}>⌁</button><button>▧</button><button>◫</button><button>◇</button><button>◉</button><i/><button>⚙</button></aside>
     <div className={styles.productDesk}>
@@ -394,15 +400,18 @@ function AppChrome({title='《失落文明》概念短片',children}) {
 }
 
 function MotionClip({clip, className=''}) {
-  return <video className={className} src={asset(clip.src)} muted autoPlay loop playsInline preload="metadata" aria-label={clip.title}/>;
+  const merged = `${styles.motionAsset} ${className}`.trim();
+  return clip.src.endsWith('.mp4')
+    ? <video className={merged} src={asset(clip.src)} muted autoPlay loop playsInline preload="metadata" aria-label={clip.title}/>
+    : <img className={merged} src={asset(clip.src)} alt={clip.title}/>;
 }
 
 function ProductScreen({type, focus, selectedModel='H3', onSelectModel=()=>{}}) {
   if(type==='overview') return <AppChrome><div className={styles.overviewScreen}>
-    <section className={styles.overviewProject}><span>当前项目 / 03</span><h4>失落文明 · 概念片</h4><MotionClip clip={workbenchClips[0]}/><div><b>12 个镜头</b><b>8 个参考</b><b>4 个版本</b></div></section>
+    <section className={styles.overviewProject}><span>当前项目 / EP01</span><h4>Forbidden Bride · 海外短剧</h4><MotionClip clip={workbenchClips[0]}/><div><b>30 个镜头</b><b>身份 / 空间 / 首尾帧</b><b>9:16</b></div></section>
     <section className={styles.overviewRecent}><span>最近素材 · LIVE</span><div>{workbenchClips.map(x=><figure key={x.src}><MotionClip clip={x}/><small>{x.title}</small></figure>)}</div></section>
-    <section className={`${styles.overviewQueue} ${focus==='任务队列'?styles.uiFocus:''}`}><span>生成任务</span><article><i/>H3 · 镜头 08 <b>68%</b></article><article><i/>LTX · 镜头 06 <b>排队</b></article><article><i/>FLUX · 角色设定 <b>完成</b></article></section>
-    <section className={`${styles.overviewModels} ${focus==='多模型'?styles.uiFocus:''}`}><span>模型状态</span><b><i/>H3 已加载</b><b><i/>LTX 在线</b><b><i/>图像模型待命</b></section>
+    <section className={`${styles.overviewQueue} ${focus==='任务队列'?styles.uiFocus:''}`}><span>生成任务</span><article><i/>H3 · R18 多参考 <b>68%</b></article><article><i/>图生图 · R19 修订 <b>排队</b></article><article><i/>FLUX · 角色定帧 <b>完成</b></article></section>
+    <section className={`${styles.overviewModels} ${focus==='多模型'?styles.uiFocus:''}`}><span>模型状态</span><b><i/>H3 已加载</b><b><i/>FLUX 在线</b><b><i/>图生图待命</b></section>
   </div></AppChrome>;
 
   if(type==='canvas') return <AppChrome><div className={styles.fullCanvas}>
@@ -412,14 +421,14 @@ function ProductScreen({type, focus, selectedModel='H3', onSelectModel=()=>{}}) 
   </div></AppChrome>;
 
   if(type==='models') return <AppChrome title="选择创作模型"><div className={`${styles.modelScreen} ${focus==='多模型'?styles.uiFocus:''}`}>
-    <div className={styles.modelFilter}><span>模型中心</span><button className={styles.filterOn}>全部</button><button>视频</button><button>图像</button><button>语言</button><i/><small>4 个本地模型已就绪</small></div>
+    <div className={styles.modelFilter}><span>模型中心</span><button className={styles.filterOn}>全部</button><button>视频</button><button>文生图</button><button>图生图</button><i/><small>模型按任务路由 · 点击选择</small></div>
     <div className={styles.modelGrid}>{[
-      ['H3','视频生成','电影镜头与多参考',workbenchClips[2],'已加载'],['LTX','视频生成','快速预览与迭代',workbenchClips[1],'在线'],['FLUX','图像生成','角色与场景设定',workbenchClips[0],'在线'],['Qwen','语言模型','分镜与提示词助手',workbenchClips[3],'在线']
+      ['H3','多参考视频','人物、空间与机位协同',workbenchClips[0],'已加载'],['FLUX','文生图','角色与场景设定',workbenchClips[5],'在线'],['IMAGE EDIT','图生图','服装、构图与连续性修订',workbenchClips[3],'在线'],['QWEN','语言模型','分镜与提示词助手',workbenchClips[1],'在线']
     ].map(([name,kind,desc,clip,state])=><button type="button" onClick={()=>onSelectModel(name)} className={selectedModel===name?styles.modelSelected:''} key={name}><MotionClip clip={clip}/><div><span>{kind}</span><b>{name}</b><p>{desc}</p><small><i/>{state}</small></div></button>)}</div>
   </div></AppChrome>;
 
   if(type==='references') return <AppChrome title="多参考素材板"><div className={`${styles.referenceScreen} ${focus==='多参考'?styles.uiFocus:''}`}>
-    <div className={styles.refLines}/>{[['人物参考',workbenchClips[2],'CHARACTER'],['场景参考',workbenchClips[0],'SCENE'],['动作参考',workbenchClips[1],'MOTION'],['首帧',workbenchClips[3],'START'],['尾帧',workbenchClips[0],'END']].map(([title,clip,tag],i)=><article style={{'--x':`${8+i*17}%`,'--y':`${i%2?42:15}%`}} key={title}><MotionClip clip={clip}/><span>{tag}</span><b>{title}</b><small>拖动连接到镜头 08</small></article>)}<div className={styles.audioCard}><Volume2/><span>氛围声音</span><i/></div><div className={styles.refCore}><WandSparkles/><b>镜头 08</b><small>5 个参考已连接</small></div>
+    <div className={styles.refLines}/>{[['Elvira 身份',workbenchClips[5],'IDENTITY'],['走廊空间',workbenchClips[1],'SPACE'],['机位参考',workbenchClips[2],'VIEWPOINT'],['R18 首帧',workbenchClips[3],'START'],['R18 尾帧',workbenchClips[4],'END']].map(([title,clip,tag],i)=><article style={{'--x':`${8+i*17}%`,'--y':`${i%2?42:15}%`}} key={title}><MotionClip clip={clip}/><span>{tag}</span><b>{title}</b><small>拖动连接到 R18</small></article>)}<div className={styles.audioCard}><Volume2/><span>环境声轨</span><i/></div><div className={styles.refCore}><WandSparkles/><b>R18</b><small>5 个参考已连接</small></div>
   </div></AppChrome>;
 
   if(type==='timeline') return <AppChrome title="镜头编排"><div className={`${styles.timelineScreen} ${focus==='镜头编排'?styles.uiFocus:''}`}><div className={styles.timelinePlayer}><MotionClip clip={workbenchClips[3]}/><span>00:18:12 / 00:42:00</span></div><div className={styles.timelineTools}><button><Play/></button><b>12 个镜头</b><span>自动吸附</span><span>关键帧</span><i/></div><div className={styles.cinemaTimeline}>{['画面','提示词','声音'].map((track,row)=><section key={track}><b>{track}</b><div>{workbenchClips.concat(workbenchClips.slice(0,2)).map((x,i)=><article style={{'--w':`${110+(i%3)*36}px`}} key={`${track}-${i}`}>{row===0?<MotionClip clip={x}/>:<><small>{row===1?'镜头沿主体缓慢环绕':'氛围 · 机械低鸣'}</small></>}</article>)}</div></section>)}<i className={styles.playhead}/></div></div></AppChrome>;
@@ -435,17 +444,17 @@ function MiniTimeline(){return <div className={styles.miniTimeline}><div><button
 
 function CreationJourney() {
   const steps = [
-    { title: '剧本与场景锁定', tag: 'LOCK', copy: '先确定观众看到什么、感受到什么，再拆场景。', clip: workbenchClips[3], stat: '8 个场景' },
-    { title: '六类资产登记', tag: 'ASSET', copy: '人物状态、地点、道具、声音、行为与空间图统一建档。', clip: workbenchClips[0], stat: '42 项资产' },
-    { title: '空间图与分镜', tag: 'GEO', copy: '锁定轴线、光线和空间锚点，然后把叙事拆成镜头。', clip: workbenchClips[0], stat: '12 个镜头' },
-    { title: '参考分工与模型', tag: 'ROUTE', copy: '明确人物、场景、动作、首尾帧各自控制什么。', clip: workbenchClips[2], stat: 'H3 · 5 参考' },
-    { title: '4–6 秒单动作生成', tag: 'GENERATE', copy: '每段只保留一个主动作和一种运镜，复杂镜头分段完成。', clip: workbenchClips[1], stat: '本地队列 03' },
-    { title: '单变量迭代与剪辑回流', tag: 'REFINE', copy: '一次只改一项；连续失败就拆镜头、减动作或换角度。', clip: workbenchClips[3], stat: 'V12 已通过' },
+    { title: '成片任务', tag: 'BRIEF', copy: '海外竖屏短剧《Forbidden Bride》：30 个镜头、统一角色与连续空间。', clip: workbenchClips[0], stat: 'EP01 · 9:16' },
+    { title: '角色身份', tag: 'IDENTITY', copy: '把 Elvira 与 Lucas 的面部、发型和服装独立成身份参考，不让场景图承担全部控制。', clip: workbenchClips[5], stat: '2 个主角锚点' },
+    { title: '空间与机位', tag: 'BLOCKING', copy: '同一走廊先锁空间结构，再用独立视点图约束景别、轴线与人物位置。', clip: workbenchClips[1], stat: 'SPACE + VIEWPOINT' },
+    { title: '模型路由', tag: 'ROUTE', copy: '文生图建角色与场景，图生图修订连续性，H3 负责带多参考的镜头运动。', clip: workbenchClips[2], stat: 'IMAGE → EDIT → VIDEO' },
+    { title: '首尾帧控制', tag: 'KEYFRAME', copy: '镜头从明确的起点发展到明确终点，动作、构图和空间关系都有可检查的落点。', clip: workbenchClips[3], stat: 'R18 · 0s → 15s' },
+    { title: '生成与回看', tag: 'REVIEW', copy: '真实测试采用 5.2 秒片段先验证动作；复杂 15 秒镜头再拆段、换角度或减少变量。', clip: workbenchClips[0], stat: '5.2s 测试片 · 本地回看' },
   ];
   const [active, setActive] = useState(0);
   const current = steps[active];
   return <section className={styles.journey} id="visual-story">
-    <div className={styles.journeyHead}><span>PRODUCTION LOGIC</span><h2>一次创作，<br/>如何真正发生。</h2><p>来自真实 AI 短片、多参考镜头和长片项目的生产方法。</p></div>
+    <div className={styles.journeyHead}><span>REAL PROJECT / 01</span><h2>不是功能清单。<br/>是一个短剧任务。</h2><p>所有画面来自《Forbidden Bride》的真实生产包；点击左侧查看输入如何变成镜头。</p></div>
     <div className={styles.productionFlow}>
       <div className={styles.flowRail}>{steps.map((step,i)=><button key={step.title} className={i===active?styles.flowOn:''} onClick={()=>setActive(i)}><span>{String(i+1).padStart(2,'0')}</span><b>{step.title}</b><small>{step.tag}</small></button>)}</div>
       <div className={styles.flowStage}><MotionClip key={current.clip.src} clip={current.clip}/><div className={styles.flowHud}><span>{current.tag} / ACTIVE</span><strong>{current.title}</strong><p>{current.copy}</p><b>{current.stat}</b></div><div className={styles.flowNodes}>{steps.map((_,i)=><i key={i} className={i<=active?styles.flowNodeOn:''}/>)}</div></div>
@@ -455,12 +464,16 @@ function CreationJourney() {
 
 function AdvantagesSection(){
   return <section className={styles.advantages} id="advantages">
-    <div className={styles.advantageHead}><span>SILTOK ADVANTAGE</span><h2>速度、成本、<br/>系统工程。</h2><p>本地视频生成的价值，不是换一个界面，而是换一种生产方式。</p></div>
-    <div className={styles.advantageGrid}>
-      <article><div className={styles.speedViz}><i/><i/><i/><span>LOCAL QUEUE</span><b>01:42</b><small>持续生成 · 无云端排队</small></div><h3>生成速度</h3><p>模型驻留本地，任务连续运行，生成、重试与版本回看在同一条队列。</p></article>
-      <article><div className={styles.costViz}><span>单次成本</span><svg viewBox="0 0 260 120" aria-label="生成越多，本地方案边际成本越低"><path d="M10 18 C70 45 135 78 250 102"/><path d="M10 50 L250 50"/><circle cx="116" cy="70" r="5"/></svg><b>生成越多 → 边际成本越低</b></div><h3>价格更低</h3><p>算力转为本地资产，不再为每一次试错单独付费；对高频制作更有意义。</p></article>
-      <article><div className={styles.moatMini}><span>FULL VIDEO MODEL</span><strong><b>16</b>GB</strong><i>→</i><strong><b>120</b>GB</strong><small>MEMORY · SCHEDULING · DENSE MODEL</small></div><h3>技术壁垒</h3><p>稠密视频模型无法照搬语言模型方法。内存生命周期与跨设备调度，是长期积累的系统能力。</p></article>
+    <div className={styles.evidenceIntro}><span>SILTOK / SYSTEM EVIDENCE</span><h2>真实任务跑得动，<br/>才是优势。</h2><p>速度、成本、系统工程、团队与市场窗口，放在同一条生产坐标里看。</p></div>
+    <div className={styles.evidenceRail}>
+      <article className={styles.evidenceProduction}><span>PRODUCTION</span><b>30 镜</b><strong>海外竖屏短剧生产包</strong><small>角色 · 空间 · 首尾帧 · H3 提示词</small></article>
+      <article><span>SPEED</span><b>MODEL READY</b><strong>模型驻留，任务连续运行</strong><small>5.2 秒真实测试片 · 生成、重试与回看同队列</small></article>
+      <article><span>COST</span><b>LOCAL</b><strong>高频试错不按次付费</strong><small>算力转为可复用的本地生产资产</small></article>
+      <article><span>SYSTEM</span><b>16 → 120GB</b><strong>从“装不下”一侧求解</strong><small>内存生命周期 · 跨设备调度 · 稠密模型</small></article>
+      <article><span>TEAM</span><b>HPC × AI</b><strong>系统与创作产品同队闭环</strong><small>白鹏 CEO · 沈游人 CTO</small></article>
+      <article><span>MARKET GAP</span><b>32 / 192GB</b><strong>消费级 GPU 与数据中心显存</strong><small>RTX 5090 / NVIDIA B200 · 数据见来源</small></article>
     </div>
+    <div className={styles.evidenceFooter}><div><i/>当前验证对象：短剧、动画、电商与 ComfyUI 工作流</div><div>资料来源：<a href="https://www.nvidia.com/en-gb/geforce/news/rtx-50-series-graphics-cards-gpu-laptop-announcements/" target="_blank" rel="noreferrer">NVIDIA RTX 5090</a><a href="https://www.nvidia.com/en-us/data-center/b200/" target="_blank" rel="noreferrer">NVIDIA B200</a></div></div>
   </section>;
 }
 
