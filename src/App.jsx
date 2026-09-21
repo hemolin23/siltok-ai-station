@@ -106,11 +106,13 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  if (window.location.pathname.endsWith('/co-create.html')) return <CoCreatePage />;
+
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#product-overview">产品总览</a><a href="#showreel">生成样片</a><a href="#product-details">系统架构</a><a href="#creator-canvas">创作画布</a><a href="#team">团队</a></nav>
-      <a className={styles.navCta} href="#co-create">邀请共创 <ArrowRight /></a>
+      <nav><a href="#creator-canvas">创作画布</a><a href="#visual-story">创作系统</a><a href="#showreel">生成样片</a><a href="#team">公司与团队</a></nav>
+      <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
     <section className={styles.hero} id="top">
@@ -120,8 +122,8 @@ export default function App() {
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
         <h1>Siltok<br/><em>AI Station.</em></h1>
         <h2>把开源模型与工作流，带回创作者桌面。</h2>
-        <p className={styles.lead}>硬件、模型环境与创作画布组成同一套本地系统。它不只完成一次生成，也让素材、节点和成功流程持续留下来。</p>
-        <div className={styles.actions}><a className={styles.primary} href="#showreel">浏览生成样片 <ArrowRight /></a><a className={styles.secondary} href="#product-details">了解系统</a></div>
+        <p className={styles.lead}>一张画布，把文字、图片、视频、模型、素材与作品连成完整创作流。</p>
+        <div className={styles.actions}><a className={styles.primary} href="#creator-canvas">进入创作画布 <ArrowRight /></a><a className={styles.secondary} href="#showreel">观看样片</a></div>
       </div>
       <div className={styles.heroMedia}>
         <div className={styles.glassEyebrow}><span>LOCAL CREATIVE CORE</span><b>STATION / 01</b></div>
@@ -135,21 +137,15 @@ export default function App() {
       <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
     </section>
 
-    <div className={styles.signalRail} aria-label="Siltok 本地创作流程"><div><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span></div></div>
+    <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
-    <ProductOverview />
-    <Showreel />
-    <ProductDetails />
     <CanvasExperience />
+    <VisualStories />
+    <Showreel />
     <TeamSection />
-    <ParticipationIntro />
-    <BetaProgram />
-    <ProductFAQ />
-    <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>CONTACT · WHEN YOU ARE READY</p><h2>看懂产品之后，再决定是否参与。</h2><span>添加企业微信，发送你的创作方向。我们会先确认产品与需求是否匹配，再安排测试或合作沟通。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>01</b> 内测申请</span><small>带一个真实任务体验产品</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>02</b> 商单生态合作</span><small>提交账号、团队资料与合作方向</small><ArrowRight/></a></div></section>
+    <section className={styles.coCreateGateway}><img src={asset('siltok-liquid-workflow.png')} alt="液态玻璃创作工作流"/><div><span>CO-CREATE / SEPARATE PAGE</span><h2>带一个真实任务，<br/>来和我们一起验证。</h2><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
 
-    <section className={styles.apply}><div><p>THREE STEPS · TWO OPTIONS</p><h2>先建立联系，<br/>再选择参与方式。</h2><span>第一步添加企微是统一入口。第二步和第三步可以任选其一，也可以同时填写：参与产品测试请提交内测申请；有商单、账号或生态资源请提交合作报价。</span><div className={visual.choiceNote}>02 / 03 按需选择 · 可同时填写</div></div><div className={styles.applyCards}><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>石根洁 · 硅基词元</b></div><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-linan-20260909.png')} alt="李楠的企业微信二维码"/><b>李楠 · 硅基词元</b></div><div className={`${styles.applyCard} ${visual.betaCard}`}><span className={visual.stepBadge}>02 · 内测申请</span><FileCheck2/><h3>参与产品内测</h3><p>请创作者填写真实任务、当前工具与可参与时间。</p><a href={APPLY_URL} target="_blank" rel="noreferrer">填写内测申请 <ArrowRight/></a></div><div className={`${styles.applyCard} ${visual.commerceCard}`}><span className={visual.stepBadge}>03 · 商单生态合作</span><MessageSquareText/><h3>提交合作报价</h3><p>请创作者填写账号信息，并上传团队介绍、媒体资料包与报价文件。</p><a href={COLLAB_URL} target="_blank" rel="noreferrer">填写合作报价 <ArrowRight/></a></div></div></section>
-
-    <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · Siltok Labs AI 创作共创社区</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测</a><a href={COLLAB_URL} target="_blank" rel="noreferrer">商单合作</a></div></footer>
+    <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
 }
 
@@ -200,30 +196,45 @@ function ProductDetails() {
 }
 
 function CanvasExperience() {
+  const [mode, setMode] = useState('视频');
+  const tools = [['文字','T'],['图片','▧'],['视频','▷'],['作品','□']];
   return <section className={styles.canvasSection} id="creator-canvas">
-    <SectionHead n="UI" label="SILTOK CREATOR" title="把复杂工作流，收进一张创作画布。" copy="创作者面向作品做决策，系统在背后组织模型、节点、素材与任务。" />
+    <SectionHead n="01" label="SILTOK CREATOR" title="从想法到成片，都在这一张画布里。" copy="文字、图片、视频和作品资产共用同一套项目上下文。" />
     <div className={styles.canvasWindow}>
-      <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL</i></div>
+      <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL · 项目自动保存</i></div>
       <div className={styles.canvasBody}>
-        <aside><button className={styles.canvasToolOn}>▷<small>视频</small></button><button>▧<small>图片</small></button><button>T<small>文字</small></button><button>□<small>作品</small></button></aside>
-        <div className={styles.canvasStage}><div className={styles.canvasStageHead}><b>视频预览</b><span>画布 · 项目自动保存</span></div><video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} autoPlay muted loop playsInline preload="metadata"/><div className={styles.canvasTimeline}><i/><i/><i/><i/></div></div>
-        <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>视频生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>参考素材生成</span></div><label>画面描述</label><p>描述人物、场景、动作与镜头，或交给提示词助手整理。</p><label>输出规格</label><div className={styles.canvasChips}><b>16:9</b><span>768p</span><span>多条生成</span></div><button className={styles.generateButton}>开始生成 <ArrowRight/></button></div>
+        <aside>{tools.map(([name,icon])=><button key={name} onClick={()=>setMode(name)} className={mode===name?styles.canvasToolOn:''}>{icon}<small>{name}</small></button>)}</aside>
+        <div className={styles.canvasStage}>
+          <div className={styles.canvasStageHead}><b>{mode}预览</b><span>画布 80% · 版本 12</span></div>
+          {mode==='视频'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} autoPlay muted loop playsInline preload="metadata"/>}
+          {mode==='图片'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><img key={item.poster} src={asset(item.poster)} alt=""/>)}</div>}
+          {mode==='文字'&&<div className={styles.canvasTextBoard}><span>镜头 01</span><h4>机械法老从黑暗中醒来，镜头沿金属结构缓慢环绕。</h4><span>镜头 02</span><h4>峡谷云雾被巨龙的翼尖切开，远处城市逐渐显现。</h4></div>}
+          {mode==='作品'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><figure key={item.poster}><img src={asset(item.poster)} alt=""/><b>{item.title}</b></figure>)}</div>}
+          <div className={styles.canvasTimeline}><i/><i/><i/><i/><i/><i/></div>
+        </div>
+        <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>{mode}生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>首尾帧</span><span>全能参考</span></div><label>画面描述 <em>✦ 提示词助手</em></label><p>描述人物、场景、动作、镜头和声音，也可以拖入图片、视频或音频参考。</p><label>输出规格</label><div className={styles.canvasSpec}><span><small>清晰度</small><b>768p</b></span><span><small>比例</small><b>16:9</b></span><span><small>时长</small><b>5–15 秒</b></span><span><small>声音</small><b>可选</b></span><span><small>数量</small><b>1 / 2 / 4</b></span><span><small>服务</small><b>标准 / 高速</b></span></div><div className={styles.canvasQueue}><i/><span>本地渲染队列可见 · 完成一条展示一条</span></div><button className={styles.generateButton}>立即生成 <ArrowRight/></button></div>
       </div>
     </div>
-    <div className={styles.canvasFoot}><div><b>一个入口</b><span>文字、图片、视频与作品资产在同一画布流转。</span></div><div><b>按任务选模型</b><span>模型是能力模块，不是用户必须理解的技术负担。</span></div><div><b>工作流可复用</b><span>参考素材、规格与生成记录持续留在项目里。</span></div><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开交互原型 <ArrowRight/></a></div>
+    <div className={styles.canvasFeatureRail}><span>多模型选择</span><span>提示词助手</span><span>图／视频／音频参考</span><span>首尾帧控制</span><span>多比例与时长</span><span>批量生成</span><span>本地队列</span><span>作品与素材库</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开完整原型 <ArrowRight/></a></div>
   </section>;
 }
 
+function VisualStories() {
+  const cards = [
+    ['siltok-liquid-workflow.png','素材、参考与模型汇成同一条创作流','工作流不是配置文件，而是可以复用的创作资产。'],
+    ['siltok-liquid-library.png','所有创作资产，都回到你的本地素材库','角色、场景、声音、色板与成片持续积累。'],
+    ['siltok-creative-engine-hero.png','一台工作站，连接不断更新的影像世界','模型会变，创作系统持续生长。'],
+    [showreel[0].poster,'从文字到动作','让叙事、角色与运镜共同发生。'],
+    [showreel[3].poster,'从参考到世界','把风格、空间与气氛带进连续镜头。'],
+  ];
+  return <section className={styles.visualStories} id="visual-story"><div className={styles.visualStoryHead}><span>02 / VISUAL SYSTEM</span><h2>少一点说明。<br/>直接看创作如何流动。</h2></div><div className={styles.visualMarquee}><div>{[...cards,...cards].map(([src,title,copy],i)=><figure key={`${src}-${i}`} aria-hidden={i>=cards.length}><img src={asset(src)} alt={i<cards.length?title:''}/><figcaption><b>{title}</b><span>{copy}</span></figcaption></figure>)}</div></div></section>;
+}
+
 function Showreel() {
-  const [page, setPage] = useState(0);
-  const visible = showreel.slice(page * 2, page * 2 + 2);
   return <section className={styles.showreel} id="showreel">
-    <SectionHead n="01" label="SELECTED OUTPUTS" title="生成样片浏览器。" copy="像参考项目页一样，把作品放到参数之前：每次并排浏览两个案例，再查看它们各自验证的画面能力。" />
-    <div className={styles.reelBrowser}>
-      <div className={styles.reelBrowserHead}><div><span>04 SELECTED EXAMPLES</span><h3>先看作品，再谈系统。</h3></div><div className={styles.reelPager}><button onClick={()=>setPage(0)} disabled={page===0} aria-label="上一组样片">←</button><span>EXAMPLES {String(page*2+1).padStart(2,'0')} + {String(page*2+2).padStart(2,'0')}<small>PAGE 0{page+1} / 02</small></span><button onClick={()=>setPage(1)} disabled={page===1} aria-label="下一组样片">→</button></div></div>
-      <div className={styles.reelGrid} key={page}>{visible.map((item,i)=>{const index=page*2+i;return <article key={item.src}><div className={styles.reelTitle}><span>EXAMPLE {String(index+1).padStart(2,'0')}</span><h3>{item.title}</h3><b>SILTOK TEST OUTPUT</b></div><div className={styles.reelMeta}>{item.meta.map(x=><span key={x}>{x}</span>)}</div><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} controls muted loop playsInline preload="metadata"/><span>LOCAL WORKFLOW</span><i>{String(index+1).padStart(2,'0')} / 04</i></div><details><summary><span>＋</span> 查看展示重点 <small>{item.copy}</small></summary><p>{item.detail}</p></details></article>})}</div>
-    </div>
-    <p className={styles.reelNote}>页面展示为产品测试样片；生成效果会随模型、输入素材与工作流配置变化。</p>
+    <SectionHead n="03" label="SELECTED OUTPUTS" title="四条样片，一次看完。" copy="不分页、不拆组，横向浏览四种不同的影像能力。" />
+    <div className={styles.reelStream}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} controls muted loop playsInline preload="metadata"/><i>{String(index+1).padStart(2,'0')} / 04</i></div><div className={styles.reelStreamCaption}><span>{item.meta.join(' · ')}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
+    <p className={styles.reelNote}>产品测试样片 · 效果会随模型、输入素材与工作流配置变化</p>
   </section>;
 }
 
@@ -237,12 +248,20 @@ function ParticipationIntro() {
 
 function TeamSection() {
   return <section className={styles.team} id="team">
-    <SectionHead n="05" label="CORE TEAM" title="从硬件产品，到端侧 AI 与软件生态。" copy="核心团队覆盖智能硬件、互联网商业化、高性能计算与企业软件实践。" />
-    <div className={styles.teamGrid}>
-      <article><div><span>创始人 & CEO</span><b>白鹏</b></div><p>20 年以上科技、互联网与智能硬件行业管理经验，覆盖 AI 硬件、软件生态与商业化全链路。曾任爱奇艺 AI 硬件公司 CEO、小米集团政企部副总裁、小米集团商业部总经理、小米集团互联网四部总经理、小米电视副总裁、迅雷总经理。</p><small>曾推动小米互联网月度收入突破 10 亿元、年度互联网收入突破 200 亿元；负责小米电视、小米盒子、小爱音箱等产品线，推动相关出货量、系统用户量与 OTT 收入达到中国第一。</small></article>
-      <article><div><span>联合创始人 & CTO</span><b>沈游人</b></div><p>北京硅基词元科技有限公司联合创始人兼 CTO，北京海致科技有限公司联合创始人兼 CTO，清华大学计算机系高性能研究所成员。</p><small>长期从事高性能计算、企业软件与技术平台建设，负责 Siltok 端侧 AI 技术与产品工程方向。</small></article>
-    </div>
+    <div className={styles.companyIntro}><span>04 / SILTOK LABS</span><h2>我们把硬件、模型工程与创作体验，聚合成一件产品。</h2><p>北京硅基词元科技有限公司专注端侧 AI 创作系统。团队同时理解智能硬件、高性能计算、企业软件和内容生产，让模型真正进入稳定工作流。</p></div>
+    <div className={styles.talentMap}><div className={styles.talentCore}><b>SILTOK</b><span>人才与能力聚合</span></div><article><span>创始人 & CEO</span><b>白鹏</b><small>智能硬件 · 产品商业化 · 互联网生态</small></article><article><span>联合创始人 & CTO</span><b>沈游人</b><small>高性能计算 · 企业软件 · 端侧 AI</small></article><i>AI 模型工程</i><i>创作工作流</i><i>硬件产品</i><i>创作者生态</i></div>
   </section>;
+}
+
+function CoCreatePage() {
+  return <main className={`${styles.page} ${styles.coCreatePage}`}>
+    <header className={styles.nav}><a href={asset('index.html')} className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><nav><a href={asset('index.html#creator-canvas')}>产品画布</a><a href="#program">测试计划</a><a href="#apply">申请入口</a></nav><a className={styles.navCta} href={asset('index.html')}>返回产品页 <ArrowRight/></a></header>
+    <section className={styles.coCreateHero}><img src={asset('siltok-liquid-library.png')} alt="Siltok 创作资产库"/><div><span>CO-CREATE WITH SILTOK</span><h1>带一个真实任务，<br/>一起把创作系统做对。</h1><p>产品介绍与申请流程已经分开。这里仅说明如何参与测试与生态合作。</p><a href="#apply">查看申请方式 <ArrowRight/></a></div></section>
+    <BetaProgram />
+    <section className={visual.connectBar} id="apply"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>STEP 01 · CONNECT</p><h2>先添加企业微信。</h2><span>发送你的创作方向，我们会先确认产品与任务是否匹配。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>02</b> 内测申请</span><small>带一个真实任务体验产品</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>03</b> 商单生态合作</span><small>提交团队资料与合作方向</small><ArrowRight/></a></div></section>
+    <section className={styles.apply}><div><p>THREE STEPS · TWO OPTIONS</p><h2>先建立联系，<br/>再选择参与方式。</h2><span>添加企微是统一入口；内测申请与生态合作可以任选其一，也可以同时提交。</span><div className={visual.choiceNote}>02 / 03 按需选择</div></div><div className={styles.applyCards}><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>石根洁 · 硅基词元</b></div><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-linan-20260909.png')} alt="李楠的企业微信二维码"/><b>李楠 · 硅基词元</b></div><div className={`${styles.applyCard} ${visual.betaCard}`}><span className={visual.stepBadge}>02 · 内测申请</span><FileCheck2/><h3>参与产品内测</h3><p>填写真实任务、当前工具与可参与时间。</p><a href={APPLY_URL} target="_blank" rel="noreferrer">填写内测申请 <ArrowRight/></a></div><div className={`${styles.applyCard} ${visual.commerceCard}`}><span className={visual.stepBadge}>03 · 商单生态合作</span><MessageSquareText/><h3>提交合作报价</h3><p>填写账号、团队资料与合作方向。</p><a href={COLLAB_URL} target="_blank" rel="noreferrer">填写合作报价 <ArrowRight/></a></div></div></section>
+    <footer><a href={asset('index.html')} className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 邀请共创</p><div><a href={asset('index.html')}>返回产品页</a></div></footer>
+  </main>;
 }
 
 function BetaProgram() {
