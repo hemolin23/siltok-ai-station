@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow } from 'lucide-react';
 import styles from './station.module.css';
 import visual from './product-visual.module.css';
@@ -77,15 +77,35 @@ const userQuestions = [
 ];
 
 const showreel = [
-  { src: 'cases/clock-runner.mp4', title: '时钟之上', copy: '动画角色与大幅运镜', meta: ['动画叙事', '角色运动', '镜头调度'], detail: '观察角色在复杂机械场景中的运动连贯性，以及远近景切换时的主体稳定性。' },
-  { src: 'cases/ancient-market.mp4', title: '市井一瞬', copy: '写实人物与场景转换', meta: ['写实人物', '连续场景', '电影光影'], detail: '观察人物身份、服饰与面部特征在室内外场景转换中的一致性。' },
-  { src: 'cases/mechanical-pharaoh.mp4', title: '机械法老', copy: '材质细节与主体环绕', meta: ['机械材质', '主体环绕', '黑色背景'], detail: '观察高反差画面中的金属、石材和机械结构，以及环绕视角下的细节保持。' },
-  { src: 'cases/dragon-valley.mp4', title: '龙临峡谷', copy: '大场景、群像与氛围光', meta: ['奇幻场景', '群像调度', '氛围光'], detail: '观察复杂环境、远景层次和多个运动主体在连续镜头中的空间关系。' },
+  { src: 'cases/clock-runner.mp4', poster: 'cases/clock-runner-poster.jpg', title: '时钟之上', copy: '动画角色与大幅运镜', meta: ['动画叙事', '角色运动', '镜头调度'], detail: '观察角色在复杂机械场景中的运动连贯性，以及远近景切换时的主体稳定性。' },
+  { src: 'cases/ancient-market.mp4', poster: 'cases/ancient-market-poster.jpg', title: '市井一瞬', copy: '写实人物与场景转换', meta: ['写实人物', '连续场景', '电影光影'], detail: '观察人物身份、服饰与面部特征在室内外场景转换中的一致性。' },
+  { src: 'cases/mechanical-pharaoh.mp4', poster: 'cases/mechanical-pharaoh-poster.jpg', title: '机械法老', copy: '材质细节与主体环绕', meta: ['机械材质', '主体环绕', '黑色背景'], detail: '观察高反差画面中的金属、石材和机械结构，以及环绕视角下的细节保持。' },
+  { src: 'cases/dragon-valley.mp4', poster: 'cases/dragon-valley-poster.jpg', title: '龙临峡谷', copy: '大场景、群像与氛围光', meta: ['奇幻场景', '群像调度', '氛围光'], detail: '观察复杂环境、远景层次和多个运动主体在连续镜头中的空间关系。' },
 ];
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 export default function App() {
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sections = [...document.querySelectorAll('main > section')];
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.setAttribute('data-visible', 'true'));
+      return undefined;
+    }
+    sections.forEach((section) => section.setAttribute('data-reveal', 'true'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute('data-visible', 'true');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -7% 0px' });
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
@@ -102,8 +122,10 @@ export default function App() {
         <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
         <div className={styles.actions}><a className={styles.primary} href="#showreel">浏览生成样片 <ArrowRight /></a><a className={styles.secondary} href="#product-details">了解系统</a></div>
       </div>
-      <div className={styles.heroMedia}><div><span>FEATURED GENERATION</span><b>1344 × 768 · VIDEO WORKFLOW</b></div><video src={asset(showreel[3].src)} controls muted loop playsInline autoPlay preload="metadata"/><p><i/>精选测试样片 · 大场景、群像与氛围光</p></div>
+      <div className={styles.heroMedia}><div><span>FEATURED GENERATION</span><b>1344 × 768 · VIDEO WORKFLOW</b></div><div className={styles.heroMediaFrame}><video src={asset(showreel[3].src)} poster={asset(showreel[3].poster)} controls muted loop playsInline autoPlay preload="metadata"/><span>LOCAL OUTPUT / 04</span><i>FRAME 0001–096</i></div><p><i/>精选测试样片 · 大场景、群像与氛围光</p></div>
     </section>
+
+    <div className={styles.signalRail} aria-label="Siltok 本地创作流程"><div><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span></div></div>
 
     <ProductOverview />
     <Showreel />
@@ -141,6 +163,15 @@ function ProductDetails() {
     <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
     <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，面向真实项目中的稳定性、可控性与工作流复用。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
     <div className={visual.techStrip}><div><span>资源协同</span><b>围绕 CPU、GPU、内存与存储组织模型加载和任务调度</b></div><div><span>推理优化</span><b>在硬件边界内平衡精度、稳定性与资源占用</b></div><div><span>流程管理</span><b>把模型、节点、素材与任务记录组织成可复用的生产流程</b></div></div>
+    <div className={styles.performanceBand} id="performance">
+      <div className={styles.performanceLead}><span>GENERATION EFFICIENCY</span><h3>速度要可用，<br/>也要可解释。</h3><p>不用一个脱离硬件、分辨率和工作流的数字制造错误预期。</p></div>
+      <div className={styles.performanceGrid}>
+        <article><span>01</span><b>无云端排队</b><p>任务进入本地队列，可持续运行、查看与恢复。</p></article>
+        <article><span>02</span><b>测试条件透明</b><p>展示显卡、模型、分辨率、帧数与关键参数。</p></article>
+        <article><span>03</span><b>按真实流程比较</b><p>同一任务对比生成、返工和稳定性，再判断效率。</p></article>
+      </div>
+      <p className={styles.performanceNote}><i/>当前状态：不同模型与工作流正在逐项实测；完整基准会随测试条件一起公布。</p>
+    </div>
     <div className={visual.stageBlock}><div className={visual.stageTitle}><span>CAPABILITY BOUNDARY</span><h3>能力边界，先说清楚。</h3><p>产品仍处于共创阶段。以下内容区分当前重点、正在验证与不做预先承诺的事项。</p></div><div className={visual.stageGrid}>{capabilityStages.map(([title,copy],i)=><article key={title} data-stage={i}><b>{title}</b><p>{copy}</p></article>)}</div></div>
     <div className={visual.disclaimer}><ShieldCheck/><span><b>参数仅作参考，非最终版</b>产品配置、模型能力和功能范围以最终发布与实际测试结果为准。</span></div>
     <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a></div>
@@ -154,7 +185,7 @@ function CanvasExperience() {
       <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL</i></div>
       <div className={styles.canvasBody}>
         <aside><button className={styles.canvasToolOn}>▷<small>视频</small></button><button>▧<small>图片</small></button><button>T<small>文字</small></button><button>□<small>作品</small></button></aside>
-        <div className={styles.canvasStage}><div className={styles.canvasStageHead}><b>视频预览</b><span>画布 · 项目自动保存</span></div><video src={asset(showreel[2].src)} autoPlay muted loop playsInline preload="metadata"/><div className={styles.canvasTimeline}><i/><i/><i/><i/></div></div>
+        <div className={styles.canvasStage}><div className={styles.canvasStageHead}><b>视频预览</b><span>画布 · 项目自动保存</span></div><video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} autoPlay muted loop playsInline preload="metadata"/><div className={styles.canvasTimeline}><i/><i/><i/><i/></div></div>
         <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>视频生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>参考素材生成</span></div><label>画面描述</label><p>描述人物、场景、动作与镜头，或交给提示词助手整理。</p><label>输出规格</label><div className={styles.canvasChips}><b>16:9</b><span>768p</span><span>多条生成</span></div><button className={styles.generateButton}>开始生成 <ArrowRight/></button></div>
       </div>
     </div>
@@ -169,7 +200,7 @@ function Showreel() {
     <SectionHead n="01" label="SELECTED OUTPUTS" title="生成样片浏览器。" copy="像参考项目页一样，把作品放到参数之前：每次并排浏览两个案例，再查看它们各自验证的画面能力。" />
     <div className={styles.reelBrowser}>
       <div className={styles.reelBrowserHead}><div><span>04 SELECTED EXAMPLES</span><h3>先看作品，再谈系统。</h3></div><div className={styles.reelPager}><button onClick={()=>setPage(0)} disabled={page===0} aria-label="上一组样片">←</button><span>EXAMPLES {String(page*2+1).padStart(2,'0')} + {String(page*2+2).padStart(2,'0')}<small>PAGE 0{page+1} / 02</small></span><button onClick={()=>setPage(1)} disabled={page===1} aria-label="下一组样片">→</button></div></div>
-      <div className={styles.reelGrid}>{visible.map((item,i)=>{const index=page*2+i;return <article key={item.src}><div className={styles.reelTitle}><span>EXAMPLE {String(index+1).padStart(2,'0')}</span><h3>{item.title}</h3><b>SILTOK TEST OUTPUT</b></div><div className={styles.reelMeta}>{item.meta.map(x=><span key={x}>{x}</span>)}</div><video src={asset(item.src)} controls muted loop playsInline preload="metadata"/><details><summary><span>＋</span> 查看展示重点 <small>{item.copy}</small></summary><p>{item.detail}</p></details></article>})}</div>
+      <div className={styles.reelGrid} key={page}>{visible.map((item,i)=>{const index=page*2+i;return <article key={item.src}><div className={styles.reelTitle}><span>EXAMPLE {String(index+1).padStart(2,'0')}</span><h3>{item.title}</h3><b>SILTOK TEST OUTPUT</b></div><div className={styles.reelMeta}>{item.meta.map(x=><span key={x}>{x}</span>)}</div><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} controls muted loop playsInline preload="metadata"/><span>LOCAL WORKFLOW</span><i>{String(index+1).padStart(2,'0')} / 04</i></div><details><summary><span>＋</span> 查看展示重点 <small>{item.copy}</small></summary><p>{item.detail}</p></details></article>})}</div>
     </div>
     <p className={styles.reelNote}>页面展示为产品测试样片；生成效果会随模型、输入素材与工作流配置变化。</p>
   </section>;
