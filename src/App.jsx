@@ -7,7 +7,7 @@ const APPLY_URL = 'https://my.feishu.cn/share/base/shrcnVgo3Gj2zxuRtMYljrAmozd';
 const COLLAB_URL = 'https://my.feishu.cn/share/base/shrcn63I30xlVeGwwS1aRNVMm7b';
 const OFFICIAL_URL = 'https://siltok-ai.com/products/ai-station';
 const CREATOR_PROTOTYPE_URL = 'https://hemolin23.github.io/siltok-creator-prototype/';
-const CREATION_NOTEBOOK_URL = 'https://benben-film-making-notebook.qingyu-lu-ai.chatgpt.site/';
+const CREATION_NOTEBOOK_PATH = 'creation-notebook/index.html';
 
 const directedCases = [
   { n: '01', icon: ImageIcon, title: '人物立绘', copy: '固定提示词与尺寸生成单人全身立绘，记录可用率、细节问题与返工次数。' },
@@ -354,12 +354,8 @@ function CanvasExperience() {
 
 function CreationNotebook() {
   return <section className={styles.notebookSection} id="creation-notebook">
-    <div className={styles.notebookIntro}><span>CREATION NOTEBOOK / OPEN TOOL</span><h2>作品之外，<br/>把创作过程也留下。</h2><p>镜头为什么这样拍、参考如何组合、哪一次修改有效，都进入同一本创作手记。</p><a href={CREATION_NOTEBOOK_URL} target="_blank" rel="noreferrer">打开创作手记 <ArrowRight/></a></div>
-    <a className={styles.notebookPreview} href={CREATION_NOTEBOOK_URL} target="_blank" rel="noreferrer" aria-label="打开创作手记">
-      <header><b>创作手记</b><span>项目</span><span>镜头</span><span>参考</span><i>持续记录</i></header>
-      <main><div className={styles.notebookShot}><img src={asset(showreel[2].poster)} alt="机械法老样片画面"/><span>SHOT 03 · 机械法老</span></div><div className={styles.notebookNotes}><span>今日创作判断</span><h3>材质、主体与镜头运动，分别记录。</h3><p>保留有效参考、模型选择、失败原因和下一次修改方向。</p><div><b>镜头语言</b><b>参考素材</b><b>迭代记录</b></div></div></main>
-      <footer><span>BENBEN · FILM MAKING NOTEBOOK</span><b>进入手记 ↗</b></footer>
-    </a>
+    <div className={styles.notebookIntro}><span>CREATION NOTEBOOK / REAL PROJECT</span><h2>一颗球的<br/>电影手记。</h2><p>从故事、分镜和资产，到生成、剪辑与声音，完整拆解《带你去玩球！》怎样成为一部 AI 短片。</p><a href={asset(CREATION_NOTEBOOK_PATH)} target="_blank" rel="noreferrer">全屏阅读手记 <ArrowRight/></a></div>
+    <div className={styles.notebookPreview}><div className={styles.notebookBrowserBar}><i/><i/><i/><span>一颗球的电影手记</span><a href={asset(CREATION_NOTEBOOK_PATH)} target="_blank" rel="noreferrer">新窗口 ↗</a></div><iframe src={asset(CREATION_NOTEBOOK_PATH)} title="一颗球的电影手记" loading="lazy"/></div>
   </section>;
 }
 
