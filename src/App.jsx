@@ -130,7 +130,10 @@ export default function App() {
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
       <HeroFluidField />
       <div className={styles.heroSpatialRig} aria-hidden="true">
-        <div className={styles.heroRemoteFlow}><img src={asset('brand/siltok-remote-test-flow.png')} alt="创作者通过 Siltok 远程软件连接硬件、技术与加速支持"/></div>
+        <div className={styles.heroAppIconStage}>
+          <i/><i/><i/>
+          <div className={styles.heroAppIconCrop}><img src={asset('brand/siltok-dash-icon.png')} alt="Siltok 软件图标"/></div>
+        </div>
       </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
@@ -453,7 +456,7 @@ function CreationJourney() {
 
 function AdvantagesSection(){
   return <section className={styles.advantages} id="advantages">
-    <div className={styles.evidenceIntro}><span>SILTOK / SYSTEM EVIDENCE</span><h2>真实任务跑得动，<br/>才是优势。</h2><p>速度、成本、系统工程、团队与市场窗口，放在同一条生产坐标里看。</p></div>
+    <div className={styles.evidenceIntro}><span>SILTOK / SYSTEM EVIDENCE</span><h2>真实任务跑得动，<br/>才是优势。</h2><div className={styles.evidenceIntroAside}><p>速度、成本、系统工程、团队与市场窗口，放在同一条生产坐标里看。</p><img src={asset('brand/siltok-remote-test-flow.png')} alt="创作者通过 Siltok 远程软件连接硬件、技术与加速支持"/></div></div>
     <div className={styles.evidenceRail}>
       <article className={styles.evidenceProduction}><span>PRODUCTION</span><b>30 镜</b><strong>海外竖屏短剧生产包</strong><small>角色 · 空间 · 首尾帧 · H3 提示词</small></article>
       <article><span>SPEED</span><b>MODEL READY</b><strong>模型驻留，任务连续运行</strong><small>5.2 秒真实测试片 · 生成、重试与回看同队列</small></article>
