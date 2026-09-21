@@ -354,7 +354,7 @@ function CanvasExperience() {
 
 function CreationNotebook() {
   return <section className={styles.notebookSection} id="creation-notebook">
-    <div className={styles.notebookIntro}><span>CREATION NOTEBOOK / REAL PROJECT</span><h2>一颗球的<br/>电影手记。</h2><p>从故事、分镜和资产，到生成、剪辑与声音，完整拆解《带你去玩球！》怎样成为一部 AI 短片。</p><a href={asset(CREATION_NOTEBOOK_PATH)} target="_blank" rel="noreferrer">全屏阅读手记 <ArrowRight/></a></div>
+    <div className={styles.notebookIntro}><span>CREATION NOTEBOOK / REAL PROJECT</span><h2>沉淀用户的<br/>创作手记。</h2><p>把真实项目的故事、分镜、资产、生成过程与修改判断，沉淀为可以回看和复用的创作档案。</p><a href={asset(CREATION_NOTEBOOK_PATH)} target="_blank" rel="noreferrer">全屏阅读手记 <ArrowRight/></a></div>
     <div className={styles.notebookPreview}><div className={styles.notebookBrowserBar}><i/><i/><i/><span>一颗球的电影手记</span><a href={asset(CREATION_NOTEBOOK_PATH)} target="_blank" rel="noreferrer">新窗口 ↗</a></div><iframe src={asset(CREATION_NOTEBOOK_PATH)} title="一颗球的电影手记" loading="lazy"/></div>
   </section>;
 }
