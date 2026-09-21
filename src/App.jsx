@@ -6,6 +6,7 @@ import visual from './product-visual.module.css';
 const APPLY_URL = 'https://my.feishu.cn/share/base/shrcnVgo3Gj2zxuRtMYljrAmozd';
 const COLLAB_URL = 'https://my.feishu.cn/share/base/shrcn63I30xlVeGwwS1aRNVMm7b';
 const OFFICIAL_URL = 'https://siltok-ai.com/products/ai-station';
+const CREATOR_PROTOTYPE_URL = 'https://hemolin23.github.io/siltok-creator-prototype/';
 
 const directedCases = [
   { n: '01', icon: ImageIcon, title: '人物立绘', copy: '固定提示词与尺寸生成单人全身立绘，记录可用率、细节问题与返工次数。' },
@@ -75,24 +76,31 @@ const userQuestions = [
   ['测试期间还有其他费用吗？', '约定的内测设备使用本身免费，不会自动转为付费服务。测试时长、支持范围以及可能产生的第三方模型或 API 费用，会在开始前书面确认。'],
 ];
 
+const showreel = [
+  { src: 'cases/clock-runner.mp4', title: '时钟之上', copy: '动画角色与大幅运镜' },
+  { src: 'cases/ancient-market.mp4', title: '市井一瞬', copy: '写实人物与场景转换' },
+  { src: 'cases/mechanical-pharaoh.mp4', title: '机械法老', copy: '材质细节与主体环绕' },
+  { src: 'cases/dragon-valley.mp4', title: '龙临峡谷', copy: '大场景、群像与氛围光' },
+];
+
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
 
 export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#product-overview">产品与技术</a><a href="#questions">常见问题</a><a href="#program">内测说明</a><a href="#ecosystem">创作者生态</a><a href="#team">团队</a></nav>
-      <a className={styles.navCta} href="#wechat">添加企业微信 <ArrowRight /></a>
+      <nav><a href="#product-details">产品</a><a href="#creator-canvas">创作画布</a><a href="#showreel">生成样片</a><a href="#team">团队</a><a href="#program">内测</a></nav>
+      <a className={styles.navCta} href="#creator-canvas">查看产品 <ArrowRight /></a>
     </header>
 
     <section className={styles.hero} id="top">
       <div className={visual.heroRail} aria-hidden="true"><span>MODEL</span><i/><span>NODE</span><i/><span>WORKFLOW</span><i/><span>OUTPUT</span></div>
       <div className={styles.heroCopy}>
-        <p className={styles.kicker}>SILTOK LABS · CREATOR CO-CREATION</p>
+        <p className={styles.kicker}>SILTOK AI STATION · LOCAL CREATIVE SYSTEM</p>
         <h1>把开源模型与工作流，<br/><em>带回创作者桌面。</em></h1>
-        <p className={styles.lead}>Siltok AI Station 面向需要本地处理素材、持续生成和复用工作流的创作者与团队。模型环境、ComfyUI 节点和任务执行统一整合，支持本地数据管理、稳定生产和深度定制。</p>
-        <div className={styles.actions}><a className={styles.primary} href="#wechat">第一步 · 添加企业微信 <ArrowRight /></a><a className={styles.secondary} href={APPLY_URL} target="_blank" rel="noreferrer">产品内测申请</a><a className={styles.secondary} href={COLLAB_URL} target="_blank" rel="noreferrer">商单 / 生态合作</a></div>
-        <div className={styles.heroNote}><ShieldCheck /><span>技术、运营、产品团队为你服务，先确认真实需求和当前产品是否匹配，再安排测试。</span></div>
+        <p className={styles.lead}>一台面向 AI 影像生产的桌面工作站：把模型、ComfyUI 节点、素材、任务与创作画布放进同一个本地系统，让一次生成变成可积累、可复用的工作流。</p>
+        <div className={styles.actions}><a className={styles.primary} href="#creator-canvas">探索创作画布 <ArrowRight /></a><a className={styles.secondary} href="#showreel">查看生成样片</a><a className={styles.secondary} href="#product-details">了解产品能力</a></div>
+        <div className={styles.heroNote}><ShieldCheck /><span>桌面工作站 × 创作画布 × 开放模型生态，围绕真实内容生产而设计。</span></div>
       </div>
       <div className={styles.heroPanel}>
         <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>LOCAL CREATIVE INFRASTRUCTURE</span></div>
@@ -102,50 +110,13 @@ export default function App() {
     </section>
 
     <ProductOverview />
-
-    <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>STEP 01 · CONNECT</p><h2>第一步，添加企业微信。</h2><span>添加后发送你的创作方向，技术、运营、产品团队将共同为你服务。第二步与第三步按需选择，也可以同时填写。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>02</b> 内测申请</span><small>请创作者填写内测申请</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>03</b> 商单生态合作</span><small>请创作者填写合作报价</small><ArrowRight/></a></div></section>
-
-    <section className={styles.valueStrip}><p>围绕真实任务完成测试</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
-
-    <section className={styles.program} id="program">
-      <SectionHead n="01" label="BETA PROGRAM" title="3 天完成一个最小测试闭环。" copy="在约定的 3 天窗口内根据自己的时间自由测试，不要求连续在线；围绕一个明确问题留下可复现的结论。" />
-      <div className={styles.weekGrid}>{testDays.map(([day,title,copy])=><article key={day}><b>{day}</b><h3>{title}</h3><p>{copy}</p></article>)}</div>
-      <div className={styles.exchange}><div><span>我们提供</span><ul><li><Check/>现场或远程测试环境</li><li><Check/>安装与操作引导</li><li><Check/>定向案例与问题响应</li><li><Check/>适合时共同沉淀模板</li></ul></div><div><span>参与者提供</span><ul><li><Check/>一个最小测试任务</li><li><Check/>3 天内按自己的时间自由测试</li><li><Check/>问题、失败样本与判断标准</li><li><Check/>结束后的简短反馈</li></ul></div></div>
-    </section>
-
-    <section className={styles.tasks} id="tasks">
-      <SectionHead n="02" label="TEST TASKS" title="70% 真实项目，30% 统一案例。" copy="真实任务判断产品是否有用；统一案例让不同创作者的结果可以比较。具体模型、输入和交付规格在入选后确认。" />
-      <div className={styles.taskSplit}><article><b>60-70%</b><h3>真实项目测试</h3><p>带入一个正在发生的业务任务，完成从输入素材到结果导出的最小流程。</p><ul><li>记录原有方案、时间与成本基线</li><li>记录生成时长、成功率、返工与失败原因</li><li>判断结果是否达到你的可用标准</li><li>确认是否值得继续沉淀为模板</li></ul></article><article><b>30-40%</b><h3>定向场景测试</h3><p>使用统一输入和步骤测试关键能力，建立跨用户可比较的数据。</p><ul><li>统一素材与输出规格</li><li>保留原始输出，不只提交最好结果</li><li>标注可接受、需返工和不可用</li><li>记录操作门槛与异常复现路径</li></ul></article></div>
-      <div className={styles.caseGrid}>{directedCases.map(({n,icon:Icon,title,copy})=><article key={n}><div><span>{n}</span><Icon/></div><h3>{title}</h3><p>{copy}</p></article>)}</div>
-      <div className={styles.boundary}><CircleHelp/><p><b>测试边界：</b>产品仍处于研发共创阶段，不承诺所有任务都比云端更快或一次生成即可商用。我们更希望用真实数据确认“适合什么、不适合什么”。</p></div>
-    </section>
-
-    <section className={styles.ecosystem} id="ecosystem">
-      <SectionHead n="03" label="CREATOR ECOSYSTEM" title="让不同创作角色，验证不同问题。" copy="右侧为首阶段建议招募结构，并非现有用户统计。比例会根据报名质量、产品阶段和测试资源动态调整。" />
-      <div className={styles.ecoBody}><div className={styles.donut}><div><b>100%</b><span>创作者共创</span></div></div><div className={styles.legend}>{ecosystem.map(([name,pct,color])=><div key={name}><i style={{background:color}}/><span>{name}</span><b>{pct}</b></div>)}</div></div>
-    </section>
-
-    <section className={styles.products} id="product-details">
-      <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在走向可持续运行的生产系统。Siltok 统一管理本地模型、节点、素材和任务，帮助团队复用创作流程。" />
-      <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低了模型门槛，<br/>工程和业务资产决定长期价值。</h3><p>参考实时视频、长视频推理和本地工作站的发展方向，我们把与 Siltok 直接相关的判断拆成三层。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
-      <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，重点验证真实项目中的稳定性、可控性与工作流复用价值。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
-      <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点与可复用工作流。产品仍处于内测共创阶段，实际能力以测试环境为准。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
-      <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
-      <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
-      <div className={visual.techStrip}><div><span>研发方向 · 资源协同</span><b>探索 CPU、GPU、内存与存储之间更有效的模型加载和任务调度</b></div><div><span>研发方向 · 推理优化</span><b>在实际硬件边界内验证精度、速度、稳定性与资源占用的平衡</b></div><div><span>产品方向 · 流程管理</span><b>把模型、节点、素材、任务记录与反馈组织成可复用的生产流程</b></div></div>
-      <div className={visual.stageBlock}><div className={visual.stageTitle}><span>CAPABILITY BOUNDARY</span><h3>先把能力边界说清楚。</h3><p>产品仍处于内测共创阶段。以下内容区分当前重点、正在验证与不做预先承诺的事项。</p></div><div className={visual.stageGrid}>{capabilityStages.map(([title,copy],i)=><article key={title} data-stage={i}><b>{title}</b><p>{copy}</p></article>)}</div></div>
-      <div className={visual.fitMatrix}><article><span>更适合</span><ul><li>未发布素材、客户项目或内网环境需要本地处理</li><li>有高频重复任务，希望沉淀 ComfyUI 工作流</li><li>希望自主选择模型、节点和部署方式</li><li>愿意参与测试并共同定义质量标准</li></ul></article><article><span>现阶段可能不适合</span><ul><li>只追求最新云端模型和最快单次生成</li><li>完全不希望安装、配置或维护任何环境</li><li>期待所有任务都超过云端效果与速度</li><li>要求一键产出电影级长片或原生音画成片</li></ul></article></div>
-      <div className={visual.disclaimer}><ShieldCheck/><span><b>参数仅作参考，非最终版</b>产品配置、模型能力和功能范围以最终发布与实际测试结果为准；硅基词元拥有一切解释权。</span></div>
-      <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a></div>
-    </section>
-
-    <section className={styles.team} id="team">
-      <SectionHead n="05" label="CORE TEAM" title="从硬件产品，到端侧 AI 与软件生态。" copy="核心团队覆盖智能硬件、互联网商业化、高性能计算与企业软件实践。" />
-      <div className={styles.teamGrid}>
-        <article><div><span>创始人 & CEO</span><b>白鹏</b></div><p>20 年以上科技、互联网与智能硬件行业管理经验，覆盖 AI 硬件、软件生态与商业化全链路。曾任爱奇艺 AI 硬件公司 CEO、小米集团政企部副总裁、小米集团商业部总经理、小米集团互联网四部总经理、小米电视副总裁、迅雷总经理。</p><small>曾推动小米互联网月度收入突破 10 亿元、年度互联网收入突破 200 亿元；负责小米电视、小米盒子、小爱音箱等产品线，推动相关出货量、系统用户量与 OTT 收入达到中国第一。</small></article>
-        <article><div><span>联合创始人 & CTO</span><b>沈游人</b></div><p>北京硅基词元科技有限公司联合创始人兼 CTO，北京海致科技有限公司联合创始人兼 CTO，清华大学计算机系高性能研究所成员。</p><small>长期从事高性能计算、企业软件与技术平台建设，负责 Siltok 端侧 AI 技术与产品工程方向。</small></article>
-      </div>
-    </section>
+    <ProductDetails />
+    <CanvasExperience />
+    <Showreel />
+    <TeamSection />
+    <BetaProgram />
+    <ProductFAQ />
+    <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>CONTACT · WHEN YOU ARE READY</p><h2>看懂产品之后，再决定是否参与。</h2><span>添加企业微信，发送你的创作方向。我们会先确认产品与需求是否匹配，再安排测试或合作沟通。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>01</b> 内测申请</span><small>带一个真实任务体验产品</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>02</b> 商单生态合作</span><small>提交账号、团队资料与合作方向</small><ArrowRight/></a></div></section>
 
     <section className={styles.apply}><div><p>THREE STEPS · TWO OPTIONS</p><h2>先建立联系，<br/>再选择参与方式。</h2><span>第一步添加企微是统一入口。第二步和第三步可以任选其一，也可以同时填写：参与产品测试请提交内测申请；有商单、账号或生态资源请提交合作报价。</span><div className={visual.choiceNote}>02 / 03 按需选择 · 可同时填写</div></div><div className={styles.applyCards}><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><b>石根洁 · 硅基词元</b></div><div className={styles.qrMini}><span className={visual.stepBadge}>01 · 添加企微</span><img src={asset('enterprise-wechat-linan-20260909.png')} alt="李楠的企业微信二维码"/><b>李楠 · 硅基词元</b></div><div className={`${styles.applyCard} ${visual.betaCard}`}><span className={visual.stepBadge}>02 · 内测申请</span><FileCheck2/><h3>参与产品内测</h3><p>请创作者填写真实任务、当前工具与可参与时间。</p><a href={APPLY_URL} target="_blank" rel="noreferrer">填写内测申请 <ArrowRight/></a></div><div className={`${styles.applyCard} ${visual.commerceCard}`}><span className={visual.stepBadge}>03 · 商单生态合作</span><MessageSquareText/><h3>提交合作报价</h3><p>请创作者填写账号信息，并上传团队介绍、媒体资料包与报价文件。</p><a href={COLLAB_URL} target="_blank" rel="noreferrer">填写合作报价 <ArrowRight/></a></div></div></section>
 
@@ -158,10 +129,70 @@ function SectionHead({n,label,title,copy}) {
 }
 
 function ProductOverview() {
-  const [active, setActive] = useState(0);
   return <section className={styles.productOverview} id="product-overview">
-    <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>为本地 AI 部署设计的<br/>桌面工作站。</h2><div><p>Siltok AI Station 帮助创作者和团队快速建立本地模型环境，并保留模型与工作流自主权。</p><a href="#product-details">查看完整产品说明 <ArrowRight/></a></div></div>
+    <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>不是一台只会跑模型的主机。<br/>是一套本地 AI 创作系统。</h2><div><p>Siltok AI Station 把桌面硬件、模型环境与创作画布连成一体：从选择模型、组织参考素材，到生成、回看和复用工作流，都在同一个系统里完成。</p><a href="#creator-canvas">进入画布介绍 <ArrowRight/></a></div></div>
     <div className={styles.techAdvantages}>{techAdvantages.map(([n,title,copy])=><article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
-    <div className={styles.questionRouter} id="questions"><div className={styles.questionList}><p>CHOOSE YOUR QUESTION</p><h3>你可能正在问——</h3>{userQuestions.map(([question],i)=><button className={i===active?styles.activeQuestion:''} key={question} onClick={()=>setActive(i)}><span>{String(i+1).padStart(2,'0')}</span>{question}<ArrowRight/></button>)}</div><article className={styles.answerPanel}><span>ANSWER / {String(active+1).padStart(2,'0')}</span><h3>{userQuestions[active][0]}</h3><p>{userQuestions[active][1]}</p><div><a href={APPLY_URL} target="_blank" rel="noreferrer">申请内测 <ArrowRight/></a><a href="#wechat">先添加企微沟通</a></div><small>产品仍处于内测阶段；配置、模型能力和测试范围以实际确认结果为准。</small></article></div>
   </section>;
+}
+
+function ProductDetails() {
+  return <section className={styles.products} id="product-details">
+    <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在走向可持续运行的生产系统。Siltok 统一管理本地模型、节点、素材和任务，让创作流程能够复用。" />
+    <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低模型门槛，<br/>工程与业务资产决定长期价值。</h3><p>设备不是某一个模型的外壳，而是持续承接新模型、新节点与团队工作流的本地底座。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
+    <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点、创作素材与可复用工作流。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
+    <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
+    <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
+    <div className={visual.sceneIntro}><div><span>CREATOR COVERAGE</span><h3>从个人创作到专业制作团队</h3><p>覆盖八类高频内容生产场景，面向真实项目中的稳定性、可控性与工作流复用。</p></div><div className={visual.sceneGrid}>{creatorScenes.map(([title,copy])=><article key={title}><b>{title}</b><span>{copy}</span></article>)}</div></div>
+    <div className={visual.techStrip}><div><span>资源协同</span><b>围绕 CPU、GPU、内存与存储组织模型加载和任务调度</b></div><div><span>推理优化</span><b>在硬件边界内平衡精度、稳定性与资源占用</b></div><div><span>流程管理</span><b>把模型、节点、素材与任务记录组织成可复用的生产流程</b></div></div>
+    <div className={visual.stageBlock}><div className={visual.stageTitle}><span>CAPABILITY BOUNDARY</span><h3>能力边界，先说清楚。</h3><p>产品仍处于共创阶段。以下内容区分当前重点、正在验证与不做预先承诺的事项。</p></div><div className={visual.stageGrid}>{capabilityStages.map(([title,copy],i)=><article key={title} data-stage={i}><b>{title}</b><p>{copy}</p></article>)}</div></div>
+    <div className={visual.disclaimer}><ShieldCheck/><span><b>参数仅作参考，非最终版</b>产品配置、模型能力和功能范围以最终发布与实际测试结果为准。</span></div>
+    <div className={visual.productLinks}><a className={styles.officialLink} href={OFFICIAL_URL} target="_blank" rel="noreferrer">查看产品官网 <ArrowRight/></a></div>
+  </section>;
+}
+
+function CanvasExperience() {
+  return <section className={styles.canvasSection} id="creator-canvas">
+    <SectionHead n="UI" label="SILTOK CREATOR" title="把复杂工作流，收进一张创作画布。" copy="创作者面向作品做决策，系统在背后组织模型、节点、素材与任务。" />
+    <div className={styles.canvasWindow}>
+      <div className={styles.canvasTop}><b>Siltok Creator</b><span>创作中心</span><span>我的作品</span><span>素材库</span><i>LOCAL</i></div>
+      <div className={styles.canvasBody}>
+        <aside><button className={styles.canvasToolOn}>▷<small>视频</small></button><button>▧<small>图片</small></button><button>T<small>文字</small></button><button>□<small>作品</small></button></aside>
+        <div className={styles.canvasStage}><div className={styles.canvasStageHead}><b>视频预览</b><span>画布 · 项目自动保存</span></div><video src={asset(showreel[2].src)} autoPlay muted loop playsInline preload="metadata"/><div className={styles.canvasTimeline}><i/><i/><i/><i/></div></div>
+        <div className={styles.canvasControls}><span>VIDEO WORKFLOW</span><h3>视频生成</h3><label>创作模型</label><div className={styles.canvasSelect}>MiniMax H3 <b>⌄</b></div><label>生成方式</label><div className={styles.canvasModes}><b>文生视频</b><span>图片生成视频</span><span>参考素材生成</span></div><label>画面描述</label><p>描述人物、场景、动作与镜头，或交给提示词助手整理。</p><label>输出规格</label><div className={styles.canvasChips}><b>16:9</b><span>768p</span><span>多条生成</span></div><button className={styles.generateButton}>开始生成 <ArrowRight/></button></div>
+      </div>
+    </div>
+    <div className={styles.canvasFoot}><div><b>一个入口</b><span>文字、图片、视频与作品资产在同一画布流转。</span></div><div><b>按任务选模型</b><span>模型是能力模块，不是用户必须理解的技术负担。</span></div><div><b>工作流可复用</b><span>参考素材、规格与生成记录持续留在项目里。</span></div><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开交互原型 <ArrowRight/></a></div>
+  </section>;
+}
+
+function Showreel() {
+  return <section className={styles.showreel} id="showreel">
+    <SectionHead n="FILM" label="SELECTED OUTPUTS" title="先看作品，再谈参数。" copy="从测试片中选择四种差异明显的画面类型，展示角色运动、写实人物、机械材质与大场景表现。" />
+    <div className={styles.reelGrid}>{showreel.map((item,i)=><article key={item.src} className={i===0?styles.reelLead:''}><video src={asset(item.src)} controls muted loop playsInline preload="metadata"/><div><span>0{i+1}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
+    <p className={styles.reelNote}>页面展示为产品测试样片；生成效果会随模型、输入素材与工作流配置变化。</p>
+  </section>;
+}
+
+function TeamSection() {
+  return <section className={styles.team} id="team">
+    <SectionHead n="05" label="CORE TEAM" title="从硬件产品，到端侧 AI 与软件生态。" copy="核心团队覆盖智能硬件、互联网商业化、高性能计算与企业软件实践。" />
+    <div className={styles.teamGrid}>
+      <article><div><span>创始人 & CEO</span><b>白鹏</b></div><p>20 年以上科技、互联网与智能硬件行业管理经验，覆盖 AI 硬件、软件生态与商业化全链路。曾任爱奇艺 AI 硬件公司 CEO、小米集团政企部副总裁、小米集团商业部总经理、小米集团互联网四部总经理、小米电视副总裁、迅雷总经理。</p><small>曾推动小米互联网月度收入突破 10 亿元、年度互联网收入突破 200 亿元；负责小米电视、小米盒子、小爱音箱等产品线，推动相关出货量、系统用户量与 OTT 收入达到中国第一。</small></article>
+      <article><div><span>联合创始人 & CTO</span><b>沈游人</b></div><p>北京硅基词元科技有限公司联合创始人兼 CTO，北京海致科技有限公司联合创始人兼 CTO，清华大学计算机系高性能研究所成员。</p><small>长期从事高性能计算、企业软件与技术平台建设，负责 Siltok 端侧 AI 技术与产品工程方向。</small></article>
+    </div>
+  </section>;
+}
+
+function BetaProgram() {
+  return <>
+    <section className={styles.valueStrip}><p>可选的产品共创计划</p><div><LockKeyhole/><b>素材在本地处理</b><span>未发布内容与创作资产更可控</span></div><div><Workflow/><b>工作流可沉淀</b><span>把成功参数和失败经验留下来</span></div><div><MessageSquareText/><b>反馈直接进入迭代</b><span>围绕真实任务确定产品边界</span></div></section>
+    <section className={styles.program} id="program"><SectionHead n="01" label="BETA PROGRAM" title="带一个真实任务，完成最小测试闭环。" copy="在约定的 3 天窗口内根据自己的时间自由测试，不要求连续在线；围绕一个明确问题留下可复现的结论。" /><div className={styles.weekGrid}>{testDays.map(([day,title,copy])=><article key={day}><b>{day}</b><h3>{title}</h3><p>{copy}</p></article>)}</div><div className={styles.exchange}><div><span>我们提供</span><ul><li><Check/>现场或远程测试环境</li><li><Check/>安装与操作引导</li><li><Check/>定向案例与问题响应</li><li><Check/>适合时共同沉淀模板</li></ul></div><div><span>参与者提供</span><ul><li><Check/>一个最小测试任务</li><li><Check/>3 天内按自己的时间自由测试</li><li><Check/>问题、失败样本与判断标准</li><li><Check/>结束后的简短反馈</li></ul></div></div></section>
+    <section className={styles.tasks} id="tasks"><SectionHead n="02" label="TEST TASKS" title="真实项目为主，统一案例为辅。" copy="真实任务判断产品是否有用；统一案例让不同创作者的结果可以比较。具体模型、输入和交付规格在入选后确认。" /><div className={styles.taskSplit}><article><b>主任务</b><h3>真实项目测试</h3><p>带入一个正在发生的业务任务，完成从输入素材到结果导出的最小流程。</p><ul><li>记录原有方案与判断基线</li><li>保留成功结果与失败样本</li><li>判断结果是否达到你的可用标准</li><li>确认是否值得继续沉淀为模板</li></ul></article><article><b>对照组</b><h3>定向场景测试</h3><p>使用统一输入和步骤测试关键能力，建立跨用户可比较的数据。</p><ul><li>统一素材与输出规格</li><li>保留原始输出</li><li>标注可接受、需返工和不可用</li><li>记录异常复现路径</li></ul></article></div><div className={styles.caseGrid}>{directedCases.map(({n,icon:Icon,title,copy})=><article key={n}><div><span>{n}</span><Icon/></div><h3>{title}</h3><p>{copy}</p></article>)}</div><div className={styles.boundary}><CircleHelp/><p><b>测试边界：</b>产品仍处于研发共创阶段，不承诺所有任务都优于云端或一次生成即可商用。我们更希望用真实数据确认“适合什么、不适合什么”。</p></div></section>
+    <section className={styles.ecosystem} id="ecosystem"><SectionHead n="03" label="CREATOR ECOSYSTEM" title="让不同创作角色，验证不同问题。" copy="右侧为首阶段建议招募结构，并非现有用户统计。比例会根据报名质量、产品阶段和测试资源动态调整。" /><div className={styles.ecoBody}><div className={styles.donut}><div><b>100%</b><span>创作者共创</span></div></div><div className={styles.legend}>{ecosystem.map(([name,pct,color])=><div key={name}><i style={{background:color}}/><span>{name}</span><b>{pct}</b></div>)}</div></div></section>
+  </>;
+}
+
+function ProductFAQ() {
+  const [active, setActive] = useState(0);
+  return <section className={styles.faqSection} id="questions"><div className={styles.questionRouter}><div className={styles.questionList}><p>PRODUCT QUESTIONS</p><h3>你可能正在问——</h3>{userQuestions.map(([question],i)=><button className={i===active?styles.activeQuestion:''} key={question} onClick={()=>setActive(i)}><span>{String(i+1).padStart(2,'0')}</span>{question}<ArrowRight/></button>)}</div><article className={styles.answerPanel}><span>ANSWER / {String(active+1).padStart(2,'0')}</span><h3>{userQuestions[active][0]}</h3><p>{userQuestions[active][1]}</p><div><a href="#creator-canvas">查看创作画布 <ArrowRight/></a><a href="#wechat">沟通你的场景</a></div><small>产品仍处于共创阶段；配置、模型能力和测试范围以实际确认结果为准。</small></article></div></section>;
 }
