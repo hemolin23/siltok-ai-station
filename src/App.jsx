@@ -7,6 +7,7 @@ const APPLY_URL = 'https://my.feishu.cn/share/base/shrcnVgo3Gj2zxuRtMYljrAmozd';
 const COLLAB_URL = 'https://my.feishu.cn/share/base/shrcn63I30xlVeGwwS1aRNVMm7b';
 const OFFICIAL_URL = 'https://siltok-ai.com/products/ai-station';
 const CREATOR_PROTOTYPE_URL = 'https://hemolin23.github.io/siltok-creator-prototype/';
+const CREATION_NOTEBOOK_URL = 'https://benben-film-making-notebook.qingyu-lu-ai.chatgpt.site/';
 
 const directedCases = [
   { n: '01', icon: ImageIcon, title: '人物立绘', copy: '固定提示词与尺寸生成单人全身立绘，记录可用率、细节问题与返工次数。' },
@@ -121,7 +122,7 @@ export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#creator-canvas">动态画布</a><a href="#product-ui">创作工作站</a><a href="#showreel">生成样片</a><a href="#advantages">独特优势</a></nav>
+      <nav><a href="#showreel">生成样片</a><a href="#creator-canvas">动态画布</a><a href="#creation-notebook">创作手记</a><a href="#product-ui">创作工作站</a></nav>
       <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
@@ -141,11 +142,13 @@ export default function App() {
 
     <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
-    <CanvasExperience />
-    <ProductUISuite />
     <Showreel />
+    <CanvasExperience />
+    <CreationNotebook />
+    <ProductUISuite />
     <AdvantagesSection />
-    <section className={styles.coCreateGateway}><div className={styles.gatewayFluid} aria-hidden="true"><i/><i/><i/></div><div className={styles.gatewayOffer}><span>CO-CREATE / CREATOR NETWORK</span><h2>把真实任务，<br/>接进 Siltok。</h2><div className={styles.gatewayCards}><article><b>01</b><strong>AI 内容与商业项目</strong><small>BRIEF · PRODUCTION · DELIVERY</small></article><article><b>02</b><strong>平台、技术与发行资源</strong><small>PLATFORM · SERVICE · DISTRIBUTION</small></article><article><b>03</b><strong>本地 AI 与工作流共创</strong><small>DEVICE · COMFYUI · TEST</small></article></div><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
+    <TeamSection />
+    <section className={styles.coCreateGateway}><img src={asset('siltok-liquid-workflow.png')} alt="液态玻璃创作工作流"/><div className={styles.gatewayOffer}><span>CO-CREATE / CREATOR NETWORK</span><h2>把真实任务，<br/>接进 Siltok。</h2><div className={styles.gatewayCards}><article><b>01</b><strong>AI 内容与商业项目</strong><small>BRIEF · PRODUCTION · DELIVERY</small></article><article><b>02</b><strong>平台、技术与发行资源</strong><small>PLATFORM · SERVICE · DISTRIBUTION</small></article><article><b>03</b><strong>本地 AI 与工作流共创</strong><small>DEVICE · COMFYUI · TEST</small></article></div><a href={asset('co-create.html')}>进入邀请共创页 <ArrowRight/></a></div></section>
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
@@ -346,6 +349,17 @@ function CanvasExperience() {
       </div>
     </div>
     <div className={styles.canvasFeatureRail}><span>多模型选择</span><span>提示词助手</span><span>图／视频／音频参考</span><span>首尾帧控制</span><span>多比例与时长</span><span>批量生成</span><span>本地队列</span><span>作品与素材库</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">打开完整原型 <ArrowRight/></a></div>
+  </section>;
+}
+
+function CreationNotebook() {
+  return <section className={styles.notebookSection} id="creation-notebook">
+    <div className={styles.notebookIntro}><span>CREATION NOTEBOOK / OPEN TOOL</span><h2>作品之外，<br/>把创作过程也留下。</h2><p>镜头为什么这样拍、参考如何组合、哪一次修改有效，都进入同一本创作手记。</p><a href={CREATION_NOTEBOOK_URL} target="_blank" rel="noreferrer">打开创作手记 <ArrowRight/></a></div>
+    <a className={styles.notebookPreview} href={CREATION_NOTEBOOK_URL} target="_blank" rel="noreferrer" aria-label="打开创作手记">
+      <header><b>创作手记</b><span>项目</span><span>镜头</span><span>参考</span><i>持续记录</i></header>
+      <main><div className={styles.notebookShot}><img src={asset(showreel[2].poster)} alt="机械法老样片画面"/><span>SHOT 03 · 机械法老</span></div><div className={styles.notebookNotes}><span>今日创作判断</span><h3>材质、主体与镜头运动，分别记录。</h3><p>保留有效参考、模型选择、失败原因和下一次修改方向。</p><div><b>镜头语言</b><b>参考素材</b><b>迭代记录</b></div></div></main>
+      <footer><span>BENBEN · FILM MAKING NOTEBOOK</span><b>进入手记 ↗</b></footer>
+    </a>
   </section>;
 }
 
