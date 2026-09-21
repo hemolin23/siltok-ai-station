@@ -114,15 +114,25 @@ export default function App() {
     </header>
 
     <section className={styles.hero} id="top">
+      <div className={styles.heroBackdrop} aria-hidden="true"><img src={asset('siltok-creative-engine-hero.png')} alt=""/></div>
+      <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
       <div className={styles.heroCopy}>
-        <p className={styles.kicker}>DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
+        <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
         <h1>Siltok<br/><em>AI Station.</em></h1>
         <h2>把开源模型与工作流，带回创作者桌面。</h2>
         <p className={styles.lead}>硬件、模型环境与创作画布组成同一套本地系统。它不只完成一次生成，也让素材、节点和成功流程持续留下来。</p>
-        <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
         <div className={styles.actions}><a className={styles.primary} href="#showreel">浏览生成样片 <ArrowRight /></a><a className={styles.secondary} href="#product-details">了解系统</a></div>
       </div>
-      <div className={styles.heroMedia}><div><span>FEATURED GENERATION</span><b>1344 × 768 · VIDEO WORKFLOW</b></div><div className={styles.heroMediaFrame}><video src={asset(showreel[3].src)} poster={asset(showreel[3].poster)} controls muted loop playsInline autoPlay preload="metadata"/><span>LOCAL OUTPUT / 04</span><i>FRAME 0001–096</i></div><p><i/>精选测试样片 · 大场景、群像与氛围光</p></div>
+      <div className={styles.heroMedia}>
+        <div className={styles.glassEyebrow}><span>LOCAL CREATIVE CORE</span><b>STATION / 01</b></div>
+        <div className={styles.deviceHalo}/>
+        <img className={styles.heroDevice} src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品"/>
+        <div className={`${styles.glassChip} ${styles.glassChipOne}`}><i/>模型环境 <b>READY</b></div>
+        <div className={`${styles.glassChip} ${styles.glassChipTwo}`}>素材处理 <b>LOCAL</b></div>
+        <div className={`${styles.glassChip} ${styles.glassChipThree}`}>工作流 <b>REUSABLE</b></div>
+        <p><i/>正在运行 · 本地创作系统</p>
+      </div>
+      <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
     </section>
 
     <div className={styles.signalRail} aria-label="Siltok 本地创作流程"><div><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span><span>01 / MODEL READY</span><span>02 / NODE GRAPH</span><span>03 / LOCAL ASSETS</span><span>04 / RENDER QUEUE</span><span>05 / REUSABLE WORKFLOW</span></div></div>
@@ -151,6 +161,7 @@ function ProductOverview() {
   return <section className={styles.productOverview} id="product-overview">
     <div className={styles.overviewIntro}><p>PRODUCT FIRST · WHAT IT IS</p><h2>不是一台只会跑模型的主机。<br/>是一套本地 AI 创作系统。</h2><div><p>Siltok AI Station 把桌面硬件、模型环境与创作画布连成一体：从选择模型、组织参考素材，到生成、回看和复用工作流，都在同一个系统里完成。</p><a href="#creator-canvas">进入画布介绍 <ArrowRight/></a></div></div>
     <div className={styles.techAdvantages}>{techAdvantages.map(([n,title,copy])=><article key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></article>)}</div>
+    <div className={styles.breakthroughVisual}><img src={asset(showreel[2].poster)} alt="机械法老生成样片"/><div><span>WORKFLOW AS AN ASSET</span><h3>模型会更新。<br/>你的工作流会留下。</h3><p>成功的参数、节点、素材与判断标准，都成为下一次创作的起点。</p></div><b>LOCAL / OPEN / REUSABLE</b></div>
   </section>;
 }
 
@@ -158,6 +169,16 @@ function ProductDetails() {
   return <section className={styles.products} id="product-details">
     <SectionHead n="04" label="SILTOK AI STATION" title="模型会变，工作流会留下来。" copy="AI 视频正在走向可持续运行的生产系统。Siltok 统一管理本地模型、节点、素材和任务，让创作流程能够复用。" />
     <div className={visual.logicBlock}><div className={visual.logicLead}><span>FROM MODEL TO SYSTEM</span><h3>开源降低模型门槛，<br/>工程与业务资产决定长期价值。</h3><p>设备不是某一个模型的外壳，而是持续承接新模型、新节点与团队工作流的本地底座。</p></div><div className={visual.logicGrid}>{productLogic.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><h4>{title}</h4><p>{copy}</p></article>)}</div></div>
+    <div className={styles.workflowMap}>
+      <div className={styles.workflowMapHead}><span>LOCAL SYSTEM MAP</span><h3>从模型到作品，<br/>每一步都在同一套系统里。</h3><p>节点不是装饰，它们就是 Siltok 的运行方式。</p></div>
+      <div className={styles.workflowTrack}>
+        <article><span>01</span><b>模型环境</b><small>MODEL</small></article>
+        <article><span>02</span><b>节点图</b><small>GRAPH</small></article>
+        <article className={styles.workflowCore}><img src={asset('siltok-ai-station-perspective.png')} alt=""/><b>Siltok Station</b><small>LOCAL CORE</small></article>
+        <article><span>03</span><b>渲染队列</b><small>QUEUE</small></article>
+        <article><span>04</span><b>作品资产</b><small>OUTPUT</small></article>
+      </div>
+    </div>
     <div className={visual.productShowcase}><div><span>DESKTOP LOCAL AI</span><h3>为创作者设计的<br/>桌面级 AI Station</h3><p>紧凑机身承载本地模型、ComfyUI 节点、创作素材与可复用工作流。</p></div><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 产品透视图"/></div>
     <div className={styles.productGrid}>{products.map((p,i)=><article key={p.name}><div className={styles.productTop}><Cpu/><span>{p.label}</span><b>0{i+1}</b></div><h3>{p.name}</h3><p>{p.copy}</p><ul>{p.points.map(x=><li key={x}><Check/>{x}</li>)}</ul></article>)}</div>
     <div className={visual.valueGrid}>{localValues.map(([title,copy],i)=><article key={title}><span>0{i+1}</span><b>{title}</b><p>{copy}</p></article>)}</div>
