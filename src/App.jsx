@@ -77,10 +77,10 @@ const userQuestions = [
 ];
 
 const showreel = [
-  { src: 'cases/clock-runner.mp4', title: '时钟之上', copy: '动画角色与大幅运镜' },
-  { src: 'cases/ancient-market.mp4', title: '市井一瞬', copy: '写实人物与场景转换' },
-  { src: 'cases/mechanical-pharaoh.mp4', title: '机械法老', copy: '材质细节与主体环绕' },
-  { src: 'cases/dragon-valley.mp4', title: '龙临峡谷', copy: '大场景、群像与氛围光' },
+  { src: 'cases/clock-runner.mp4', title: '时钟之上', copy: '动画角色与大幅运镜', meta: ['动画叙事', '角色运动', '镜头调度'], detail: '观察角色在复杂机械场景中的运动连贯性，以及远近景切换时的主体稳定性。' },
+  { src: 'cases/ancient-market.mp4', title: '市井一瞬', copy: '写实人物与场景转换', meta: ['写实人物', '连续场景', '电影光影'], detail: '观察人物身份、服饰与面部特征在室内外场景转换中的一致性。' },
+  { src: 'cases/mechanical-pharaoh.mp4', title: '机械法老', copy: '材质细节与主体环绕', meta: ['机械材质', '主体环绕', '黑色背景'], detail: '观察高反差画面中的金属、石材和机械结构，以及环绕视角下的细节保持。' },
+  { src: 'cases/dragon-valley.mp4', title: '龙临峡谷', copy: '大场景、群像与氛围光', meta: ['奇幻场景', '群像调度', '氛围光'], detail: '观察复杂环境、远景层次和多个运动主体在连续镜头中的空间关系。' },
 ];
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
@@ -89,31 +89,28 @@ export default function App() {
   return <main className={styles.page}>
     <header className={styles.nav}>
       <a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok" /><span>LABS</span></a>
-      <nav><a href="#product-details">产品</a><a href="#creator-canvas">创作画布</a><a href="#showreel">生成样片</a><a href="#team">团队</a><a href="#program">内测</a></nav>
-      <a className={styles.navCta} href="#creator-canvas">查看产品 <ArrowRight /></a>
+      <nav><a href="#product-overview">产品总览</a><a href="#showreel">生成样片</a><a href="#product-details">系统架构</a><a href="#creator-canvas">创作画布</a><a href="#team">团队</a></nav>
+      <a className={styles.navCta} href="#co-create">邀请共创 <ArrowRight /></a>
     </header>
 
     <section className={styles.hero} id="top">
-      <div className={visual.heroRail} aria-hidden="true"><span>MODEL</span><i/><span>NODE</span><i/><span>WORKFLOW</span><i/><span>OUTPUT</span></div>
       <div className={styles.heroCopy}>
-        <p className={styles.kicker}>SILTOK AI STATION · LOCAL CREATIVE SYSTEM</p>
-        <h1>把开源模型与工作流，<br/><em>带回创作者桌面。</em></h1>
-        <p className={styles.lead}>一台面向 AI 影像生产的桌面工作站：把模型、ComfyUI 节点、素材、任务与创作画布放进同一个本地系统，让一次生成变成可积累、可复用的工作流。</p>
-        <div className={styles.actions}><a className={styles.primary} href="#creator-canvas">探索创作画布 <ArrowRight /></a><a className={styles.secondary} href="#showreel">查看生成样片</a><a className={styles.secondary} href="#product-details">了解产品能力</a></div>
-        <div className={styles.heroNote}><ShieldCheck /><span>桌面工作站 × 创作画布 × 开放模型生态，围绕真实内容生产而设计。</span></div>
+        <p className={styles.kicker}>DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
+        <h1>Siltok<br/><em>AI Station.</em></h1>
+        <h2>把开源模型与工作流，带回创作者桌面。</h2>
+        <p className={styles.lead}>硬件、模型环境与创作画布组成同一套本地系统。它不只完成一次生成，也让素材、节点和成功流程持续留下来。</p>
+        <div className={styles.heroFacts}><div><b>LOCAL</b><span>素材与项目留在本地</span></div><div><b>OPEN</b><span>模型与节点持续扩展</span></div><div><b>REUSABLE</b><span>工作流成为创作资产</span></div></div>
+        <div className={styles.actions}><a className={styles.primary} href="#showreel">浏览生成样片 <ArrowRight /></a><a className={styles.secondary} href="#product-details">了解系统</a></div>
       </div>
-      <div className={styles.heroPanel}>
-        <div className={styles.panelTop}><span>SILTOK AI STATION</span><span>LOCAL CREATIVE INFRASTRUCTURE</span></div>
-        <div className={visual.deviceStage}><img src={asset('siltok-ai-station-perspective.png')} alt="Siltok AI Station 桌面级本地 AI 工作站"/><div className={visual.stageCaption}><b>一台设备，承载你的本地创作环境。</b><span>模型 · ComfyUI 节点 · 素材 · 工作流</span></div><span className={visual.stageNode}>01 / LOCAL</span><span className={visual.stageNode}>02 / OPEN</span></div>
-        <div className={styles.panelStats}><div><b>本地</b><span>创作资产处理</span></div><div><b>开放</b><span>模型与节点扩展</span></div><div><b>共创</b><span>工作流沉淀</span></div></div>
-      </div>
+      <div className={styles.heroMedia}><div><span>FEATURED GENERATION</span><b>1344 × 768 · VIDEO WORKFLOW</b></div><video src={asset(showreel[3].src)} controls muted loop playsInline autoPlay preload="metadata"/><p><i/>精选测试样片 · 大场景、群像与氛围光</p></div>
     </section>
 
     <ProductOverview />
+    <Showreel />
     <ProductDetails />
     <CanvasExperience />
-    <Showreel />
     <TeamSection />
+    <ParticipationIntro />
     <BetaProgram />
     <ProductFAQ />
     <section className={visual.connectBar} id="wechat"><img src={asset('enterprise-wechat-shigenjie-20260904.png')} alt="石根洁的企业微信二维码"/><div><p>CONTACT · WHEN YOU ARE READY</p><h2>看懂产品之后，再决定是否参与。</h2><span>添加企业微信，发送你的创作方向。我们会先确认产品与需求是否匹配，再安排测试或合作沟通。</span></div><div><a href={APPLY_URL} target="_blank" rel="noreferrer"><span><b>01</b> 内测申请</span><small>带一个真实任务体验产品</small><ArrowRight/></a><a className={visual.commerceLink} href={COLLAB_URL} target="_blank" rel="noreferrer"><span><b>02</b> 商单生态合作</span><small>提交账号、团队资料与合作方向</small><ArrowRight/></a></div></section>
@@ -166,10 +163,23 @@ function CanvasExperience() {
 }
 
 function Showreel() {
+  const [page, setPage] = useState(0);
+  const visible = showreel.slice(page * 2, page * 2 + 2);
   return <section className={styles.showreel} id="showreel">
-    <SectionHead n="FILM" label="SELECTED OUTPUTS" title="先看作品，再谈参数。" copy="从测试片中选择四种差异明显的画面类型，展示角色运动、写实人物、机械材质与大场景表现。" />
-    <div className={styles.reelGrid}>{showreel.map((item,i)=><article key={item.src} className={i===0?styles.reelLead:''}><video src={asset(item.src)} controls muted loop playsInline preload="metadata"/><div><span>0{i+1}</span><h3>{item.title}</h3><p>{item.copy}</p></div></article>)}</div>
+    <SectionHead n="01" label="SELECTED OUTPUTS" title="生成样片浏览器。" copy="像参考项目页一样，把作品放到参数之前：每次并排浏览两个案例，再查看它们各自验证的画面能力。" />
+    <div className={styles.reelBrowser}>
+      <div className={styles.reelBrowserHead}><div><span>04 SELECTED EXAMPLES</span><h3>先看作品，再谈系统。</h3></div><div className={styles.reelPager}><button onClick={()=>setPage(0)} disabled={page===0} aria-label="上一组样片">←</button><span>EXAMPLES {String(page*2+1).padStart(2,'0')} + {String(page*2+2).padStart(2,'0')}<small>PAGE 0{page+1} / 02</small></span><button onClick={()=>setPage(1)} disabled={page===1} aria-label="下一组样片">→</button></div></div>
+      <div className={styles.reelGrid}>{visible.map((item,i)=>{const index=page*2+i;return <article key={item.src}><div className={styles.reelTitle}><span>EXAMPLE {String(index+1).padStart(2,'0')}</span><h3>{item.title}</h3><b>SILTOK TEST OUTPUT</b></div><div className={styles.reelMeta}>{item.meta.map(x=><span key={x}>{x}</span>)}</div><video src={asset(item.src)} controls muted loop playsInline preload="metadata"/><details><summary><span>＋</span> 查看展示重点 <small>{item.copy}</small></summary><p>{item.detail}</p></details></article>})}</div>
+    </div>
     <p className={styles.reelNote}>页面展示为产品测试样片；生成效果会随模型、输入素材与工作流配置变化。</p>
+  </section>;
+}
+
+function ParticipationIntro() {
+  return <section className={styles.participationIntro} id="co-create">
+    <div><span>PART II · INVITATION</span><h2>产品介绍到这里。<br/>下面，是邀请共创。</h2></div>
+    <p>产品能力、样片、系统与团队已经独立展示。只有当你确认它与你的创作场景相关，再进入申请流程。</p>
+    <div className={styles.participationSteps}><article><span>01</span><b>了解计划</b><p>确认测试方式、任务边界与适合人群。</p></article><article><span>02</span><b>带来任务</b><p>选择一个真实、足够小、能够判断价值的任务。</p></article><article><span>03</span><b>提交申请</b><p>填写内测或生态合作信息，再由团队与你沟通。</p></article></div>
   </section>;
 }
 
