@@ -282,3 +282,12 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 @media(max-width:1000px){.canvasBody{height:auto}}
 @media(max-width:760px){.canvasSection,.uiSuite,.showreel,.advantages{padding-left:18px;padding-right:18px}.canvasSection>* ,.uiSuite>* ,.showreel>* ,.advantages>*{max-width:100%}.uiSuite .productScreen{min-height:0}}
 @media(prefers-reduced-motion:reduce){.heroBackdrop img,.heroAura,.heroCopy,.heroSpatialRig{transform:none!important}.heroCameraPath:after{animation:none}.heroFluidField{display:none}}
+
+/* Framed hero: editorial width, generous page whitespace, no oversized app mark. */
+.nav{width:min(1100px,calc(100% - 32px))}
+.hero{width:calc(100% - 72px);max-width:1100px;min-height:650px;margin:28px auto 72px;grid-template-columns:minmax(0,720px);grid-template-rows:1fr auto;justify-content:start;gap:36px;padding:88px 64px 38px;border-radius:40px;box-shadow:0 24px 70px rgba(7,27,57,.12)}
+.heroCopy{width:min(720px,100%)}
+.heroFacts{grid-column:1;width:min(680px,100%)}
+.heroBackdrop img{object-position:64% center}
+.hero:after{background:linear-gradient(90deg,rgba(3,10,20,.95) 0%,rgba(4,12,23,.78) 52%,rgba(5,13,25,.34) 82%,rgba(5,12,22,.48) 100%)}
+@media(max-width:760px){.hero{width:calc(100% - 24px);min-height:auto;margin:12px auto 44px;padding:94px 24px 26px;border-radius:26px}.hero h1{font-size:62px}.heroFacts{width:100%}.heroBackdrop img{object-position:68% center}}

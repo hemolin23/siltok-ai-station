@@ -129,12 +129,6 @@ export default function App() {
       <div className={styles.heroBackdrop} aria-hidden="true"><img src={asset('siltok-creative-engine-hero.png')} alt=""/></div>
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
       <HeroFluidField />
-      <div className={styles.heroSpatialRig} aria-hidden="true">
-        <div className={styles.heroAppIconStage}>
-          <i/><i/><i/>
-          <div className={styles.heroAppIconCrop}><img src={asset('brand/siltok-dash-icon.png')} alt="Siltok 软件图标"/></div>
-        </div>
-      </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
         <h1>Siltok<br/><em>AI Station.</em></h1>
