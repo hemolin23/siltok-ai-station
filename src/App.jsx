@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, CircleHelp, Cpu, FileCheck2, Film, Image as ImageIcon, Layers3, LockKeyhole, MessageSquareText, MonitorUp, ShieldCheck, Workflow, Play, Plus, SlidersHorizontal, Sparkles, Box, RotateCcw, Volume2, WandSparkles } from 'lucide-react';
 import styles from './station.module.css';
 import visual from './product-visual.module.css';
@@ -125,6 +125,17 @@ export default function App() {
     <section className={styles.hero} id="top">
       <div className={styles.heroBackdrop} aria-hidden="true"><img src={asset('siltok-creative-engine-hero.png')} alt=""/></div>
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
+      <HeroFluidField />
+      <div className={styles.heroSpatialRig} aria-hidden="true">
+        <div className={styles.heroCameraPath}><i/><i/><i/><span>CAMERA PATH / 03</span></div>
+        <div className={styles.heroReferenceDeck}>
+          <figure><img src={asset(showreel[3].poster)} alt=""/><figcaption>SCENE REF</figcaption></figure>
+          <figure><img src={asset(showreel[1].poster)} alt=""/><figcaption>CHARACTER REF</figcaption></figure>
+          <figure><img src={asset(showreel[0].poster)} alt=""/><figcaption>MOTION REF</figcaption></figure>
+        </div>
+        <img className={styles.heroStationModel} src={asset('siltok-ai-station-cutout.png')} alt=""/>
+        <div className={styles.heroSceneBadge}><span>SCENE MODEL</span><b>场景建模 · 摄像机 · 参考图生成</b><i><em/>本地创作核心</i></div>
+      </div>
       <div className={styles.heroCopy}>
         <p className={styles.kicker}><i/> DESKTOP AI STATION · LOCAL CREATIVE SYSTEM</p>
         <h1>Siltok<br/><em>AI Station.</em></h1>
@@ -146,6 +157,134 @@ export default function App() {
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
+}
+
+function HeroFluidField() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const host = canvas?.closest('section');
+    if (!canvas || !host) return undefined;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let animationFrame = 0;
+    const pointer = { x: 0, y: 0, active: false };
+    const palette = ['94,169,255', '223,242,255', '56,132,255', '91,224,255', '151,198,255'];
+    const streams = Array.from({ length: 9 }, (_, index) => ({
+      x: 0, y: 0, vx: 0, vy: 0, phase: index * .77, width: .7 + (index % 4) * .55, history: [],
+    }));
+
+    const resize = () => {
+      const rect = host.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      pointer.x = width * .72;
+      pointer.y = height * .42;
+      streams.forEach((stream, index) => {
+        stream.x = width * (.58 + index * .035);
+        stream.y = height * (.28 + (index % 4) * .11);
+        stream.history = Array.from({ length: 34 }, () => ({ x: stream.x, y: stream.y }));
+      });
+      ctx.clearRect(0, 0, width, height);
+    };
+
+    const onPointerMove = (event) => {
+      const rect = host.getBoundingClientRect();
+      pointer.x = event.clientX - rect.left;
+      pointer.y = event.clientY - rect.top;
+      pointer.active = true;
+      host.style.setProperty('--pointer-x', `${(pointer.x / Math.max(width, 1) - .5) * 2}`);
+      host.style.setProperty('--pointer-y', `${(pointer.y / Math.max(height, 1) - .5) * 2}`);
+    };
+    const onPointerLeave = () => { pointer.active = false; };
+    const onScroll = () => {
+      const rect = host.getBoundingClientRect();
+      const progress = Math.max(-1, Math.min(1.25, -rect.top / Math.max(rect.height, 1)));
+      host.style.setProperty('--hero-scroll', `${progress}`);
+    };
+
+    const draw = () => {
+      frame += 1;
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = 'rgba(0, 0, 0, .105)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.globalCompositeOperation = 'lighter';
+      const idleX = width * (.7 + Math.sin(frame * .003) * .12);
+      const idleY = height * (.46 + Math.cos(frame * .0022) * .2);
+
+      streams.forEach((stream, index) => {
+        const targetX = pointer.active ? pointer.x : idleX;
+        const targetY = pointer.active ? pointer.y : idleY;
+        const dx = targetX - stream.x;
+        const dy = targetY - stream.y;
+        const distance = Math.max(90, Math.hypot(dx, dy));
+        const flow = Math.sin(stream.y * .008 + frame * .012 + stream.phase) + Math.cos(stream.x * .005 - frame * .009);
+        const orbit = stream.phase + frame * (.006 + index * .00018);
+        stream.vx += dx / distance * .16 + Math.cos(orbit) * .11 + Math.cos(flow) * .14;
+        stream.vy += dy / distance * .16 + Math.sin(orbit) * .11 + Math.sin(flow) * .14;
+        stream.vx *= .968;
+        stream.vy *= .968;
+        stream.x += stream.vx;
+        stream.y += stream.vy;
+        if (stream.x < -80 || stream.x > width + 80 || stream.y < -80 || stream.y > height + 80) {
+          stream.x = width * .72;
+          stream.y = height * .42;
+          stream.history.length = 0;
+        }
+        stream.history.push({ x: stream.x, y: stream.y });
+        if (stream.history.length > 48) stream.history.shift();
+
+        const color = palette[index % palette.length];
+        ctx.beginPath();
+        stream.history.forEach((point, pointIndex) => {
+          if (pointIndex === 0) ctx.moveTo(point.x, point.y);
+          else {
+            const previous = stream.history[pointIndex - 1];
+            ctx.quadraticCurveTo(previous.x, previous.y, (previous.x + point.x) / 2, (previous.y + point.y) / 2);
+          }
+        });
+        ctx.strokeStyle = `rgba(${color}, ${.035 + (index % 3) * .012})`;
+        ctx.lineWidth = 13 + stream.width * 3;
+        ctx.shadowColor = `rgba(${color}, .58)`;
+        ctx.shadowBlur = 34 + index * 2;
+        ctx.stroke();
+        ctx.strokeStyle = `rgba(${color}, ${.2 + (index % 3) * .07})`;
+        ctx.lineWidth = stream.width;
+        ctx.shadowColor = `rgba(${color}, .82)`;
+        ctx.shadowBlur = 19 + index * 2;
+        ctx.stroke();
+      });
+      ctx.shadowBlur = 0;
+      animationFrame = requestAnimationFrame(draw);
+    };
+
+    resize();
+    onScroll();
+    window.addEventListener('resize', resize);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    host.addEventListener('pointermove', onPointerMove, { passive: true });
+    host.addEventListener('pointerleave', onPointerLeave);
+    if (!reduceMotion) draw();
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', onScroll);
+      host.removeEventListener('pointermove', onPointerMove);
+      host.removeEventListener('pointerleave', onPointerLeave);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className={styles.heroFluidField} aria-hidden="true"/>;
 }
 
 function SectionHead({n,label,title,copy}) {
