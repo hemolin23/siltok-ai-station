@@ -336,7 +336,7 @@ function CanvasExperience() {
         <aside>{tools.map(([name,icon])=><button key={name} onClick={()=>setMode(name)} className={mode===name?styles.canvasToolOn:''}>{icon}<small>{name}</small></button>)}</aside>
         <div className={styles.canvasStage}>
           <div className={styles.canvasStageHead}><b>{mode}预览</b><span>画布 80% · 版本 12</span></div>
-          {mode==='视频'&&<MotionClip clip={showreel[0]}/>}
+          {mode==='视频'&&<MotionClip clip={showreel[2]}/>}
           {mode==='图片'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><img key={item.poster} src={asset(item.poster)} alt={`${item.title}样片海报`}/>)}</div>}
           {mode==='文字'&&<div className={styles.canvasTextBoard}><span>SELECTED OUTPUT · 镜头任务</span><h4>让角色、环境与镜头运动在同一段影像中自然发生。</h4><span>创作方向</span><h4>动画叙事、写实人物、机械材质与奇幻大场景，分别调用更合适的模型与参考方式。</h4></div>}
           {mode==='作品'&&<div className={styles.canvasImageBoard}>{showreel.map(item=><figure key={item.poster}><img src={asset(item.poster)} alt={`${item.title}样片海报`}/><b>{item.title}</b></figure>)}</div>}
