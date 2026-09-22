@@ -374,3 +374,10 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 .canvasFeatureRail>span,.canvasFeatureRail>a{border-color:#c0d5ee;background:rgba(255,255,255,.72);color:#587494}.canvasFeatureRail>a{border-color:#6e9fe4;color:#1768df}
 .canvasImageBoard figure b{background:rgba(20,86,177,.72);color:#fff}.canvasTextBoard{background:radial-gradient(circle at 80% 20%,rgba(65,126,243,.17),transparent 35%),#f7fbff}.canvasTextBoard span{color:#1768df}.canvasTextBoard h4{color:#1a3557}
 .demoNotice{margin:16px 0 0;color:#8192a8;font-size:9px;line-height:1.6;letter-spacing:.02em;text-align:right}
+
+/* Accessible playback: keep hover previews, but make touch/click playback explicit. */
+.festivalReel .reelMedia>.reelPlay{left:50%;right:auto;top:50%;display:flex;transform:translate(-50%,-50%);opacity:1;cursor:pointer}
+.festivalReel .reelMedia[data-playing="true"]>.reelPlay{opacity:0;pointer-events:none}
+.festivalReel .reelMedia>.reelFullscreen{left:auto;right:10px;top:10px;display:flex;padding:6px 9px;transform:none;opacity:0;cursor:pointer}
+.festivalReel article:hover .reelFullscreen,.festivalReel .reelMedia:focus-within>.reelFullscreen{opacity:1;transform:none}
+@media(max-width:640px){.festivalReel .reelMedia>.reelPlay{display:flex}.festivalReel .reelMedia>.reelFullscreen{display:flex;opacity:1}.festivalReel .reelMedia>i{top:9px;left:9px}}

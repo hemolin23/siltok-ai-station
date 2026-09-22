@@ -508,14 +508,37 @@ function VisualStories() {
 
 function Showreel() {
   const preview = (event, play) => {
-    if (window.matchMedia('(hover:hover)').matches) play ? event.currentTarget.play().catch(()=>{}) : event.currentTarget.pause();
+    if (!window.matchMedia('(hover:hover)').matches) return;
+    if (play) event.currentTarget.play().catch(()=>{});
+    else if (event.currentTarget.parentElement.dataset.pinned !== 'true') event.currentTarget.pause();
+  };
+  const togglePlayback = (event) => {
+    const video = event.currentTarget.tagName === 'VIDEO'
+      ? event.currentTarget
+      : event.currentTarget.parentElement.querySelector('video');
+    const frame = video.parentElement;
+    if (video.paused) {
+      frame.dataset.pinned = 'true';
+      video.play().catch(()=>{});
+    } else if (frame.dataset.pinned === 'true') {
+      frame.dataset.pinned = 'false';
+      video.pause();
+    } else {
+      frame.dataset.pinned = 'true';
+    }
   };
   const expand = (event) => {
-    if (event.currentTarget.requestFullscreen) event.currentTarget.requestFullscreen().catch(()=>{});
+    const video = event.currentTarget.tagName === 'VIDEO'
+      ? event.currentTarget
+      : event.currentTarget.parentElement.querySelector('video');
+    video.parentElement.dataset.pinned = 'true';
+    if (video.paused) video.play().catch(()=>{});
+    if (video.requestFullscreen) video.requestFullscreen().catch(()=>{});
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
   };
   return <section className={styles.showreel} id="showreel">
     <div className={styles.compactReelHead}><span>SELECTED OUTPUTS</span><h2>生成样片</h2></div>
-    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={expand}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button onClick={e=>{e.stopPropagation();expand({currentTarget:e.currentTarget.parentElement.querySelector('video')})}}><Play/> 全屏</button></div></article>)}</div>
+    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" aria-label={`${item.title}生成样片`} onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={togglePlayback} onPlay={e=>e.currentTarget.parentElement.dataset.playing='true'} onPause={e=>e.currentTarget.parentElement.dataset.playing='false'}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button className={styles.reelPlay} aria-label={`播放${item.title}`} onClick={togglePlayback}><Play/> 播放</button><button className={styles.reelFullscreen} aria-label={`全屏播放${item.title}`} onClick={expand}>全屏</button></div></article>)}</div>
   </section>;
 }
 
