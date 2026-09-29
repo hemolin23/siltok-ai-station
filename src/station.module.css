@@ -381,3 +381,9 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 .festivalReel .reelMedia>.reelFullscreen{left:auto;right:10px;top:10px;display:flex;padding:6px 9px;transform:none;opacity:0;cursor:pointer}
 .festivalReel article:hover .reelFullscreen,.festivalReel .reelMedia:focus-within>.reelFullscreen{opacity:1;transform:none}
 @media(max-width:640px){.festivalReel .reelMedia>.reelPlay{display:flex}.festivalReel .reelMedia>.reelFullscreen{display:flex;opacity:1}.festivalReel .reelMedia>i{top:9px;left:9px}}
+
+/* Three equal creator contacts, followed by the two participation paths. */
+.applyCards{grid-template-columns:repeat(6,minmax(0,1fr))}
+.applyCards>.qrMini{grid-column:span 2}
+.applyCards>.applyCard{grid-column:span 3}
+@media(max-width:640px){.applyCards{grid-template-columns:1fr;max-width:360px}.applyCards>.qrMini,.applyCards>.applyCard{grid-column:auto}.applyCards>.qrMini{max-width:240px}}
