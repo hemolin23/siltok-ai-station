@@ -377,10 +377,12 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 
 /* Accessible playback: keep hover previews, but make touch/click playback explicit. */
 .festivalReel .reelMedia>.reelPlay{left:50%;right:auto;top:50%;display:flex;transform:translate(-50%,-50%);opacity:1;cursor:pointer}
+.festivalReel{grid-template-columns:repeat(5,minmax(0,1fr))}
 .festivalReel .reelMedia[data-playing="true"]>.reelPlay{opacity:0;pointer-events:none}
 .festivalReel .reelMedia>.reelFullscreen{left:auto;right:10px;top:10px;display:flex;padding:6px 9px;transform:none;opacity:0;cursor:pointer}
 .festivalReel article:hover .reelFullscreen,.festivalReel .reelMedia:focus-within>.reelFullscreen{opacity:1;transform:none}
-@media(max-width:640px){.festivalReel .reelMedia>.reelPlay{display:flex}.festivalReel .reelMedia>.reelFullscreen{display:flex;opacity:1}.festivalReel .reelMedia>i{top:9px;left:9px}}
+@media(max-width:640px){.festivalReel{grid-template-columns:repeat(2,minmax(0,1fr))}.festivalReel .reelMedia>.reelPlay{display:flex}.festivalReel .reelMedia>.reelFullscreen{display:flex;opacity:1}.festivalReel .reelMedia>i{top:9px;left:9px}}
+@media(min-width:641px) and (max-width:1000px){.festivalReel{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Three equal creator contacts, followed by the two participation paths. */
 .applyCards{grid-template-columns:repeat(6,minmax(0,1fr))}
