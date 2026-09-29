@@ -537,9 +537,13 @@ function Showreel() {
     if (video.requestFullscreen) video.requestFullscreen().catch(()=>{});
     else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
   };
+  const reelCard = (item,index,featured=false) => <article key={item.src} className={featured?styles.featureReelCard:undefined}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" aria-label={`${item.title}生成样片`} onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={togglePlayback} onPlay={e=>e.currentTarget.parentElement.dataset.playing='true'} onPause={e=>e.currentTarget.parentElement.dataset.playing='false'}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button className={styles.reelPlay} aria-label={`播放${item.title}`} onClick={togglePlayback}><Play/> 播放</button><button className={styles.reelFullscreen} aria-label={`全屏播放${item.title}`} onClick={expand}>全屏</button></div>{featured&&<aside className={styles.featureReelMeta}><span>FULL-LENGTH TEST FILM</span><h3>《非妖哉》<br/>哑女小荷</h3><p>逐镜呈现原片与 H3 生成结果，保留完整镜头标注与对照。</p><dl><div><dt>MODEL</dt><dd>MiniMax H3</dd></div><div><dt>OUTPUT</dt><dd>768P</dd></div><div><dt>DEVICE</dt><dd>RTX 5090</dd></div><div><dt>RUNTIME</dt><dd>12:06</dd></div></dl></aside>}</article>;
+  const feature = showreel[4];
   return <section className={styles.showreel} id="showreel">
     <div className={styles.compactReelHead}><span>SELECTED OUTPUTS</span><h2>生成样片</h2></div>
-    <div className={styles.festivalReel}>{showreel.map((item,index)=><article key={item.src}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" aria-label={`${item.title}生成样片`} onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={togglePlayback} onPlay={e=>e.currentTarget.parentElement.dataset.playing='true'} onPause={e=>e.currentTarget.parentElement.dataset.playing='false'}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button className={styles.reelPlay} aria-label={`播放${item.title}`} onClick={togglePlayback}><Play/> 播放</button><button className={styles.reelFullscreen} aria-label={`全屏播放${item.title}`} onClick={expand}>全屏</button></div></article>)}</div>
+    <div className={styles.festivalReel}>{showreel.slice(0,4).map((item,index)=>reelCard(item,index))}</div>
+    <div className={styles.overnightBridge}><span>OVERNIGHT AUTONOMY</span><h3>把夜晚，交给本地工作站。</h3><p>这个测试中，夜间任务队列自动接管生成；第二天回到工作台，一支 12 分钟完整样片已经完成。</p></div>
+    <div className={styles.featureReel}>{reelCard(feature,4,true)}</div>
   </section>;
 }
 
