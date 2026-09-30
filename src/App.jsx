@@ -82,7 +82,7 @@ const showreel = [
   { src: 'cases/ancient-market.mp4', poster: 'cases/ancient-market-poster.jpg', title: '市井一瞬', copy: '写实人物与场景转换', meta: ['写实人物', '连续场景', '电影光影'], detail: '观察人物身份、服饰与面部特征在室内外场景转换中的一致性。' },
   { src: 'cases/mechanical-pharaoh.mp4', poster: 'cases/mechanical-pharaoh-poster.jpg', title: '机械法老', copy: '材质细节与主体环绕', meta: ['机械材质', '主体环绕', '黑色背景'], detail: '观察高反差画面中的金属、石材和机械结构，以及环绕视角下的细节保持。' },
   { src: 'cases/dragon-valley.mp4', poster: 'cases/dragon-valley-poster.jpg', title: '龙临峡谷', copy: '大场景、群像与氛围光', meta: ['奇幻场景', '群像调度', '氛围光'], detail: '观察复杂环境、远景层次和多个运动主体在连续镜头中的空间关系。' },
-  { src: 'https://github.com/hemolin23/siltok-ai-station/releases/download/site-media-2026-09-29/feiyaozai-xiaohe-h3-5090.mp4', poster: 'cases/feiyaozai-xiaohe-poster.jpg', title: '哑女小荷', copy: '《非妖哉》H3 镜头复刻', meta: ['完整镜头', 'H3 复刻', 'RTX 5090'], detail: '以原片与生成结果逐镜对照，观察人物、动作、构图与场景在连续镜头中的复现效果。' },
+  { src: 'cases/feiyaozai-xiaohe-web.mp4', poster: 'cases/feiyaozai-xiaohe-poster.jpg', title: '哑女小荷', copy: '《非妖哉》H3 镜头复刻', meta: ['完整镜头', 'H3 复刻', 'RTX 5090'], detail: '以原片与生成结果逐镜对照，观察人物、动作、构图与场景在连续镜头中的复现效果。' },
 ];
 
 const workbenchClips = [
