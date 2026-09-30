@@ -5,7 +5,39 @@ const durations=[12,14,20,12,15,17,17,15,14,18,18,23,19,15,17,20,17,12];
 function resize(){document.documentElement.style.setProperty('--studio-scale',Math.min(innerWidth/1600,innerHeight/900));}addEventListener('resize',resize);resize();
 function media(){slides.forEach((s,i)=>s.querySelectorAll('video').forEach(v=>{if(i===index&&!paused&&motion){v.play().catch(()=>{});}else v.pause();}));}
 function schedule(){clearTimeout(timer);if(auto&&!paused&&!document.hidden&&overview.hidden)timer=setTimeout(()=>{if(index===slides.length-1){auto=false;updateButtons();}else go(index+1);},durations[index]*1000);}
-function go(next,replay=false){next=Math.max(0,Math.min(slides.length-1,next));const old=slides[index];old.classList.remove('active');old.classList.add('exiting');setTimeout(()=>old.classList.remove('exiting'),550);index=next;const current=slides[index];current.classList.remove('active');void current.offsetWidth;current.classList.add('active');slides.forEach((s,i)=>{s.inert=i!==index;s.setAttribute('aria-hidden',String(i!==index));});document.getElementById('progress').style.width=((index+1)/slides.length*100)+'%';document.title=current.dataset.title+' · Siltok';history.replaceState(null,'','#'+(index+1));media();schedule();document.querySelectorAll('.overview-grid button').forEach((b,i)=>b.classList.toggle('current',i===index));document.getElementById('previous').disabled=index===0;document.getElementById('next').disabled=index===slides.length-1;}
+const exitTimers=new Map(), entranceTimers=new Map();
+let initialized=false;
+function go(next,replay=false){
+ next=Math.max(0,Math.min(slides.length-1,next));
+ if(initialized&&next===index&&!replay)return;
+ const old=slides[index], current=slides[next];
+ if(initialized&&old!==current){
+  old.classList.remove('active','entering');
+  old.classList.add('exiting');
+  clearTimeout(exitTimers.get(old));
+  exitTimers.set(old,setTimeout(()=>{old.classList.remove('exiting');exitTimers.delete(old);},550));
+ }
+ clearTimeout(exitTimers.get(current));exitTimers.delete(current);
+ clearTimeout(entranceTimers.get(current));
+ current.classList.remove('exiting','entering');
+ index=next;
+ current.classList.add('active');
+ // Replay only when explicitly requested, not on same-page navigation.
+ if(replay)void current.offsetWidth;
+ if(motion){
+  current.classList.add('entering');
+  const delay=Math.max(0,...[...current.querySelectorAll('.reveal')].map(el=>parseFloat(el.style.getPropertyValue('--delay'))||0));
+  entranceTimers.set(current,setTimeout(()=>{current.classList.remove('entering');entranceTimers.delete(current);},(delay+1.8)*1000));
+ }
+ initialized=true;
+ slides.forEach((s,i)=>{s.inert=i!==index;s.setAttribute('aria-hidden',String(i!==index));});
+ document.getElementById('progress').style.width=((index+1)/slides.length*100)+'%';
+ document.title=current.dataset.title+' · Siltok';history.replaceState(null,'','#'+(index+1));
+ media();schedule();
+ document.querySelectorAll('.overview-grid button').forEach((b,i)=>b.classList.toggle('current',i===index));
+ document.getElementById('previous').disabled=index===0;
+ document.getElementById('next').disabled=index===slides.length-1;
+}
 function updateButtons(){const b=document.getElementById('autoplay');b.textContent=auto?'停止自动播放':'自动播放';b.setAttribute('aria-pressed',auto);document.getElementById('motion').textContent=motion?'动效：开':'动效：关';document.getElementById('motion').setAttribute('aria-pressed',motion);document.body.classList.toggle('motion-off',!motion);}
 function showControls(){document.body.classList.remove('controls-hidden');clearTimeout(hideTimer);if(overview.hidden)hideTimer=setTimeout(()=>{if(!controls.matches(':hover')&&!controls.contains(document.activeElement))document.body.classList.add('controls-hidden');},2600);}
 function toggleOverview(show){overview.hidden=!show;if(show){clearTimeout(timer);slides[index].querySelectorAll('video').forEach(v=>v.pause());document.getElementById('close-overview').focus();}else{media();schedule();document.getElementById('browse').focus();}showControls();}
