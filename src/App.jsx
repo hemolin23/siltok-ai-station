@@ -127,6 +127,7 @@ export default function App() {
       <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
+    <FlipbookSection />
     <section className={styles.hero} id="top">
       <div className={styles.heroBackdrop} aria-hidden="true"><img src={asset('siltok-creative-engine-hero.png')} alt=""/></div>
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
@@ -153,6 +154,28 @@ export default function App() {
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
+}
+
+
+// 翻页画册开场：点击翻开，嵌入在动态画布之前
+function FlipbookSection() {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) setShown(true);
+    }, { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return <section className={styles.flipbookIntro} id="flipbook" ref={ref}>
+    <div className={styles.flipbookFrame}>
+      {shown && <iframe src={`${import.meta.env.BASE_URL}flipbook.html`} title="Siltok 产品画册" loading="lazy" allow="autoplay; fullscreen" />}
+    </div>
+    <a className={styles.flipbookScroll} href="#top"><span>向下滚动 · 进入创作工作站</span></a>
+  </section>;
 }
 
 function HeroFluidField() {
@@ -337,7 +360,7 @@ function CanvasExperience() {
       <div className={styles.realChatStage}>
         <div className={styles.realResultMeta}>minimax-h3-fl2va · 16:9 · 768P · 5 秒</div>
         <div className={styles.realResult}>
-          {mode==='视频生成'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} muted autoPlay loop playsInline/>}
+          {mode==='视频生成'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} muted autoPlay loop playsInline preload='metadata'/>}
           {mode==='图片生成'&&<img src={asset(showreel[3].poster)} alt="龙临峡谷生成结果"/>}
           {mode==='文字对话'&&<div className={styles.realTextReply}><span>GEMMA-4</span><h3>把镜头拆成可执行的生成描述</h3><p>主体：机械法老在暗色空间中缓慢苏醒。动作：胸腔机械结构逐级点亮。镜头：由半身近景向右侧环绕，保持面部与金属纹理稳定。</p></div>}
         </div>
@@ -537,7 +560,7 @@ function Showreel() {
     if (video.requestFullscreen) video.requestFullscreen().catch(()=>{});
     else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
   };
-  const reelCard = (item,index,featured=false) => <article key={item.src} className={featured?styles.featureReelCard:undefined}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline preload="metadata" aria-label={`${item.title}生成样片`} onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={togglePlayback} onPlay={e=>e.currentTarget.parentElement.dataset.playing='true'} onPause={e=>e.currentTarget.parentElement.dataset.playing='false'}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button className={styles.reelPlay} aria-label={`播放${item.title}`} onClick={togglePlayback}><Play/> 播放</button><button className={styles.reelFullscreen} aria-label={`全屏播放${item.title}`} onClick={expand}>全屏</button></div>{featured&&<aside className={styles.featureReelMeta}><span>FULL-LENGTH TEST FILM</span><h3>《非妖哉》<br/>哑女小荷</h3><p>逐镜呈现原片与 H3 生成结果，保留完整镜头标注与对照。</p><dl><div><dt>MODEL</dt><dd>MiniMax H3</dd></div><div><dt>OUTPUT</dt><dd>768P</dd></div><div><dt>DEVICE</dt><dd>RTX 5090</dd></div><div><dt>RUNTIME</dt><dd>12:06</dd></div></dl></aside>}</article>;
+  const reelCard = (item,index,featured=false) => <article key={item.src} className={featured?styles.featureReelCard:undefined}><div className={styles.reelMedia}><video src={asset(item.src)} poster={asset(item.poster)} muted loop playsInline autoPlay preload="metadata" aria-label={`${item.title}生成样片`} onMouseEnter={e=>preview(e,true)} onMouseLeave={e=>preview(e,false)} onClick={togglePlayback} onPlay={e=>e.currentTarget.parentElement.dataset.playing='true'} onPause={e=>e.currentTarget.parentElement.dataset.playing='false'}/><i>{String(index+1).padStart(2,'0')}</i><b>{item.title}</b><button className={styles.reelPlay} aria-label={`播放${item.title}`} onClick={togglePlayback}><Play/> 播放</button><button className={styles.reelFullscreen} aria-label={`全屏播放${item.title}`} onClick={expand}>全屏</button></div>{featured&&<aside className={styles.featureReelMeta}><span>FULL-LENGTH TEST FILM</span><h3>《非妖哉》<br/>哑女小荷</h3><p>逐镜呈现原片与 H3 生成结果，保留完整镜头标注与对照。</p><dl><div><dt>MODEL</dt><dd>MiniMax H3</dd></div><div><dt>OUTPUT</dt><dd>768P</dd></div><div><dt>DEVICE</dt><dd>RTX 5090</dd></div><div><dt>RUNTIME</dt><dd>12:06</dd></div></dl></aside>}</article>;
   const feature = showreel[4];
   return <section className={styles.showreel} id="showreel">
     <div className={styles.compactReelHead}><span>SELECTED OUTPUTS</span><h2>生成样片</h2></div>
