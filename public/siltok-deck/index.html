@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07101d" />
+  <title>Siltok Deck Motion</title>
+  <style>
+    :root{color-scheme:dark;--deck-blue:#5c9cff;--deck-ink:#07101d}
+    *{box-sizing:border-box}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--deck-ink)}
+    body{font-family:"Avenir Next","PingFang SC","Microsoft YaHei",sans-serif}
+    main{position:relative;width:100%;height:100%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#122a4d 0,transparent 42%),#07101d}
+    video{display:block;width:100%;height:100%;object-fit:cover;background:#07101d;cursor:pointer}
+    .controls{position:absolute;z-index:2;right:16px;bottom:16px;display:flex;gap:8px;opacity:0;transform:translateY(8px);transition:.25s}
+    main:hover .controls,main:focus-within .controls,.controls[data-visible="true"]{opacity:1;transform:none}
+    button{display:flex;align-items:center;justify-content:center;min-height:34px;padding:0 13px;border:1px solid rgba(255,255,255,.42);border-radius:999px;background:rgba(5,17,35,.58);color:#fff;font:800 9px ui-monospace,SFMono-Regular,monospace;letter-spacing:.08em;backdrop-filter:blur(14px);cursor:pointer}
+    .status{position:absolute;z-index:2;left:16px;bottom:18px;display:flex;align-items:center;gap:8px;color:#bdd5f7;font:800 8px ui-monospace,SFMono-Regular,monospace;letter-spacing:.12em;pointer-events:none}
+    .status i{width:6px;height:6px;border-radius:50%;background:#65edae;box-shadow:0 0 10px #65edae}
+    @media(hover:none){.controls{opacity:1;transform:none}.status{bottom:62px}}
+    @media(prefers-reduced-motion:reduce){.controls{transition:none}}
+  </style>
+</head>
+<body>
+  <main>
+    <video id="deck" src="siltok-first10-coverflow.mp4" poster="poster.jpg" muted autoplay loop playsinline preload="metadata" aria-label="Siltok 前 10 页 3D 卡片流"></video>
+    <div class="status"><i></i><span>10 PAGES · 3D COVER FLOW</span></div>
+    <div class="controls" id="controls">
+      <button type="button" id="toggle">暂停</button>
+      <button type="button" id="fullscreen">全屏</button>
+    </div>
+  </main>
+  <script>
+    const video = document.querySelector('#deck');
+    const toggle = document.querySelector('#toggle');
+    const fullscreen = document.querySelector('#fullscreen');
+    const controls = document.querySelector('#controls');
+    const update = () => { toggle.textContent = video.paused ? '播放' : '暂停'; };
+    const togglePlayback = () => video.paused ? video.play().catch(() => { controls.dataset.visible = 'true'; }) : video.pause();
+    video.addEventListener('click', togglePlayback);
+    video.addEventListener('play', update);
+    video.addEventListener('pause', update);
+    toggle.addEventListener('click', togglePlayback);
+    fullscreen.addEventListener('click', () => {
+      if (video.requestFullscreen) video.requestFullscreen().catch(() => {});
+      else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+    });
+    video.play().catch(() => { controls.dataset.visible = 'true'; update(); });
+  </script>
+</body>
+</html>
