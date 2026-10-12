@@ -35,21 +35,96 @@ body{
   background-image:var(--noise);
   background-size:260px 260px; opacity:.13; mix-blend-mode:overlay;
 }
-/* 桌面透视质感 — 模拟桌面平面与远处环境 */
-.desk-surface{
+/* ====== 3D 桌面环境建模 ====== */
+.desk-scene{
   position:fixed;inset:0;z-index:0;pointer-events:none;
+  perspective:1600px;perspective-origin:50% 28%;
+  background:radial-gradient(120% 80% at 50% 0%, #1a1a20 0%, #0d0d11 40%, #070709 100%);
+  overflow:hidden;
+}
+.desk-plane{
+  position:absolute;bottom:-20%;left:50%;width:240%;height:160%;
+  transform:translateX(-50%) rotateX(58deg);transform-origin:50% 100%;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.018) 0%, transparent 12%, transparent 88%, rgba(0,0,0,.12) 100%),
-    radial-gradient(90% 50% at 50% 100%, rgba(40,42,48,.35) 0%, transparent 70%);
+    linear-gradient(180deg, rgba(255,255,255,.05) 0%, transparent 5%, transparent 85%, rgba(0,0,0,.35) 100%),
+    radial-gradient(55% 35% at 50% 45%, rgba(32,32,40,.8) 0%, rgba(18,18,24,.95) 50%, rgba(10,10,14,1) 100%);
+  box-shadow:inset 0 0 280px rgba(0,0,0,.7);
 }
-.desk-vignette{
-  position:fixed;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(78% 68% at 50% 48%, rgba(0,0,0,0) 36%, rgba(0,0,0,.5) 76%, rgba(0,0,0,.82) 100%);
+.desk-plane::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(120,150,200,.04) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(120,150,200,.025) 0 1px, transparent 1px 5px);
+  opacity:.7;
 }
-.desk-grain{
-  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.028;
-  background:repeating-linear-gradient(97deg, rgba(255,255,255,.4) 0 1px, rgba(255,255,255,0) 1px 7px);
+.desk-plane::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(48% 32% at 50% 40%, rgba(0,0,0,.5) 0%, transparent 65%);
 }
+
+/* 透视网格线 — 增强3D纵深 */
+.desk-grid{
+  position:absolute;bottom:-20%;left:50%;width:240%;height:160%;
+  transform:translateX(-50%) rotateX(58deg);transform-origin:50% 100%;
+  pointer-events:none;opacity:.35;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 39px, rgba(90,130,200,.6) 39px 40px),
+    repeating-linear-gradient(90deg, transparent 0 79px, rgba(90,130,200,.35) 79px 80px);
+  -webkit-mask:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 15%, rgba(0,0,0,.9) 50%, rgba(0,0,0,.5) 100%);
+  mask:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 15%, rgba(0,0,0,.9) 50%, rgba(0,0,0,.5) 100%);
+}
+/* 桌面物品 — 3D 定位的桌面物件 */
+.desk-items{position:absolute;bottom:0;left:50%;width:100%;height:100%;transform:translateX(-50%);pointer-events:none;z-index:1}
+.desk-item{position:absolute;display:flex;align-items:flex-end;justify-content:center}
+/* 盆栽 */
+.item-plant{left:6%;bottom:38%;width:70px;height:90px}
+.item-plant .pot{width:44px;height:38px;background:linear-gradient(180deg,#4a3528,#2a1d15);border-radius:4px 4px 8px 8px;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+.item-plant .leaves{width:60px;height:55px;position:absolute;bottom:30px;left:5px}
+.item-plant .leaves i{position:absolute;bottom:0;width:18px;height:40px;background:linear-gradient(180deg,#3a6b35,#1e3a1a);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform-origin:bottom center}
+.item-plant .leaves i:nth-child(1){left:8px;transform:rotate(-22deg) scaleY(.9)}
+.item-plant .leaves i:nth-child(2){left:22px;transform:rotate(0deg) scaleY(1.1)}
+.item-plant .leaves i:nth-child(3){left:36px;transform:rotate(20deg) scaleY(.85)}
+.item-plant .shadow{position:absolute;bottom:-6px;left:50%;width:64px;height:12px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.55),transparent);border-radius:50%
+/* 咖啡杯 */
+.item-coffee{right:7%;bottom:35%;width:64px;height:64px}
+.item-coffee .cup{width:56px;height:50px;background:linear-gradient(180deg,#e8e6e2,#c4c0ba);border-radius:6px 6px 28px 28px;box-shadow:0 5px 14px rgba(0,0,0,.45),inset 0 -4px 8px rgba(0,0,0,.15)}
+.item-coffee .latte{position:absolute;top:4px;left:50%;width:48px;height:14px;transform:translateX(-50%);background:radial-gradient(circle at 50% 50%,#c9a87c 30%,#a87f54 60%,#8b6239);border-radius:50%;box-shadow:inset 0 1px 3px rgba(0,0,0,.2)}
+.item-coffee .handle{position:absolute;right:-10px;top:14px;width:18px;height:24px;border:4px solid #d8d4ce;border-radius:50%;background:transparent}
+.item-coffee .steam{position:absolute;top:-18px;left:50%;width:4px;height:24px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(255,255,255,.08));border-radius:50%;animation:steam 3s ease-in-out infinite}
+.item-coffee .steam.s2{left:60%;animation-delay:1s}
+@keyframes steam{0%,100%{opacity:0;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(-8px)}}
+.item-coffee .shadow{position:absolute;bottom:-4px;left:50%;width:72px;height:10px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.5),transparent);border-radius:50%}
+/* 眼镜 */
+.item-glasses{left:11%;bottom:30%;width:70px;height:26px}
+.item-glasses .frame{position:absolute;top:0;width:30px;height:26px;border:2.5px solid #2a2a2e;border-radius:50%;background:rgba(100,130,160,.06);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.item-glasses .frame.l{left:0}
+.item-glasses .frame.r{right:0}
+.item-glasses .bridge{position:absolute;top:6px;left:50%;width:14px;height:3px;transform:translateX(-50%);background:#2a2a2e;border-radius:2px}
+.item-glasses .shadow{position:absolute;bottom:-4px;left:50%;width:74px;height:8px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.4),transparent);border-radius:50%}
+/* 笔 */
+.item-pen{right:13%;bottom:28%;width:90px;height:14px;transform:rotate(-8deg)}
+.item-pen .body{width:100%;height:10px;background:linear-gradient(90deg,#1a1a1e 0%,#3a3a42 15%,#1a1a1e 85%,#c0392b 85%,#a93226 100%);border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.item-pen .clip{position:absolute;top:1px;right:14%;width:4px;height:14px;background:#555;border-radius:2px}
+.item-pen .tip{position:absolute;left:-6px;top:2px;width:8px;height:6px;background:#c0c0c0;border-radius:3px 0 0 3px}
+.item-pen .shadow{position:absolute;bottom:-3px;left:0;width:100%;height:6px;background:radial-gradient(50% 50%,rgba(0,0,0,.45),transparent);border-radius:50%}
+/* 黑色笔记本 */
+.item-notebook{left:4%;bottom:26%;width:120px;height:80px;transform:rotate(6deg)}
+.item-notebook .cover{width:100%;height:100%;background:linear-gradient(135deg,#1e1e22,#0d0d10);border-radius:4px;box-shadow:0 6px 16px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.04)}
+.item-notebook .label{position:absolute;top:14px;left:50%;transform:translateX(-50%);color:#555;font-size:9px;letter-spacing:2px;font-family:monospace}
+.item-notebook .band{position:absolute;top:0;left:10px;width:3px;height:100%;background:rgba(255,255,255,.06)}
+.item-notebook .shadow{position:absolute;bottom:-5px;left:50%;width:90%;height:10px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.55),transparent);border-radius:50%
+
+/* 书本下方聚光 — 让书本"落在"桌面上 */
+.book-spotlight{
+  position:fixed;top:50%;left:50%;width:70%;height:50%;
+  transform:translate(-50%,-30%);
+  background:radial-gradient(50% 50% at 50% 50%,rgba(60,100,160,.05) 0%,transparent 70%);
+  pointer-events:none;z-index:0;
+}
+/* 远处氛围光 */
+.desk-glow{position:fixed;top:0;left:50%;width:60%;height:40%;transform:translateX(-50%);background:radial-gradient(50% 50% at 50% 0%,rgba(60,100,160,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+/* 暗角 */
+.desk-vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(82% 70% at 50% 46%,rgba(0,0,0,0) 30%,rgba(0,0,0,.45) 75%,rgba(0,0,0,.85) 100%)}
 /* 翻开入场态：书本合拢封面 */
 .book.closed{
   transform:rotateX(12deg) scale(.72);
@@ -407,9 +482,18 @@ h3.sub{
 </style>
 </head>
 <body>
-<div class="desk"></div>
-<div class="desk-surface"></div>
-<div class="desk-grain"></div>
+<div class="desk-scene">
+  <div class="desk-glow"></div>
+  <div class="desk-plane"></div>
+  <div class="desk-grid"></div>
+  <div class="desk-items">
+    <div class="desk-item item-plant"><div class="shadow"></div><div class="leaves"><i></i><i></i><i></i></div><div class="pot"></div></div>
+    <div class="desk-item item-glasses"><div class="shadow"></div><div class="frame l"></div><div class="bridge"></div><div class="frame r"></div></div>
+    <div class="desk-item item-notebook"><div class="shadow"></div><div class="cover"><div class="band"></div><div class="label">SIITOK</div></div></div>
+    <div class="desk-item item-pen"><div class="shadow"></div><div class="body"></div><div class="clip"></div><div class="tip"></div></div>
+    <div class="desk-item item-coffee"><div class="steam"></div><div class="steam s2"></div><div class="shadow"></div><div class="cup"></div><div class="latte"></div><div class="handle"></div></div>
+  </div>
+</div>
 <div class="desk-vignette"></div>
 
 <div class="brandbar"><i></i><span>Siltok · 硅基词元</span></div>
