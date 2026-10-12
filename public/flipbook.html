@@ -904,8 +904,15 @@ var DROOP    = 16;     // 外缘附加下垂（度）
 var LIFT     = 0.09;   // 中段拱起系数（相对半页宽）
 var SHADE_K  = 0.70;
 
-/* 官网双样片宽度仍保留真实对开书形；只有手机宽度才切为单页。 */
-function isSingle(){ return window.innerWidth < 520; }
+/* 嵌入官网时按浏览器窗口判断设备，而不是按 iframe 的窄宽度误判。
+   电脑端固定对开双页；只有手机端才切为单页。 */
+function viewportWidth(){
+  try {
+    if (window.parent && window.parent !== window) return window.parent.innerWidth;
+  } catch (e) {}
+  return window.innerWidth;
+}
+function isSingle(){ return viewportWidth() < 640; }
 
 /* ===== DOM ===== */
 var staticLeft = document.createElement('div');
