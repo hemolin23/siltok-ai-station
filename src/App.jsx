@@ -127,7 +127,6 @@ export default function App() {
       <a className={styles.navCta} href={asset('co-create.html')}>邀请共创 <ArrowRight /></a>
     </header>
 
-    <FlipbookSection />
     <section className={styles.hero} id="top">
       <div className={styles.heroBackdrop} aria-hidden="true"><img src={asset('siltok-creative-engine-hero.png')} alt=""/></div>
       <div className={styles.heroAura} aria-hidden="true"><i/><i/><i/></div>
@@ -154,28 +153,6 @@ export default function App() {
 
     <footer><a href="#top" className={styles.brand}><img src={asset('brand/siltok-blue.png')} alt="Siltok"/><span>LABS</span></a><p>北京硅基词元科技有限公司 · 本地 AI 视频创作工作站</p><div><a href={OFFICIAL_URL} target="_blank" rel="noreferrer">产品官网</a><a href={asset('co-create.html')}>邀请共创</a></div></footer>
   </main>;
-}
-
-
-// 翻页画册开场：点击翻开，嵌入在动态画布之前
-function FlipbookSection() {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return undefined;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) setShown(true);
-    }, { threshold: 0.15 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-  return <section className={styles.flipbookIntro} id="flipbook" ref={ref}>
-    <div className={styles.flipbookFrame}>
-      {shown && <iframe src={`${import.meta.env.BASE_URL}flipbook.html`} title="Siltok 产品画册" loading="lazy" allow="autoplay; fullscreen" />}
-    </div>
-    <a className={styles.flipbookScroll} href="#top"><span>向下滚动 · 进入创作工作站</span></a>
-  </section>;
 }
 
 function HeroFluidField() {
@@ -356,21 +333,9 @@ function CanvasExperience() {
   const [mode, setMode] = useState('视频生成');
   return <section className={styles.canvasSection} id="creator-canvas">
     <SectionHead n="01" label="SILTOK CREATOR" title="画布先动起来。" copy="文字、参考图、视频和作品始终处在同一个创作上下文。" />
-    <StudioShell conversations resource="内存 90%" queue="队列 1">
-      <div className={styles.realChatStage}>
-        <div className={styles.realResultMeta}>minimax-h3-fl2va · 16:9 · 768P · 5 秒</div>
-        <div className={styles.realResult}>
-          {mode==='视频生成'&&<video src={asset(showreel[2].src)} poster={asset(showreel[2].poster)} muted autoPlay loop playsInline preload='metadata'/>}
-          {mode==='图片生成'&&<img src={asset(showreel[3].poster)} alt="龙临峡谷生成结果"/>}
-          {mode==='文字对话'&&<div className={styles.realTextReply}><span>GEMMA-4</span><h3>把镜头拆成可执行的生成描述</h3><p>主体：机械法老在暗色空间中缓慢苏醒。动作：胸腔机械结构逐级点亮。镜头：由半身近景向右侧环绕，保持面部与金属纹理稳定。</p></div>}
-        </div>
-        <div className={styles.realActions}><button>重新编辑</button><button>再次生成</button><button>复制</button><button>删除</button></div>
-        <div className={styles.realComposer}>
-          <p>{mode==='文字对话'?'输入消息，与模型对话…':'描述主体、动作、场景和镜头效果。'}</p>
-          <div><button onClick={()=>setMode('文字对话')} className={mode==='文字对话'?styles.realActive:''}>文字对话</button><button onClick={()=>setMode('图片生成')} className={mode==='图片生成'?styles.realActive:''}>图片生成</button><button onClick={()=>setMode('视频生成')} className={mode==='视频生成'?styles.realActive:''}>视频生成</button><span>{mode==='视频生成'?'minimax h3':mode==='图片生成'?'SenseNova 图像模型':'Gemma-4 语言模型'}⌄</span>{mode==='视频生成'&&<><span>文字生成视频⌄</span><span>16:9 · 768P · 5秒 · 1条⌄</span></>}<i>↑</i></div>
-        </div>
-      </div>
-    </StudioShell>
+    <div className={styles.flipbookEmbed}>
+      <iframe src={`${import.meta.env.BASE_URL}flipbook.html`} title="Siltok 产品画册" loading="lazy" allow="autoplay; fullscreen" />
+    </div>
     <div className={styles.canvasFeatureRail}><span>文字对话</span><span>图片生成</span><span>视频生成</span><span>多种参考方式</span><span>参数与队列可见</span><a href={CREATOR_PROTOTYPE_URL} target="_blank" rel="noreferrer">查看功能设计 <ArrowRight/></a></div>
     <p className={styles.demoNotice}>当前演示效果非产品最终形态，仅为用户理解而做。</p>
   </section>;
