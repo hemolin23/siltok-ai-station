@@ -157,16 +157,16 @@ export default function App() {
 }
 
 
-// 翻页画册独立页 — 插在样片与动态画布之间
+// 翻页画册独立页
 function FlipbookSection() {
   return <section className={styles.flipbookPage} id="flipbook">
     <div className={styles.flipbookHead}>
-      <span>PRODUCT CATALOGUE · 产品画册</span>
+      <span>PRODUCT CATALOGUE</span>
       <h2>翻开 Siltok</h2>
-      <p>点击翻开 · 左右翻页 · 拖拽浏览</p>
+      <p>点击翻开 / 左右翻页 / 拖拽浏览</p>
     </div>
     <div className={styles.flipbookHolder}>
-      <iframe src={\`\${import.meta.env.BASE_URL}flipbook.html?auto=open\`} title="Siltok 产品画册" allow="autoplay; fullscreen" loading="eager" />
+      <iframe src={String(import.meta.env.BASE_URL) + "flipbook.html?auto=open"} title="Siltok 产品画册" allow="autoplay; fullscreen" loading="eager" />
     </div>
   </section>;
 }
