@@ -385,22 +385,23 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 @media(min-width:641px) and (max-width:1000px){.festivalReel{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Interactive company deck and product statement share one editorial spread. */
-.teamChapterTitle{margin:clamp(64px,8vw,104px) 0 28px;padding-top:28px;border-top:1px solid #c5d9f0}
+.teamChapterTitle{width:66.666%;margin:clamp(64px,8vw,104px) auto 24px;padding-top:24px;border-top:1px solid #c5d9f0}
 .teamChapterTitle span{display:block;margin-bottom:18px;color:#176be5;font:800 9px ui-monospace,SFMono-Regular,monospace;letter-spacing:.16em}
-.teamChapterTitle h2{max-width:920px;margin:0;color:#10233e;font-size:clamp(44px,6.1vw,78px);font-weight:850;line-height:.98;letter-spacing:-.06em}
-.teamFlipbook{width:100%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.16fr) minmax(300px,.84fr);overflow:hidden;border:1px solid #bfd5ef;border-radius:24px;background:#fff;box-shadow:0 16px 40px rgba(38,91,158,.1)}
+.teamChapterTitle h2{margin:0;color:#10233e;font-size:clamp(38px,4.1vw,52px);font-weight:850;line-height:.98;letter-spacing:-.06em}
+.teamFlipbook{width:66.666%;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.16fr) minmax(280px,.84fr);overflow:hidden;border:1px solid #bfd5ef;border-radius:22px;background:#fff;box-shadow:0 12px 30px rgba(38,91,158,.08)}
 .teamFlipbookMedia{min-width:0;border-right:1px solid #c9dcf1;background:#09090b}
 .teamFlipbookTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding:18px 20px;border-bottom:1px solid #c9dcf1;background:linear-gradient(135deg,#fff,#edf6ff)}
 .teamFlipbookTitle span{color:#176be5;font:800 8px ui-monospace,SFMono-Regular,monospace;letter-spacing:.14em}.teamFlipbookTitle h3{margin:0;color:#10233e;font-size:20px;line-height:1;letter-spacing:-.035em}
-.teamFlipbook iframe{display:block;width:100%;height:430px;border:0;background:#09090b}
-.teamFlipbookCopy{min-width:0;display:flex;flex-direction:column;padding:clamp(32px,4vw,54px);background:radial-gradient(circle at 100% 0,rgba(75,157,255,.2),transparent 40%),linear-gradient(145deg,#fff 15%,#edf6ff 100%);color:#10233e}
+.teamFlipbook iframe{display:block;width:100%;height:330px;border:0;background:#09090b}
+.teamFlipbookCopy{min-width:0;display:flex;flex-direction:column;padding:clamp(26px,2.5vw,38px);background:radial-gradient(circle at 100% 0,rgba(75,157,255,.2),transparent 40%),linear-gradient(145deg,#fff 15%,#edf6ff 100%);color:#10233e}
 .teamFlipbookCopy>span{color:#176be5;font:800 9px ui-monospace,SFMono-Regular,monospace;letter-spacing:.16em}
-.teamFlipbookCopy h3{margin:clamp(38px,6vw,72px) 0 7px;color:#6e87a7;font-size:13px;font-weight:700;letter-spacing:.08em}
-.teamFlipbookCopy h2{margin:0;color:#10233e;font-size:clamp(38px,4.2vw,54px);font-weight:850;line-height:.98;letter-spacing:-.06em}
+.teamFlipbookCopy h3{margin:clamp(28px,3vw,42px) 0 7px;color:#6e87a7;font-size:12px;font-weight:700;letter-spacing:.08em}
+.teamFlipbookCopy h2{margin:0;color:#10233e;font-size:clamp(34px,3vw,44px);font-weight:850;line-height:.98;letter-spacing:-.06em}
 .teamFlipbookCopy p{max-width:350px;margin:28px 0 0;color:#58718e;font-size:14px;line-height:1.9}
 .teamFlipbookCopy strong{display:block;margin-top:auto;padding-top:26px;border-top:1px solid #b9d4f1;color:#176be5;font-size:clamp(21px,2.1vw,28px);font-weight:800;line-height:1.28;letter-spacing:-.035em}
-@media(max-width:1000px){.teamFlipbook{grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr)}.teamFlipbook iframe{height:470px}.teamFlipbookCopy{padding:32px}.teamFlipbookCopy h3{margin-top:42px}}
+@media(max-width:1000px){.teamChapterTitle,.teamFlipbook{width:82%}.teamFlipbook{grid-template-columns:minmax(0,1.08fr) minmax(260px,.92fr)}.teamFlipbook iframe{height:380px}.teamFlipbookCopy{padding:30px}.teamFlipbookCopy h3{margin-top:34px}}
 @media(max-width:760px){.teamFlipbook{grid-template-columns:1fr}.teamFlipbookMedia{border-right:0;border-bottom:1px solid #c9dcf1}.teamFlipbook iframe{height:430px}.teamFlipbookCopy{min-height:390px;padding:32px}.teamFlipbookCopy h3{margin-top:40px}.teamFlipbookCopy p{max-width:440px}.teamFlipbookCopy strong{margin-top:46px}}
+@media(max-width:760px){.teamChapterTitle,.teamFlipbook{width:100%}}
 @media(max-width:640px){.teamChapterTitle{margin-top:52px;padding-top:22px}.teamChapterTitle span{margin-bottom:14px}.teamChapterTitle h2{font-size:39px}.teamFlipbook{border-radius:18px}.teamFlipbookTitle{padding:15px 16px}.teamFlipbookTitle h3{font-size:17px}.teamFlipbook iframe{height:400px}.teamFlipbookCopy{min-height:360px;padding:28px 22px}.teamFlipbookCopy h2{font-size:38px}}
 
 /* The long-form result gets its own editorial chapter beneath the four short samples. */
