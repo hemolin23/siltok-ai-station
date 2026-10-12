@@ -543,6 +543,10 @@ function Showreel() {
   return <section className={styles.showreel} id="showreel">
     <div className={styles.compactReelHead}><span>SELECTED OUTPUTS</span><h2>生成样片</h2></div>
     <div className={styles.festivalReel}>{showreel.slice(0,4).map((item,index)=>reelCard(item,index))}</div>
+    <div className={styles.teamChapterTitle}>
+      <span>ABOUT SILTOK</span>
+      <h2>Siltok，正在定义<br />AI 时代的个人计算</h2>
+    </div>
     <div className={styles.teamFlipbook}>
       <div className={styles.teamFlipbookMedia}>
         <div className={styles.teamFlipbookTitle}><span>SILTOK / TEAM</span><h3>公司团队介绍</h3></div>
