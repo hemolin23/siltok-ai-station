@@ -1391,6 +1391,12 @@ function openBook(){
   setTimeout(function(){ if (startPrompt) startPrompt.style.display='none'; }, 700);
 }
 if (startPrompt) startPrompt.addEventListener('click', openBook);
+
+/* 自动翻开 — 嵌入 iframe 时自动启动 */
+var urlParams = new URLSearchParams(location.search);
+if (urlParams.get('auto') === 'open') {
+  setTimeout(openBook, 1200);
+}
 /* 触屏也支持点开 */
 if (startPrompt) startPrompt.addEventListener('touchend', function(e){ e.preventDefault(); openBook(); });
 
