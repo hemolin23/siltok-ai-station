@@ -914,6 +914,24 @@ function viewportWidth(){
 }
 function isSingle(){ return viewportWidth() < 640; }
 
+/* 官网内嵌的电脑端画册保持完整桌面排版，再整体等比缩小。
+   这样内页不会因为 iframe 较窄而重新换行并被纸张裁切。 */
+function fitEmbeddedSpread(single){
+  var embedded = false;
+  try { embedded = window.parent && window.parent !== window; } catch (e) {}
+  if (embedded && !single){
+    var logicalW = 840;
+    var logicalH = logicalW / 1.52;
+    var scale = Math.min((window.innerWidth - 36) / logicalW, (window.innerHeight - 54) / logicalH);
+    scale = Math.max(0.28, Math.min(1, scale));
+    book.style.setProperty('--bookW', logicalW + 'px');
+    book.style.transform = 'rotateX(5deg) scale(' + scale.toFixed(4) + ')';
+  } else {
+    book.style.removeProperty('--bookW');
+    book.style.removeProperty('transform');
+  }
+}
+
 /* ===== DOM ===== */
 var staticLeft = document.createElement('div');
 staticLeft.className = 'static-left';
@@ -1108,14 +1126,14 @@ function updateHud(){
 
 /* 半页宽度（像素）→ 用于细条尺寸 */
 function halfWidth(){
-  var r = book.getBoundingClientRect();
-  return isSingle() ? r.width : r.width/2;
+  return isSingle() ? book.offsetWidth : book.offsetWidth/2;
 }
 
 /* ===== 渲染静止摊开态 ===== */
 function render(){
   var single = isSingle();
   book.classList.toggle('single', single);
+  fitEmbeddedSpread(single);
   var w = halfWidth();
   if (Math.abs(w - leafW) > 1) buildStrips(w);
 
