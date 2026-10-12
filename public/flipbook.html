@@ -356,6 +356,8 @@ h3.sub{
 .book.single .page::before{display:none}
 .book.single .page,.book.single .face.front .page,.book.single .face.back .page{border-radius:5px}
 .book.single .grab{width:24%}
+.book.single .leaf.flipping .leaf-strips{display:none}
+.book.single .leaf.flipping .leaf-flat{visibility:visible}
 
 @media (prefers-reduced-motion:reduce){
   .leaf{transition-duration:.01ms !important}
@@ -902,7 +904,8 @@ var DROOP    = 16;     // 外缘附加下垂（度）
 var LIFT     = 0.09;   // 中段拱起系数（相对半页宽）
 var SHADE_K  = 0.70;
 
-function isSingle(){ return window.innerWidth < 760; }
+/* 官网双样片宽度仍保留真实对开书形；只有手机宽度才切为单页。 */
+function isSingle(){ return window.innerWidth < 520; }
 
 /* ===== DOM ===== */
 var staticLeft = document.createElement('div');
@@ -1026,6 +1029,14 @@ var DEG = Math.PI / 180;
 function applyCurl(t){
   var e = Math.max(0, Math.min(1, t));
   var base = -180 * e;                      // 基准翻转角
+  /* 单页嵌入使用完整纸页翻转。分片曲面专为双页大画册设计，
+     在窄容器中会让正面、背面与下层页同时穿帮。 */
+  if (isSingle()){
+    leafFlat.style.transform = 'rotateY(' + base.toFixed(3) + 'deg)';
+    castL.style.opacity = 0;
+    castR.style.opacity = (Math.sin(Math.PI * e) * 0.42).toFixed(3);
+    return;
+  }
   var bend = Math.sin(Math.PI * e);         // 首尾趋平，中途形变最大
   var PHI  = SPREAD * bend;
   var DRP  = DROOP  * bend;
@@ -1133,8 +1144,7 @@ function prepare(dir){
     if (single){
       front = sheetAt(cur*2 + subPage);
       back  = nextSub(); if (back === null) return false;
-      var after = (cur*2+subPage+2 < TOTAL*2) ? sheetAt(cur*2+subPage+2) : back;
-      setPage(rightPage, after);
+      setPage(rightPage, back);
     } else {
       if (!SHEETS[cur+1]) return false;
       front = SHEETS[cur][1];
@@ -1156,6 +1166,10 @@ function prepare(dir){
       setPage(leftPage,  SHEETS[cur-1][0]);
       setPage(rightPage, SHEETS[cur][1]);
     }
+  }
+  if (single){
+    setPage(faceFront, front);
+    setPage(faceBack, back);
   }
   fillStrips(front, back);
   leaf.classList.add('flipping');
