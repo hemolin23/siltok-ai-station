@@ -545,7 +545,7 @@ function Showreel() {
     <div className={styles.festivalReel}>{showreel.slice(0,4).map((item,index)=>reelCard(item,index))}</div>
     <div className={styles.teamFlipbook}>
       <div className={styles.teamFlipbookTitle}><span>SILTOK / TEAM</span><h3>公司团队介绍</h3></div>
-      <iframe src={asset('flipbook.html')} title="Siltok 公司团队介绍翻页画册" loading="lazy" allow="fullscreen" />
+      <iframe src={asset('flipbook.html?v=20261012-spread')} title="Siltok 公司团队介绍翻页画册" loading="lazy" allow="fullscreen" />
     </div>
     <div className={styles.overnightBridge}><span>OVERNIGHT AUTONOMY</span><h3>把夜晚，交给本地工作站。</h3><p>这个测试中，夜间任务队列自动接管生成；第二天回到工作台，一支 12 分钟完整样片已经完成。</p></div>
     <div className={styles.featureReel}>{reelCard(feature,4,true)}</div>
