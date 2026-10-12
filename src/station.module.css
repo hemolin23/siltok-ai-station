@@ -395,10 +395,13 @@ img.motionAsset{animation:assetDrift 8s ease-in-out infinite alternate;transform
 .applyCards>.applyCard{grid-column:span 3}
 @media(max-width:640px){.applyCards{grid-template-columns:1fr;max-width:360px}.applyCards>.qrMini,.applyCards>.applyCard{grid-column:auto}.applyCards>.qrMini{max-width:240px}}
 
-/* ============ 翻页画册开场 ============ */
 
-@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-.flipbookEmbed{position:relative;width:100%;height:min(78vh,760px);min-height:420px;margin:0 auto;border-radius:12px;overflow:hidden;background:#070709;box-shadow:0 8px 40px rgba(0,0,0,.5)}
-.flipbookEmbed iframe{width:100%;height:100%;border:none;display:block}
-@media(max-width:760px){.flipbookEmbed{height:65vh;min-height:380px;border-radius:8px}}
+/* 翻页画册独立页样式 */
+.flipbookPage{width:100%;background:#070709;padding:56px 0 0;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.flipbookHead{text-align:center;margin-bottom:20px}
+.flipbookHead span{display:block;font-size:12px;letter-spacing:.2em;color:#60D8F0;margin-bottom:10px}
+.flipbookHead h2{font-size:clamp(26px,4.5vw,42px);color:#fff;margin:0;font-weight:700}
+.flipbookHead p{font-size:13px;color:rgba(194,200,212,.6);margin-top:8px}
+.flipbookHolder{width:100%;max-width:1200px;height:78vh;min-height:520px;position:relative}
+.flipbookHolder iframe{width:100%;height:100%;border:none;display:block}
+@media(max-width:760px){.flipbookPage{padding-top:32px}.flipbookHolder{height:85vh;min-height:400px}.flipbookHead{margin-bottom:12px}}
