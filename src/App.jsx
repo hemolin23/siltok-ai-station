@@ -144,7 +144,6 @@ export default function App() {
     <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
     <Showreel />
-    <FlipbookSection />
     <CanvasExperience />
     <CreationNotebook />
     <ProductUISuite />
@@ -156,20 +155,6 @@ export default function App() {
   </main>;
 }
 
-
-// 翻页画册独立页
-function FlipbookSection() {
-  return <section className={styles.flipbookPage} id="flipbook">
-    <div className={styles.flipbookHead}>
-      <span>PRODUCT CATALOGUE</span>
-      <h2>翻开 Siltok</h2>
-      <p>点击翻开 / 左右翻页 / 拖拽浏览</p>
-    </div>
-    <div className={styles.flipbookHolder}>
-      <iframe src={String(import.meta.env.BASE_URL) + "flipbook.html?auto=open"} title="Siltok 产品画册" allow="autoplay; fullscreen" loading="eager" />
-    </div>
-  </section>;
-}
 
 function HeroFluidField() {
   const canvasRef = useRef(null);
