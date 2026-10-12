@@ -544,8 +544,17 @@ function Showreel() {
     <div className={styles.compactReelHead}><span>SELECTED OUTPUTS</span><h2>生成样片</h2></div>
     <div className={styles.festivalReel}>{showreel.slice(0,4).map((item,index)=>reelCard(item,index))}</div>
     <div className={styles.teamFlipbook}>
-      <div className={styles.teamFlipbookTitle}><span>SILTOK / TEAM</span><h3>公司团队介绍</h3></div>
-      <iframe src={asset('flipbook.html?v=20261012-spread-fit')} title="Siltok 公司团队介绍翻页画册" loading="lazy" allow="fullscreen" />
+      <div className={styles.teamFlipbookMedia}>
+        <div className={styles.teamFlipbookTitle}><span>SILTOK / TEAM</span><h3>公司团队介绍</h3></div>
+        <iframe src={asset('flipbook.html?v=20261012-spread-fit')} title="Siltok 公司团队介绍翻页画册" loading="lazy" allow="fullscreen" />
+      </div>
+      <div className={styles.teamFlipbookCopy}>
+        <span>PRODUCT / AI STATION</span>
+        <h3>首款产品</h3>
+        <h2>Siltok<br />个人 AI 主机</h2>
+        <p>以高性能、多模态的端侧算力，为视频创作者构建稳定、可控、成本可预期的创作空间。</p>
+        <strong>从此，生产力不再被云端定价。</strong>
+      </div>
     </div>
     <div className={styles.overnightBridge}><span>OVERNIGHT AUTONOMY</span><h3>把夜晚，交给本地工作站。</h3><p>这个测试中，夜间任务队列自动接管生成；第二天回到工作台，一支 12 分钟完整样片已经完成。</p></div>
     <div className={styles.featureReel}>{reelCard(feature,4,true)}</div>
