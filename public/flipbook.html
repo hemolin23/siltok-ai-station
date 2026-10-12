@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>硅基词元 Siltok · AI Vision Station 交互画册</title>
-<meta name="description" content="硅基词元 Siltok 产品交互画册：一本可真实翻页的桌面画册，介绍 Siltok AI Vision Station 这款面向视觉创作者的桌面级本地 AI 工作站——端侧满血大模型部署、流式模型与算载并行、异构协同算力池化、RTX 5070 Ti 与 RTX 5090 两款机型、预装视频图片文字三类主流模型、ComfyUI 增强版一站式创作工作台，以及创作工作流闭环。支持拖拽翻页、点击翻页、箭头与键盘导航。">
+<meta name="description" content="硅基词元 Siltok 产品交互画册：一本可真实翻页的桌面画册，介绍 Siltok AI Vision Station 这款面向视觉创作者的桌面级本地 AI 工作站——端侧满血大模型部署、流式模型与算载并行、异构协同算力池化、RTX 5070 Ti 与 RTX 5090 两款机型、预装视频图片文字三类主流模型、ComfyUI 增强版一站式创作工作台，以及团队背景与预售信息。支持拖拽翻页、箭头与键盘导航。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -23,144 +23,26 @@ body{
   background:#09090B; color:var(--ink); font-family:var(--sans);
   overflow:hidden; -webkit-font-smoothing:antialiased;
 }
-/* ============ 桌面环境 ============ */
+/* ============ 桌面 ============ */
 .desk{position:fixed;inset:0;overflow:hidden;z-index:0}
 .desk::before{
   content:"";position:absolute;inset:-10%;
   background:
-    radial-gradient(130% 95% at 50% 16%, #2A2D33 0%, #1A1C20 34%, #0E0F12 68%, #060708 100%);
+    radial-gradient(120% 90% at 50% 18%, #26292F 0%, #171A1F 38%, #0C0D10 72%, #070709 100%);
 }
 .desk::after{
   content:"";position:absolute;inset:0;
   background-image:var(--noise);
-  background-size:260px 260px; opacity:.13; mix-blend-mode:overlay;
+  background-size:260px 260px; opacity:.16; mix-blend-mode:overlay;
 }
-/* ====== 3D 桌面环境建模 ====== */
-.desk-scene{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  perspective:1600px;perspective-origin:50% 28%;
-  background:radial-gradient(120% 80% at 50% 0%, #1a1a20 0%, #0d0d11 40%, #070709 100%);
-  overflow:hidden;
+.desk-vignette{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(75% 65% at 50% 50%, rgba(0,0,0,0) 38%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.85) 100%);
 }
-.desk-plane{
-  position:absolute;bottom:-20%;left:50%;width:240%;height:160%;
-  transform:translateX(-50%) rotateX(58deg);transform-origin:50% 100%;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.05) 0%, transparent 5%, transparent 85%, rgba(0,0,0,.35) 100%),
-    radial-gradient(55% 35% at 50% 45%, rgba(32,32,40,.8) 0%, rgba(18,18,24,.95) 50%, rgba(10,10,14,1) 100%);
-  box-shadow:inset 0 0 280px rgba(0,0,0,.7);
+.desk-grain{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;
+  background:repeating-linear-gradient(97deg, rgba(255,255,255,.4) 0 1px, rgba(255,255,255,0) 1px 7px);
 }
-.desk-plane::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(120,150,200,.04) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(120,150,200,.025) 0 1px, transparent 1px 5px);
-  opacity:.7;
-}
-.desk-plane::after{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(48% 32% at 50% 40%, rgba(0,0,0,.5) 0%, transparent 65%);
-}
-
-/* 透视网格线 — 增强3D纵深 */
-.desk-grid{
-  position:absolute;bottom:-20%;left:50%;width:240%;height:160%;
-  transform:translateX(-50%) rotateX(58deg);transform-origin:50% 100%;
-  pointer-events:none;opacity:.35;
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0 39px, rgba(90,130,200,.6) 39px 40px),
-    repeating-linear-gradient(90deg, transparent 0 79px, rgba(90,130,200,.35) 79px 80px);
-  -webkit-mask:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 15%, rgba(0,0,0,.9) 50%, rgba(0,0,0,.5) 100%);
-  mask:linear-gradient(180deg, transparent 0%, rgba(0,0,0,.5) 15%, rgba(0,0,0,.9) 50%, rgba(0,0,0,.5) 100%);
-}
-/* 桌面物品 — 3D 定位的桌面物件 */
-.desk-items{position:absolute;bottom:0;left:50%;width:100%;height:100%;transform:translateX(-50%);pointer-events:none;z-index:1}
-.desk-item{position:absolute;display:flex;align-items:flex-end;justify-content:center}
-/* 盆栽 */
-.item-plant{left:6%;bottom:38%;width:70px;height:90px}
-.item-plant .pot{width:44px;height:38px;background:linear-gradient(180deg,#4a3528,#2a1d15);border-radius:4px 4px 8px 8px;box-shadow:0 4px 12px rgba(0,0,0,.5)}
-.item-plant .leaves{width:60px;height:55px;position:absolute;bottom:30px;left:5px}
-.item-plant .leaves i{position:absolute;bottom:0;width:18px;height:40px;background:linear-gradient(180deg,#3a6b35,#1e3a1a);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform-origin:bottom center}
-.item-plant .leaves i:nth-child(1){left:8px;transform:rotate(-22deg) scaleY(.9)}
-.item-plant .leaves i:nth-child(2){left:22px;transform:rotate(0deg) scaleY(1.1)}
-.item-plant .leaves i:nth-child(3){left:36px;transform:rotate(20deg) scaleY(.85)}
-.item-plant .shadow{position:absolute;bottom:-6px;left:50%;width:64px;height:12px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.55),transparent);border-radius:50%
-/* 咖啡杯 */
-.item-coffee{right:7%;bottom:35%;width:64px;height:64px}
-.item-coffee .cup{width:56px;height:50px;background:linear-gradient(180deg,#e8e6e2,#c4c0ba);border-radius:6px 6px 28px 28px;box-shadow:0 5px 14px rgba(0,0,0,.45),inset 0 -4px 8px rgba(0,0,0,.15)}
-.item-coffee .latte{position:absolute;top:4px;left:50%;width:48px;height:14px;transform:translateX(-50%);background:radial-gradient(circle at 50% 50%,#c9a87c 30%,#a87f54 60%,#8b6239);border-radius:50%;box-shadow:inset 0 1px 3px rgba(0,0,0,.2)}
-.item-coffee .handle{position:absolute;right:-10px;top:14px;width:18px;height:24px;border:4px solid #d8d4ce;border-radius:50%;background:transparent}
-.item-coffee .steam{position:absolute;top:-18px;left:50%;width:4px;height:24px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(255,255,255,.08));border-radius:50%;animation:steam 3s ease-in-out infinite}
-.item-coffee .steam.s2{left:60%;animation-delay:1s}
-@keyframes steam{0%,100%{opacity:0;transform:translateX(-50%) translateY(0)}50%{opacity:.3;transform:translateX(-50%) translateY(-8px)}}
-.item-coffee .shadow{position:absolute;bottom:-4px;left:50%;width:72px;height:10px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.5),transparent);border-radius:50%}
-/* 眼镜 */
-.item-glasses{left:11%;bottom:30%;width:70px;height:26px}
-.item-glasses .frame{position:absolute;top:0;width:30px;height:26px;border:2.5px solid #2a2a2e;border-radius:50%;background:rgba(100,130,160,.06);box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.item-glasses .frame.l{left:0}
-.item-glasses .frame.r{right:0}
-.item-glasses .bridge{position:absolute;top:6px;left:50%;width:14px;height:3px;transform:translateX(-50%);background:#2a2a2e;border-radius:2px}
-.item-glasses .shadow{position:absolute;bottom:-4px;left:50%;width:74px;height:8px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.4),transparent);border-radius:50%}
-/* 笔 */
-.item-pen{right:13%;bottom:28%;width:90px;height:14px;transform:rotate(-8deg)}
-.item-pen .body{width:100%;height:10px;background:linear-gradient(90deg,#1a1a1e 0%,#3a3a42 15%,#1a1a1e 85%,#c0392b 85%,#a93226 100%);border-radius:5px;box-shadow:0 2px 6px rgba(0,0,0,.4)}
-.item-pen .clip{position:absolute;top:1px;right:14%;width:4px;height:14px;background:#555;border-radius:2px}
-.item-pen .tip{position:absolute;left:-6px;top:2px;width:8px;height:6px;background:#c0c0c0;border-radius:3px 0 0 3px}
-.item-pen .shadow{position:absolute;bottom:-3px;left:0;width:100%;height:6px;background:radial-gradient(50% 50%,rgba(0,0,0,.45),transparent);border-radius:50%}
-/* 黑色笔记本 */
-.item-notebook{left:4%;bottom:26%;width:120px;height:80px;transform:rotate(6deg)}
-.item-notebook .cover{width:100%;height:100%;background:linear-gradient(135deg,#1e1e22,#0d0d10);border-radius:4px;box-shadow:0 6px 16px rgba(0,0,0,.5),inset 0 1px 2px rgba(255,255,255,.04)}
-.item-notebook .label{position:absolute;top:14px;left:50%;transform:translateX(-50%);color:#555;font-size:9px;letter-spacing:2px;font-family:monospace}
-.item-notebook .band{position:absolute;top:0;left:10px;width:3px;height:100%;background:rgba(255,255,255,.06)}
-.item-notebook .shadow{position:absolute;bottom:-5px;left:50%;width:90%;height:10px;transform:translateX(-50%);background:radial-gradient(50% 50%,rgba(0,0,0,.55),transparent);border-radius:50%
-
-/* 书本下方聚光 — 让书本"落在"桌面上 */
-.book-spotlight{
-  position:fixed;top:50%;left:50%;width:70%;height:50%;
-  transform:translate(-50%,-30%);
-  background:radial-gradient(50% 50% at 50% 50%,rgba(60,100,160,.05) 0%,transparent 70%);
-  pointer-events:none;z-index:0;
-}
-/* 远处氛围光 */
-.desk-glow{position:fixed;top:0;left:50%;width:60%;height:40%;transform:translateX(-50%);background:radial-gradient(50% 50% at 50% 0%,rgba(60,100,160,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
-/* 暗角 */
-.desk-vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(82% 70% at 50% 46%,rgba(0,0,0,0) 30%,rgba(0,0,0,.45) 75%,rgba(0,0,0,.85) 100%)}
-/* 翻开入场态：书本合拢封面 */
-.book.closed{
-  transform:rotateX(12deg) scale(.72);
-  opacity:0;
-  pointer-events:none;
-}
-.book.opening{
-  animation:bookOpen 1.4s cubic-bezier(.22,.85,.25,1) forwards;
-}
-@keyframes bookOpen{
-  0%{transform:rotateX(40deg) scale(.72);opacity:0}
-  30%{opacity:1}
-  60%{transform:rotateX(18deg) scale(.86)}
-  100%{transform:rotateX(5deg) scale(1);opacity:1}
-}
-/* 点击启动提示 */
-.start-prompt{
-  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:14px;cursor:pointer;
-  background:radial-gradient(60% 50% at 50% 50%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.5) 100%);
-  transition:opacity .6s ease;
-}
-.start-prompt.hide{opacity:0;pointer-events:none}
-.start-prompt .pulse{
-  width:64px;height:64px;border-radius:50%;
-  border:1.5px solid rgba(96,216,240,.5);
-  display:flex;align-items:center;justify-content:center;
-  animation:pulseRing 2.2s ease-in-out infinite;
-}
-@keyframes pulseRing{
-  0%,100%{box-shadow:0 0 0 0 rgba(96,216,240,.25),0 0 24px rgba(59,130,246,.15)}
-  50%{box-shadow:0 0 0 18px rgba(96,216,240,0),0 0 40px rgba(59,130,246,.2)}
-}
-.start-prompt .pulse svg{width:26px;height:26px;fill:none;stroke:#60D8F0;stroke-width:1.6}
-.start-prompt p{color:#C2C8D4;font-size:14px;letter-spacing:.15em;margin:0}
-.start-prompt p b{color:#60D8F0;font-weight:500}
 /* ============ 舞台 / 周边留白 ============ */
 .stage{
   position:relative;z-index:2;height:100%;
@@ -482,18 +364,8 @@ h3.sub{
 </style>
 </head>
 <body>
-<div class="desk-scene">
-  <div class="desk-glow"></div>
-  <div class="desk-plane"></div>
-  <div class="desk-grid"></div>
-  <div class="desk-items">
-    <div class="desk-item item-plant"><div class="shadow"></div><div class="leaves"><i></i><i></i><i></i></div><div class="pot"></div></div>
-    <div class="desk-item item-glasses"><div class="shadow"></div><div class="frame l"></div><div class="bridge"></div><div class="frame r"></div></div>
-    <div class="desk-item item-notebook"><div class="shadow"></div><div class="cover"><div class="band"></div><div class="label">SIITOK</div></div></div>
-    <div class="desk-item item-pen"><div class="shadow"></div><div class="body"></div><div class="clip"></div><div class="tip"></div></div>
-    <div class="desk-item item-coffee"><div class="steam"></div><div class="steam s2"></div><div class="shadow"></div><div class="cup"></div><div class="latte"></div><div class="handle"></div></div>
-  </div>
-</div>
+<div class="desk"></div>
+<div class="desk-grain"></div>
 <div class="desk-vignette"></div>
 
 <div class="brandbar"><i></i><span>Siltok · 硅基词元</span></div>
@@ -502,7 +374,7 @@ h3.sub{
   <div class="book-wrap">
     <div class="book-shadow soft"></div>
     <div class="book-shadow"></div>
-    <div class="book closed" id="book">
+    <div class="book" id="book">
       <div class="book-base"></div>
       <div class="stack l" id="stackL"></div>
       <div class="stack r" id="stackR"></div>
@@ -516,8 +388,6 @@ h3.sub{
   </div>
 </main>
 
-<div class="start-prompt" id="startPrompt"><div class="pulse"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p><b>点击翻开</b>　产品画册</p></div>
-
 <button class="nav prev" id="btnPrev" aria-label="上一页">
   <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
@@ -527,11 +397,11 @@ h3.sub{
 
 <div class="hud">
   <div class="bar"><i id="barFill"></i></div>
-  <div class="lab"><b id="pgNow">1</b> <span style="opacity:.5">/</span> <span id="pgAll">10</span> &nbsp;<span id="pgUnit">对开页</span></div>
+  <div class="lab"><b id="pgNow">1</b> <span style="opacity:.5">/</span> <span id="pgAll">12</span> &nbsp;<span id="pgUnit">对开页</span></div>
 </div>
 
 <div class="tip" id="tip">
-  <span>拖拽 / 左右点击 翻页</span>
+  <span>拖动书页边缘翻页</span>
   <span><kbd>←</kbd><kbd>→</kbd> 方向键</span>
   <span>或点击两侧箭头</span>
 </div>
@@ -904,6 +774,86 @@ h3.sub{
     </div>
   </div>
   <div class="spacer"></div>
+</div>
+<!--SHEET 11 L-->
+<div class="page-body pad">
+  <p class="kicker">产品 Demo</p>
+  <h2 class="ttl">作品画廊</h2>
+  <p class="body-s">机械法老、古城烟火、时钟之上、龙临峡谷……全部由 Siltok AI Station 本地生成。</p>
+  <div class="gal" style="grid-template-columns:1fr 1fr;grid-auto-rows:1fr">
+    <div class="cell"><img data-img="g1" alt="机械法老"><span>机械法老</span></div>
+    <div class="cell"><img data-img="g3" alt="古城烟火"><span>古城烟火</span></div>
+    <div class="cell"><img data-img="g4" alt="时钟之上"><span>时钟之上</span></div>
+    <div class="cell"><img data-img="g2" alt="帷幕之间"><span>帷幕之间</span></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="folio"><b>11</b><span>作品</span></div>
+</div>
+<!--SHEET 11 R-->
+<div class="page-body" style="position:relative">
+  <div class="fig fill"><img data-img="g5" alt=""></div>
+  <div class="scrim"></div>
+  <div class="pad" style="position:relative;z-index:4;display:flex;flex-direction:column;height:100%">
+    <div class="spacer"></div>
+    <h3 class="sub">龙临峡谷</h3>
+    <p class="body-s" style="color:var(--ink-2)">15 秒 768P · MiniMax H3-33B 本地生成</p>
+    <div class="rule"></div>
+    <p class="lead" style="font-family:var(--serif);color:#fff;margin:0">数据不上云<br>创作不排队</p>
+    <div class="spacer" style="flex:.4"></div>
+    <p class="tiny">画面为产品 Demo 截帧，实际效果随提示词与参数变化。</p>
+  </div>
+</div>
+<!--SHEET 12 L-->
+<div class="page-body pad">
+  <p class="kicker">创始团队</p>
+  <h2 class="ttl" style="font-size:clamp(18px,4.3cqw,44px)">团队履历<br>与背景</h2>
+  <div class="rule"></div>
+  <div style="display:flex;flex-direction:column;gap:clamp(10px,1.8cqw,20px)">
+    <div class="person">
+      <div class="ph"><img data-img="p_bai" alt="白鹏"></div>
+      <div><p class="nm">白鹏</p><p class="ro">创始人 / CEO</p>
+      <p class="bi">十年小米集团高管经历，历任电视、互联网、商业及政企业务负责人。主创小米电视与小爱同学音箱，具备消费硬件和产品商业化经验。</p></div>
+    </div>
+    <div class="person">
+      <div class="ph"><img data-img="p_shen" alt="沈游人"></div>
+      <div><p class="nm">沈游人</p><p class="ro">CTO</p>
+      <p class="bi">清华大学计算机博士，前海致 CTO，兼具 Intel、蚂蚁等科研背景。拥有 10 年以上端侧操作系统与 AI 数据库系统研发经验。</p></div>
+    </div>
+    <div class="person">
+      <div class="ph"><img data-img="p_zheng" alt="郑纬民"></div>
+      <div><p class="nm">郑纬民</p><p class="ro">首席科学顾问</p>
+      <p class="bi">中国工程院院士、清华大学教授。为高性能计算方向提供学术与产业支持。</p></div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="folio"><b>12</b><span>团队与预售</span></div>
+</div>
+<!--SHEET 12 R-->
+<div class="page-body" style="position:relative">
+  <div class="fig fill"><img data-img="cover" alt=""></div>
+  <div class="scrim"></div>
+  <div class="pad" style="position:relative;z-index:4;display:flex;flex-direction:column;height:100%">
+    <p class="kicker">现在预售</p>
+    <h1 class="big" style="font-size:clamp(20px,5.2cqw,56px)">全球首款<br>AI Vision<br>Station</h1>
+    <p class="lead" style="margin:0 0 .6em">越级提速：16G 显卡，<br>跑满血视频大模型。</p>
+    <div class="rule"></div>
+    <div class="grid2">
+      <div class="card hi">
+        <p class="tiny" style="letter-spacing:.2em">预售价</p>
+        <div class="metric" style="margin-top:.3em"><span class="unit" style="font-size:clamp(9px,1.4cqw,15px)">$</span><span class="num" style="font-size:clamp(18px,4cqw,40px)">4,999</span></div>
+      </div>
+      <div class="card">
+        <p class="tiny" style="letter-spacing:.2em">定金</p>
+        <div class="metric" style="margin-top:.3em"><span class="unit" style="font-size:clamp(9px,1.4cqw,15px)">$</span><span class="num" style="font-size:clamp(18px,4cqw,40px)">99</span></div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="spec card" style="margin-bottom:.6em">
+      <div class="row"><span class="k">官网</span><span class="v">siltok-ai.com</span></div>
+      <div class="row"><span class="k">产品页</span><span class="v">siltok-ai.com/products/ai-station</span></div>
+    </div>
+    <p class="tiny">预售价格与定金为补充资料信息，PPT 未载明价格，最终以官网公示为准。</p>
+  </div>
 </div>
 </script>
 
@@ -1377,57 +1327,7 @@ window.addEventListener('resize', function(){
   rz = setTimeout(function(){ if (!busy && !drag) render(); }, 160);
 });
 
-/* ===== 点击翻开入场 ===== */
-var startPrompt = document.getElementById('startPrompt');
-var opened = false;
-function openBook(){
-  if (opened) return;
-  opened = true;
-  if (startPrompt) startPrompt.classList.add('hide');
-  book.classList.remove('closed');
-  book.classList.add('opening');
-  render();
-  setTimeout(function(){ book.classList.remove('opening'); }, 1500);
-  setTimeout(function(){ if (startPrompt) startPrompt.style.display='none'; }, 700);
-}
-if (startPrompt) startPrompt.addEventListener('click', openBook);
-
-/* 自动翻开 — 嵌入 iframe 时自动启动 */
-var urlParams = new URLSearchParams(location.search);
-if (urlParams.get('auto') === 'open') {
-  setTimeout(openBook, 1200);
-}
-/* 触屏也支持点开 */
-if (startPrompt) startPrompt.addEventListener('touchend', function(e){ e.preventDefault(); openBook(); });
-
-/* ===== 鼠标左/右键点击翻页 ===== */
-/* 左键(book area) → 下一页；右键 → 上一页 */
-book.addEventListener('contextmenu', function(e){ e.preventDefault(); });
-book.addEventListener('mousedown', function(e){
-  if (!opened) return;
-  /* 让拖拽逻辑处理 grab 区域内的按下；只在非 grab 区域做点击翻页 */
-  if (e.target.closest('.grab')) return;
-  e.preventDefault();
-  if (e.button === 0) { if (!busy) flip(1); hideTip(); }      /* 左键 → 下一页 */
-  else if (e.button === 2) { if (!busy) flip(-1); hideTip(); } /* 右键 → 上一页 */
-});
-
-/* ===== 移动端优化：单页模式触摸翻页改进 ===== */
-/* 在单页模式下，点击书本左半 → 上一页，右半 → 下一页 */
-book.addEventListener('click', function(e){
-  if (!opened) return;
-  if (e.target.closest('.grab')) return;  /* grab 区域已有自己的处理 */
-  if (window.innerWidth < 760) {
-    var rect = book.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    if (x < rect.width / 2) { if (!busy) flip(-1); }
-    else { if (!busy) flip(1); }
-    hideTip();
-  }
-});
-
-render();  /* 初始渲染（closed 态下不可见，但 DOM 需就位） */
-
+render();
 window.__forceNext = function(){ if (canNext()) { commit(1); } };
 window.__forcePrev = function(){ if (canPrev()) { commit(-1); } };
 window.__flipDebug = function(t, dir){
@@ -1435,7 +1335,6 @@ window.__flipDebug = function(t, dir){
   applyCurl(t);
   return true;
 };
-window.__openBook = openBook;
 })();
 </script>
 </body>
