@@ -144,7 +144,6 @@ export default function App() {
     <div className={styles.signalRail} aria-label="Siltok 创作能力"><div><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span><span>文字变成画面</span><span>图片自然动起来</span><span>首尾帧控制镜头</span><span>多参考保持一致</span><span>素材留在本地</span><span>工作流持续复用</span></div></div>
 
     <Showreel />
-    <DeckMotionShowcase />
     <CanvasExperience />
     <CreationNotebook />
     <ProductUISuite />
@@ -550,20 +549,6 @@ function Showreel() {
     </div>
     <div className={styles.overnightBridge}><span>OVERNIGHT AUTONOMY</span><h3>把夜晚，交给本地工作站。</h3><p>这个测试中，夜间任务队列自动接管生成；第二天回到工作台，一支 12 分钟完整样片已经完成。</p></div>
     <div className={styles.featureReel}>{reelCard(feature,4,true)}</div>
-  </section>;
-}
-
-function DeckMotionShowcase() {
-  return <section className={styles.deckMotionSection} aria-label="Siltok 产品演示稿动态展示">
-    <div className={styles.deckMotionFrame}>
-      <div className={styles.deckMotionBar}><span><i/> SILTOK DECK / MOTION</span><b>01–10 / 15</b></div>
-      <iframe
-        src={asset('siltok-deck/index.html')}
-        title="Siltok 前 10 页 3D 卡片流"
-        loading="lazy"
-        allow="autoplay; fullscreen"
-      />
-    </div>
   </section>;
 }
 
